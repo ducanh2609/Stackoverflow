@@ -1,0 +1,99 @@
+.login-page {
+  /* border: 1px solid red; */
+  height: 80vh;
+  width: 21%;
+  margin: 3vh auto;
+  box-sizing: border-box;
+  font-size: 13px;
+}
+
+.logo-homepage {
+  height: 50px;
+  padding: 0 40%;
+}
+.logo-homepage img {
+  height: 100%;
+}
+
+.loginG {
+  height: 36px;
+  margin: 10px 0;
+  border-radius: 5px;
+  text-align: center;
+  box-sizing: border-box;
+}
+.loginG:hover,
+.logo-homepage:hover {
+  cursor: pointer;
+}
+.loginG img {
+  height: 50%;
+  margin: 8px 3px 0 0;
+  margin-right: 5px;
+}
+.loginG i {
+  height: 40%;
+  margin: 16px 3px 0 0;
+  margin-right: 5px;
+}
+.login-google span {
+  display: inline-block;
+  position: relative;
+  top: -4px;
+}
+.login-form {
+  /* border: 1px solid red; */
+  height: 45%;
+  border-radius: 5px;
+  margin: 20px 0;
+  padding: 20px;
+  box-shadow: 3px 3px 50px rgb(196, 192, 192);
+}
+.login-form label {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 5px 0;
+}
+.login-form span {
+  margin-left: 38%;
+  color: rgb(9, 111, 184);
+}
+.login-form span:hover {
+  cursor: pointer;
+}
+.login-form input {
+  height: 35px;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid rgb(131, 127, 127);
+  margin-bottom: 10px;
+  outline: none;
+  font-size: 15px;
+  padding: 10px;
+}
+.login-form button {
+  height: 35px;
+  width: 100%;
+  margin: 10px 0;
+  background-color: rgb(10 149 255);
+  font-size: 15px;
+  color: white;
+  border: none;
+  border-radius: 3px;
+}
+.login-form button:hover {
+  background-color: rgb(39, 104, 243);
+}
+.login-footer p {
+  margin: 12px 0;
+  text-align: center;
+}
+.login-footer p a {
+  text-decoration: none;
+  color: blue;
+  margin-left: 4px;
+}
+.login-footer p a i {
+  margin-left: 4px;
+}

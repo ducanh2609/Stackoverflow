@@ -1,0 +1,133 @@
+.signup-page {
+  width: 22%;
+  margin: 3vh 0 0 55%;
+  padding-bottom: 80px;
+  font-size: 13px;
+}
+.signup-form {
+  /* border: 1px solid red; */
+  height: 45%;
+  border-radius: 5px;
+  margin: 20px 0;
+  padding: 20px;
+  box-shadow: 3px 3px 50px rgb(196, 192, 192);
+}
+.signup-form label {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+.signup-form input {
+  height: 35px;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid rgb(131, 127, 127);
+  margin-bottom: 10px;
+  outline: none;
+  font-size: 15px;
+  padding: 10px;
+}
+.captcha {
+  height: 150px;
+  margin: 20px 0;
+  background-color: rgb(234, 230, 230);
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid rgba(189, 189, 188, 0.544);
+  font-size: 14px;
+}
+.captcha-box {
+  border: 1px solid rgb(195, 190, 190);
+  height: 100%;
+  width: 62%;
+  margin: 0 auto;
+  background-color: white;
+  text-align: center;
+  box-shadow: 1px 1px 10px rgb(153, 149, 149);
+  border-radius: 5px;
+}
+.captcha-box img {
+  position: relative;
+  width:60%;
+  height: 40%;
+}
+.captcha-box img:hover {
+  cursor: pointer;
+}
+.captcha-check {
+  padding: 20px 0 0 0;
+  display: flex;
+}
+.captcha-check input {
+  margin: 0 10px;
+  width: 30px;
+}
+.captcha-check p {
+  line-height: 40px;
+}
+.checkbox-box {
+  margin: 10px 0;
+  display: flex;
+}
+.checkbox-box > input {
+  position: relative;
+  width: 40px;
+  top: -8px;
+}
+.checkbox-box p {
+  margin-left: 5px;
+}
+.signup-form button {
+  height: 35px;
+  width: 100%;
+  margin: 10px 0;
+  background-color: rgb(10 149 255);
+  font-size: 15px;
+  color: white;
+  border: none;
+  border-radius: 3px;
+}
+.signup-form button:hover {
+  background-color: rgb(39, 104, 243);
+}
+.signup-footer p {
+  margin: 12px 0;
+  text-align: center;
+}
+.signup-footer p a {
+  text-decoration: none;
+  color: blue;
+  margin-left: 4px;
+}
+.signup-footer p a i {
+  margin-left: 4px;
+}
+
+.introduct {
+  position: absolute;
+  font-size: 13px;
+  width: 400px;
+  height: 400px;
+  left: 22%;
+  top: 50%;
+}
+.introduct > div {
+  margin-bottom: 15px;
+  /* border: 1px solid blue; */
+  height: 40px;
+}
+.intro-title {
+  font-size: 25px;
+}
+.intro-item {
+  font-size: 15px;
+  line-height: 35px;
+}
+.intro-item i {
+  margin-right: 10px;
+  color: rgb(27, 155, 206);
+  width: 40px;
+  text-align: center;
+}
