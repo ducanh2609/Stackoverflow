@@ -5,8 +5,31 @@ import CollectionItem from "../liteComponents/CollectionItem";
 import TagsItem from "../liteComponents/TagsItem";
 import HotNetQues from "../liteComponents/HotQuestion";
 import ContentItem from "../liteComponents/ContentItem";
+import { useEffect, useState } from "react";
+import OkUserHeader from "../components/OkUserHeader";
+import ToolLeft from "../liteComponents/ToolLeft";
 
 export default function QuestionPage() {
+  const [login, setLogin] = useState(0);
+  useEffect(() => {
+    let data = {
+      sessionID: document.cookie.slice(10),
+    };
+    fetch("http://localhost:8000/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then(async (res) => {
+      let message = await res.json();
+      if (message.message === "Not Session") {
+        setLogin(0);
+      } else {
+        setLogin(1);
+      }
+    });
+  }, []);
   let overflow4 = [
     {
       title: "Accessibility Update: Colors",
@@ -146,51 +169,9 @@ export default function QuestionPage() {
   ];
   return (
     <>
-      <QuestionHeader />
+      {login === 0 ? <QuestionHeader /> : <OkUserHeader />}
       <div className="content-box">
-        <div className="tool-left">
-          <div className="home-btn">
-            <a href="/">Home</a>
-          </div>
-          <div className="public">
-            <p>PUBLIC</p>
-            <div className="question-menu">
-              <div className="question-link active">
-                <div>
-                  <i className="fa-solid fa-earth-americas fa-lg"></i>
-                </div>{" "}
-                Questions
-              </div>
-              <div className="tag-link">
-                <div></div>Tags
-              </div>
-              <div className="user-linnk">
-                <div></div>Users
-              </div>
-              <div className="company-link">
-                <div></div>Companies
-              </div>
-            </div>
-          </div>
-          <div className="collectives">
-            <p>COLLECTIVES</p>
-            <a href="/">
-              <i className="fa-brands fa-old-republic fa-lg"></i>Explore Collectives
-            </a>
-          </div>
-          <div className="teams">
-            <p>TEAMS</p>
-            <div className="team-box">
-              <p>
-                <b>Stack Overflow for Teams</b> – Start collaborating and
-                sharing organizational knowledge.
-              </p>
-              <img src="/image/teams.svg" alt="" /> <br />
-              <button>Create a free teams</button> <br />
-              <a href="/">Why teams?</a>
-            </div>
-          </div>
-        </div>
+        <ToolLeft/>
 
         <div className="tool-right">
           <div className="content">

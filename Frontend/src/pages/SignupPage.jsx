@@ -3,7 +3,28 @@ import Header from "../components/Header";
 import IntroItem from "../liteComponents/IntroductItem";
 import LoginLink from "../liteComponents/Login-Link";
 
+import { useEffect, useState } from "react";
+
 export default function SignupPage() {
+  const [errStyle, setErrStyle] = useState({ display: "none" });
+  const [errMes, setErrMes] = useState("");
+  useEffect(() => {
+    let data = {
+      sessionID: document.cookie.slice(10),
+    };
+    fetch("http://localhost:8000/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then(async (res) => {
+      let message = await res.json();
+      if (message.message === "OK") {
+        window.location.href = "/";
+      }
+    });
+  }, []);
   let loginLink = [
     {
       class: "login-google",
@@ -51,6 +72,44 @@ export default function SignupPage() {
       content: "Earn reputation and badges",
     },
   ];
+  function reCaptcha(e) {
+    console.log(e.target);
+  }
+  function sendSignin(e) {
+    e.preventDefault();
+    let data = {
+      username: e.target.displayName.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+      captcha: e.target.captcha.checked,
+      checkBonus: e.target.checkBonus.checked,
+    };
+    if (data.username === "" || data.username === "" || data.password === "") {
+      setErrMes("Các trường nhập không được để trống");
+      setErrStyle({ display: "block" });
+    } else if (data.captcha === false) {
+      setErrMes("Bạn có phải là robot?");
+      setErrStyle({ display: "block" });
+    } else {
+      setErrMes("");
+      setErrStyle({ display: "none" });
+      fetch("http://localhost:8000/api/v1/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then(async (res) => {
+        let message = await res.json();
+        if (message.message === "Post successfully") {
+          window.location.href = "/login";
+        } else {
+          setErrMes(message.message);
+          setErrStyle({ display: "block" });
+        }
+      });
+    }
+  }
   return (
     <>
       <Header />
@@ -64,14 +123,17 @@ export default function SignupPage() {
             style={item.style}
           ></LoginLink>
         ))}
-        <form className="signup-form">
+        <form onSubmit={sendSignin} className="signup-form">
+          <p className="errorNotify" style={errStyle}>
+            <i>{errMes}</i>
+          </p>
           <label htmlFor="email">Display name</label> <br />
-          <input name="email" type="text" /> <br />
+          <input name="displayName" type="text" /> <br />
           <label htmlFor="email">Email</label> <br />
-          <input name="email" type="text" /> <br />
+          <input name="email" type="email" /> <br />
           <label htmlFor="password">Password</label>
           <br />
-          <input name="password" type="text" /> <br />
+          <input name="password" type="password" /> <br />
           <p>
             Passwords must contain at least eight characters, including at least
             1 letter and 1 number.
@@ -79,20 +141,20 @@ export default function SignupPage() {
           <div className="captcha">
             <div className="captcha-box">
               <div className="captcha-check">
-                <input type="checkbox" />
+                <input name="captcha" type="checkbox" />
                 <p>I'm not a robot</p>
               </div>
-              <img src="/image/captcha.png" alt="" />
+              <img onClick={reCaptcha} src="/image/captcha.png" alt="" />
             </div>
           </div>
           <div className="checkbox-box">
-            <input type="checkbox" />
+            <input name="checkBonus" type="checkbox" />
             <p>
               Opt-in to receive occasional product updates, user research
               invitations, company announcements, and digests.
             </p>
           </div>
-          <button>Log in</button>
+          <button>Sign Up</button>
           <p>
             By clicking “Sign up”, you agree to our
             <a href="/"> terms of service, privacy policy</a> and
@@ -107,7 +169,7 @@ export default function SignupPage() {
             Are you an employer?
             <a href="/">
               Sign up on Talent
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              <i className="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
           </p>
         </div>

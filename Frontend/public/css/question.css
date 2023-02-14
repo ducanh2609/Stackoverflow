@@ -21,6 +21,10 @@
   display: flex;
   line-height: 30px;
 }
+.question-menu > div:hover {
+  cursor: pointer;
+  background-color: rgb(241 242 243);
+}
 .question-menu > div > div {
   width: 30px;
   margin-right: 5px;

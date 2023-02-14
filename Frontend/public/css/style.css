@@ -3,10 +3,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 .stack-overflow {
   background-color: rgb(248 249 249);
   min-height: 100vh;
 }
+
 .header {
   height: 50px;
   position: sticky;
@@ -14,6 +16,15 @@
   top: 0;
   background-color: rgb(248 249 249);
   z-index: 1000;
+}
+.header .tool-left {
+  position: relative;
+  left: 7%;
+  width: 16%;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.445);
+  font-size: 12px !important;
 }
 .header-box {
   /* border: 1px solid red; */
@@ -27,22 +38,27 @@
   cursor: pointer;
   background-color: rgb(204, 210, 210);
 }
+
 .menu-btn {
   width: 50px;
   padding: 15px;
 }
+
 .menu-btn i {
   color: rgb(111, 106, 106);
 }
+
 .logo {
   width: 170px;
   padding: 10px;
   height: 100%;
 }
+
 .logo img {
   width: 100%;
   height: 100%;
 }
+
 .about-link,
 .product-link,
 .for-team-link {
@@ -53,12 +69,18 @@
   font-size: 12px;
   line-height: 12px;
 }
-.search-box {
+
+.search-box,
+.ok-search-box {
   position: relative;
   width: 52%;
   margin: 8px 0;
 }
-.search-box input {
+.ok-search-box {
+  width: 60% !important;
+}
+.search-box input,
+.ok-search-box input {
   width: 100%;
   height: 100%;
   background-color: rgb(255 255 255);
@@ -69,17 +91,22 @@
   border: 1px solid rgb(121, 117, 117);
   outline: none;
 }
-.search-box input:focus {
+
+.search-box input:focus,
+.ok-search-box input:hover {
   border: 1px solid rgb(71, 71, 149);
   box-shadow: 1px 1px 2px rgb(129, 129, 232);
   background-color: rgb(255 255 255);
 }
-.search-box i {
+
+.search-box i,
+.ok-search-box i {
   position: absolute;
   color: rgb(107, 105, 105);
   left: 10px;
   top: 15px;
 }
+
 .login-link,
 .signup-link {
   margin: 10px 0px 10px 10px;
@@ -89,79 +116,195 @@
   font-size: 13px;
   line-height: 12px;
 }
+
 .login-link {
   color: rgb(152, 152, 235);
   background-color: rgb(225 236 244);
 }
+
 .login-link:hover {
   color: white;
   background-color: rgb(102, 178, 233) !important;
 }
+
 .signup-link {
   background-color: rgb(10 149 255);
   color: white;
 }
+
 .signup-link:hover {
   background-color: rgb(39, 104, 243) !important;
 }
+
 a {
   text-decoration: none;
   color: rgb(107, 105, 105);
 }
+
 button:hover {
   cursor: pointer;
 }
+
+/*  */
+
+/* Profile */
+.profile-header {
+  position: relative;
+  width: 19%;
+  margin: 8px 12px;
+  display: flex;
+}
+.profile-header:hover {
+  background-color: rgb(248 249 249) !important;
+}
+.profile-header > div {
+  /* border: 1px solid red; */
+  padding: 2px;
+}
+.profile-header > div:hover {
+  background-color: rgb(199, 202, 202);
+}
+
+.profile-header-image {
+  width: 33%;
+  display: flex;
+}
+.profile-header-image img {
+  width: 26px;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+.profile-header-image > p:nth-child(2) {
+  margin-top: 3px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.profile-header-image > p:nth-child(4) {
+  margin-top: 3px;
+  font-size: 15px;
+}
+.profile-header-image div {
+  width: 6px;
+  background-color: rgb(209 166 132);
+  border-radius: 50%;
+  height: 6px;
+  margin: 11px 5px;
+}
+.profile-header-item {
+  width: 16%;
+  text-align: center;
+}
+.profile-header-item i {
+  position: relative;
+  top: 3px;
+}
+
+.profile-menu-box {
+  position: absolute;
+  width: 25%;
+  right: 8.3%;
+  top: 50px;
+  box-shadow: 1px 1px 3px rgb(160, 159, 159);
+  background-color: rgb(244 248 251) !important;
+  font-size: 13px;
+  border-radius: 3px;
+}
+.profile-menu-box > div {
+  height: 30px;
+  padding: 2px 5px;
+  color: blue;
+}
+.box1 {
+  font-weight: 600;
+}
+.box2 {
+  display: flex;
+  justify-content: space-between;
+}
+.box2 p {
+  padding: 0 7px;
+}
+.box2 span {
+  display: inline-block;
+  height: 11px;
+  width: 10px;
+  border-left: 1px solid rgba(119, 116, 116, 0.57);
+  border-bottom: 1px solid rgba(119, 116, 116, 0.57);
+  margin: 0 10px;
+}
+.box2 i {
+  color: rgb(104, 101, 101);
+  position: relative;
+  top: 6px;
+  padding: 0 5px;
+}
+.box3:hover {
+  cursor: pointer;
+  background-color: rgb(161, 234, 234);
+}
+/*  */
+
+/* Footer */
 .footer {
   height: 325px;
   background-color: rgb(35 38 41);
   color: rgb(186 191 196);
   padding-top: 20px;
 }
+
 .footer-box {
   width: 86%;
   margin: 0 auto;
   display: flex;
+}
+.footer-logo {
+  width: 4%;
+}
+
+.footer-logo img {
+  width: 100%;
 }
 
 .footer-box > div > div {
   font-size: 13px;
   padding: 3px 0;
 }
+
 .footer-box > div > div a {
   color: rgb(174, 168, 168);
 }
-.footer-logo {
-  width: 4%;
-}
-.footer-logo img {
-  width: 100%;
-}
+
 .stack-footer,
 .product-footer,
 .company-footer {
   width: 15%;
   padding: 20px 10px 10px 20px;
 }
+
 .stack-footer h5,
 .product-footer h5,
 .company-footer h5,
 .network-footer h5 {
   height: 30px;
 }
+
 .network-footer {
   width: 20%;
   padding: 20px;
 }
+
 .contact-footer {
   position: relative;
   padding: 20px;
   width: 25%;
   font-size: 11px;
 }
+
 .contact-footer a {
   margin-right: 15px;
   color: rgb(181, 173, 173);
 }
+
 .contact-footer p {
   position: absolute;
   bottom: 0;

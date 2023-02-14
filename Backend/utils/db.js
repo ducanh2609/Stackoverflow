@@ -1,4 +1,6 @@
 const mysql = require('mysql2');
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 
 
 const pool = mysql.createPool({
@@ -10,4 +12,13 @@ const pool = mysql.createPool({
 })
 const db = pool.promise();
 
-module.exports.db = db;
+const options = {
+    host: 'localhost',
+    user: 'root',
+    password: 'ducanh93',
+    database: 'stackoverflow',
+    createDatabaseTable: true
+};
+const sessionStore = new MySQLStore(options);
+
+module.exports = { db: db, sessionStore: sessionStore };

@@ -1,8 +1,28 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import LoginLink from "../liteComponents/Login-Link";
 
 export default function LoginPage() {
+  const [errStyle, setErrStyle] = useState({ display: "none" });
+  const [errMes, setErrMes] = useState("");
+  useEffect(() => {
+    let data = {
+      sessionID: document.cookie.slice(10),
+    };
+    fetch("http://localhost:8000/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then(async (res) => {
+      let message = await res.json();
+      if (message.message === "OK") {
+        window.location.href = "/questions";
+      }
+    });
+  }, []);
   let loginLink = [
     {
       class: "login-google",
@@ -32,6 +52,41 @@ export default function LoginPage() {
       },
     },
   ];
+  function sendLogin(e) {
+    e.preventDefault();
+    let data = {
+      email: e.target.email.value,
+      password: e.target.password.value,
+    };
+    if (data.email === "" || data.password === "") {
+      setErrMes("Các trường nhập không được để trống");
+      setErrStyle({ display: "block" });
+    } else {
+      fetch(`http://localhost:8000/api/v1/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then(async (res) => {
+        let message = await res.json();
+        if (
+          message.message === "Tài khoản không tồn tại" ||
+          message.message === "Sai mật khẩu"
+        ) {
+          setErrMes(message.message);
+          setErrStyle({ display: "block" });
+        } else {
+          let token = message.sessionID;
+          const d = new Date();
+          d.setTime(d.getTime() + 90 * 24 * 60 * 60 * 1000);
+          let expires = "expires=" + d.toUTCString();
+          document.cookie = "sessionID = " + token + ";" + expires + ";path=/";
+          window.location.href = "/questions";
+        }
+      });
+    }
+  }
   return (
     <>
       <Header />
@@ -50,13 +105,16 @@ export default function LoginPage() {
             style={item.style}
           ></LoginLink>
         ))}
-        <form className="login-form">
+        <form onSubmit={sendLogin} className="login-form">
+          <p className="errorNotify" style={errStyle}>
+            <i>{errMes}</i>
+          </p>
           <label htmlFor="email">Email</label> <br />
-          <input name="email" type="text" /> <br />
+          <input name="email" type="email" /> <br />
           <label htmlFor="password">Password</label>
           <span>Forgot password?</span>
           <br />
-          <input name="password" type="text" /> <br />
+          <input name="password" type="password" /> <br />
           <button>Log in</button>
         </form>
         <div className="login-footer">
@@ -67,7 +125,7 @@ export default function LoginPage() {
             Are you an employer?
             <Link to="/">
               Sign up on Talent
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              <i className="fa-solid fa-arrow-up-right-from-square"></i>
             </Link>
           </p>
         </div>
