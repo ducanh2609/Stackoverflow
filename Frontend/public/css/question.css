@@ -78,7 +78,7 @@
 .tool-right::-webkit-scrollbar {
   width: 0px;
 }
-.content {
+.question-content {
   /* border: 1px solid blue; */
   min-height: 93vh;
   height: max-content;

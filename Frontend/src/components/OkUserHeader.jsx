@@ -3,12 +3,6 @@ import { Link } from "react-router-dom";
 
 export default function OkUserHeader() {
   const [menuStyle, setMenuStyle] = useState({ display: "none" });
-  // let headerItem = [
-  //   <i className="fa-solid fa-inbox fa-lg"></i>,
-  //   <i className="fa-solid fa-trophy fa-lg"></i>,
-  //   <i className="fa-solid fa-circle-question fa-lg"></i>,
-  //   <i className="fa-brands fa-stack-exchange fa-lg"></i>,
-  // ];
   function menuBoxOpen() {
     if (menuStyle.display === "none") {
       setMenuStyle({ display: "block" });
