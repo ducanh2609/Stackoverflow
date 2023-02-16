@@ -5,8 +5,11 @@ import Footer from "./../components/Footer";
 
 export default function HomePage() {
   useEffect(() => {
+    let userIndex = document.cookie.indexOf(";");
+    let sessIndex = document.cookie.indexOf("sessionID=");
     let data = {
-      sessionID: document.cookie.slice(10),
+      sessionID: document.cookie.slice(sessIndex + 10),
+      userID: document.cookie.slice(7, userIndex),
     };
     fetch("http://localhost:8000/", {
       method: "POST",
@@ -17,7 +20,7 @@ export default function HomePage() {
     }).then(async (res) => {
       let message = await res.json();
       if (message.message === "OK") {
-        window.location.href = "/questions";
+        window.location.href = "/questions/home";
       }
     });
   }, []);

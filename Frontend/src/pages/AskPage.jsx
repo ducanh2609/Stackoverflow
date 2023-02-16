@@ -5,8 +5,11 @@ import "../css/askpage.scss";
 
 export default function AskPage() {
   useEffect(() => {
+    let userIndex = document.cookie.indexOf(";");
+    let sessIndex = document.cookie.indexOf("sessionID=");
     let data = {
-      sessionID: document.cookie.slice(10),
+      sessionID: document.cookie.slice(sessIndex + 10),
+      userID: document.cookie.slice(7, userIndex),
     };
     fetch("http://localhost:8000/", {
       method: "POST",
@@ -16,20 +19,33 @@ export default function AskPage() {
       body: JSON.stringify(data),
     }).then(async (res) => {
       let message = await res.json();
-      if (message.message === "Not session") {
+      if (message.message === "Not Session") {
         window.location.href = "/login";
       }
     });
   }, []);
   function sendQuestion(e) {
     e.preventDefault();
+    let userIndex = document.cookie.indexOf(";");
     let data = {
+      user_id: document.cookie.slice(7, userIndex),
       title: e.target.title.value,
       code: e.target.questionCode.value,
       text: e.target.questionContent.value,
       tag: e.target.tags.value,
     };
-    console.log(data);
+    fetch("http://localhost:8000/api/v1/question/ask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then(async (res) => {
+      let message = await res.json();
+      if (message.message === "Post successfully") {
+        window.localStorage.href = "/question/home";
+      }
+    });
   }
   return (
     <div className="ask-page">
@@ -72,7 +88,7 @@ export default function AskPage() {
               type="text"
               placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
             />
-            <button>Next</button>
+            <div className="button">Next</div>
           </div>
           <div className="ask-code">
             <p>What are the details of your problem?</p>
@@ -86,7 +102,7 @@ export default function AskPage() {
                 <textarea name="questionCode" cols="30" rows="10"></textarea>
               </code>
             </div>
-            <button>Next</button>
+            <div className="button">Next</div>
           </div>
           <div className="ask-code ask-text-content">
             <p>What did you try and what were you expecting?</p>
@@ -100,7 +116,7 @@ export default function AskPage() {
                 <textarea name="questionContent" cols="30" rows="10"></textarea>
               </code>
             </div>
-            <button>Next</button>
+            <div className="button">Next</div>
           </div>
           <div className="ask-title ask-tags">
             <p>Tags</p>
@@ -113,7 +129,6 @@ export default function AskPage() {
               type="text"
               placeholder="e.g. (ios sql-server regex)"
             />
-            <button>Next</button>
           </div>
           <button>Send question</button>
         </form>

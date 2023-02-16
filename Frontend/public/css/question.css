@@ -78,6 +78,7 @@
 .tool-right::-webkit-scrollbar {
   width: 0px;
 }
+/* Content */
 .question-content {
   /* border: 1px solid blue; */
   min-height: 93vh;
@@ -138,6 +139,9 @@
   position: relative;
   top: 2px;
 }
+.nav-item:hover {
+  cursor: pointer;
+}
 .filte-btn {
   border: 1px solid rgb(170, 167, 167);
   border-radius: 3px;
@@ -148,6 +152,9 @@
   text-align: center;
   padding: 6px 5px;
   background-color: rgb(225 236 244);
+}
+.filte-btn:hover {
+  cursor: pointer;
 }
 .filte-btn i {
   /* color: blue; */
@@ -161,7 +168,7 @@
   border-top: 1px solid rgb(207, 207, 218);
 }
 .content-item-left {
-  width: 120px;
+  width: 15%;
   height: 100%;
   padding: 20px 10px 0 30px;
   text-align: right;
@@ -170,27 +177,45 @@
   padding-bottom: 5px;
 }
 .content-item-right {
-  width: calc(100% - 120px);
+  width: 85%;
   height: 100%;
   padding: 15px 0px 10px 0px;
 }
 .question-title {
   color: blue;
   font-size: 18px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  max-height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.answers-title {
+.question-title:hover {
+  cursor: pointer;
+}
+.question-text {
   margin-bottom: 5px;
+  max-height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .question-tags {
   margin-top: 5px;
   padding: 5px 0;
-  border: 1px solid rgb(207, 207, 218);
   border-radius: 5px;
-  font-weight: 600;
   color: red;
-  text-align: center;
 }
+.question-tags span {
+  background-color: rgb(225 236 244);
+  color: blue;
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+.question-tags span +span {
+  margin-left: 10px;
+
+}
+/* Right box */
 .right-box {
   /* border: 1px solid blue; */
   width: 28%;

@@ -7,8 +7,11 @@ export default function LoginPage() {
   const [errStyle, setErrStyle] = useState({ display: "none" });
   const [errMes, setErrMes] = useState("");
   useEffect(() => {
+    let userIndex = document.cookie.indexOf(";");
+    let sessIndex = document.cookie.indexOf("sessionID=");
     let data = {
-      sessionID: document.cookie.slice(10),
+      sessionID: document.cookie.slice(sessIndex + 10),
+      userID: document.cookie.slice(7, userIndex),
     };
     fetch("http://localhost:8000/", {
       method: "POST",
@@ -78,11 +81,14 @@ export default function LoginPage() {
           setErrStyle({ display: "block" });
         } else {
           let token = message.sessionID;
+          let userId = message.userId;
           const d = new Date();
           d.setTime(d.getTime() + 90 * 24 * 60 * 60 * 1000);
           let expires = "expires=" + d.toUTCString();
           document.cookie = "sessionID = " + token + ";" + expires + ";path=/";
-          window.location.href = "/questions";
+          document.cookie = "userID = " + userId + ";" + expires + ";path=/";
+
+          window.location.href = "/questions/home";
         }
       });
     }

@@ -4,16 +4,20 @@ import OverflowDiv4 from "../liteComponents/OverflowDiv4";
 import CollectionItem from "../liteComponents/CollectionItem";
 import TagsItem from "../liteComponents/TagsItem";
 import HotNetQues from "../liteComponents/HotQuestion";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import OkUserHeader from "../components/OkUserHeader";
 import ToolLeft from "../liteComponents/ToolLeft";
 import QuestionContent from "../components/QuestionContent";
+import DetailPage from "../components/Detail";
 
 export default function QuestionPage() {
   const [login, setLogin] = useState(0);
-  useEffect(() => {
+  useLayoutEffect(() => {
+    let userIndex = document.cookie.indexOf(";");
+    let sessIndex = document.cookie.indexOf("sessionID=");
     let data = {
-      sessionID: document.cookie.slice(10),
+      sessionID: document.cookie.slice(sessIndex + 10),
+      userID: document.cookie.slice(7, userIndex),
     };
     fetch("http://localhost:8000/", {
       method: "POST",
@@ -23,6 +27,7 @@ export default function QuestionPage() {
       body: JSON.stringify(data),
     }).then(async (res) => {
       let message = await res.json();
+      console.log(message.message);
       if (message.message === "Not Session") {
         setLogin(0);
       } else {
@@ -167,6 +172,9 @@ export default function QuestionPage() {
       question: "Why is 1Password sign-in to new device secure without MFA?",
     },
   ];
+
+  const url = window.location.href;
+  console.log(url.includes("/detail"));
   return (
     <>
       {login === 0 ? <QuestionHeader /> : <OkUserHeader />}
@@ -174,8 +182,15 @@ export default function QuestionPage() {
         <ToolLeft />
 
         <div className="tool-right">
-          <QuestionContent />
-
+          {url.includes("/allquestions") ? (
+            <QuestionContent title="All Question"></QuestionContent>
+          ) : url.includes("/home") ? (
+            <QuestionContent title="Top Question"></QuestionContent>
+          ) : url.includes("/detail") ? (
+            <DetailPage></DetailPage>
+          ) : (
+            ""
+          )}
           <div className="right-box">
             <div className="overflow-blog">
               <div className="overflow-div1">

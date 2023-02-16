@@ -1,31 +1,36 @@
-import { Link } from "react-router-dom";
-
 export default function ToolLeft(props) {
+  let url = window.location.href;
   return (
     <div className="tool-left" style={props.style}>
-      <div className="home-btn">
+      <div className={url.includes("/home") ? "home-btn active" : "home-btn"}>
         <a href="/">Home</a>
       </div>
       <div className="public">
         <p>PUBLIC</p>
         <div className="question-menu">
-          <div className="question-link active">
+          <div
+            className={
+              url.includes("/allquestions")
+                ? "question-link active"
+                : "question-link"
+            }
+          >
             <div>
               <i className="fa-solid fa-earth-americas fa-lg"></i>
             </div>
-            <Link to="/questions">Questions</Link>
+            <a href="/questions/allquestions">Questions</a>
           </div>
           <div className="tag-link">
             <div></div>
-            <Link>Tags</Link>
+            <a href="/questions/tags">Tags</a>
           </div>
           <div className="user-link">
             <div></div>
-            <Link>Users</Link>
+            <a href="/questions/users">Users</a>
           </div>
           <div className="company-link">
             <div></div>
-            <Link>Companies</Link>
+            <a href="/">Companies</a>
           </div>
         </div>
       </div>

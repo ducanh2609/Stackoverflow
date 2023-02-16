@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getUser } from "../redux/selector";
+import { userSlice } from "../reducers/userSlice";
 
 export default function OkUserHeader() {
+  const dispatch = useDispatch();
+  const user = useSelector(getUser).user;
   const [menuStyle, setMenuStyle] = useState({ display: "none" });
   function menuBoxOpen() {
     if (menuStyle.display === "none") {
@@ -22,16 +27,25 @@ export default function OkUserHeader() {
       window.location.reload();
     });
   }
+  useEffect(() => {
+    let userIndex = document.cookie.indexOf(";");
+    let userID = document.cookie.slice(7, userIndex);
+    console.log(111);
+    fetch(`http://localhost:8000/api/v1/user/${userID}`).then(async (res) => {
+      let user = await res.json();
+      dispatch(userSlice.actions.user(user));
+    });
+  }, [dispatch]);
   return (
     <div className="header">
       <div className="header-box">
         <div className="logo">
           <Link to="/">
-            <img src="../image/Overflow_logo.png" alt="" />
+            <img src="/image/Overflow_logo.png" alt="" />
           </Link>
         </div>
         <div className="product-link">
-          <Link to="/questions">Products</Link>
+          <Link to="/questions/home">Products</Link>
         </div>
         <div className="ok-search-box">
           <input placeholder="Search..." />
@@ -39,7 +53,7 @@ export default function OkUserHeader() {
         </div>
         <div className="profile-header">
           <div className="profile-header-image">
-            <img src="/image/profile_header.png" alt="" />
+            <img src={user.image} alt="" />
             <p>1</p>
             <div className="dot"></div>
             <p>1</p>

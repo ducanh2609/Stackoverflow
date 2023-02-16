@@ -169,6 +169,21 @@
   }
 }
 
+.button {
+  width: max-content;
+  margin: 10px 0;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  color: white;
+  background-color: rgb(11, 151, 202);
+
+  &:hover {
+    background-color: rgb(48, 201, 236);
+    cursor: pointer;
+  }
+}
+
 button {
   margin: 10px 0;
   padding: 8px 12px;

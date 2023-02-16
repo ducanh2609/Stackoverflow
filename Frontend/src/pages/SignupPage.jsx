@@ -3,14 +3,17 @@ import Header from "../components/Header";
 import IntroItem from "../liteComponents/IntroductItem";
 import LoginLink from "../liteComponents/Login-Link";
 
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 export default function SignupPage() {
   const [errStyle, setErrStyle] = useState({ display: "none" });
   const [errMes, setErrMes] = useState("");
-  useEffect(() => {
+  useLayoutEffect(() => {
+    let userIndex = document.cookie.indexOf(";");
+    let sessIndex = document.cookie.indexOf("sessionID=");
     let data = {
-      sessionID: document.cookie.slice(10),
+      sessionID: document.cookie.slice(sessIndex + 10),
+      userID: document.cookie.slice(7, userIndex),
     };
     fetch("http://localhost:8000/", {
       method: "POST",
@@ -83,6 +86,8 @@ export default function SignupPage() {
       password: e.target.password.value,
       captcha: e.target.captcha.checked,
       checkBonus: e.target.checkBonus.checked,
+      image: "/image/profile_header.png",
+      address: "",
     };
     if (data.username === "" || data.username === "" || data.password === "") {
       setErrMes("Các trường nhập không được để trống");

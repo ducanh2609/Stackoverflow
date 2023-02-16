@@ -4,6 +4,7 @@ import ToolLeft from "../liteComponents/ToolLeft";
 
 export default function Header() {
   const [toolStyle, setToolStyle] = useState({ display: "none" });
+
   const [toolI, setToolI] = useState(
     <i className="fa-solid fa-bars fa-lg"></i>
   );
@@ -17,6 +18,7 @@ export default function Header() {
       setToolI(<i className="fa-solid fa-bars fa-lg"></i>);
     }
   }
+
   return (
     <div className="header">
       <div className="header-box">
@@ -32,7 +34,7 @@ export default function Header() {
           <Link to="/about">About</Link>
         </div>
         <div className="product-link">
-          <Link to="/questions">Products</Link>
+          <Link to="/questions/allquestions">Products</Link>
         </div>
         <div className="for-team-link">For Teams</div>
         <div className="search-box">
