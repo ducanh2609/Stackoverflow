@@ -22,8 +22,8 @@ export default function ContentItem(props) {
         <div className="question-text">{props.data.text}</div>
         <div className="question-tags">
           <div>
-            {props.data.cata_name.map((item) => (
-              <span>{item}</span>
+            {props.data.cata_name.map((item, index) => (
+              <span key={index}>{item}</span>
             ))}
           </div>
         </div>

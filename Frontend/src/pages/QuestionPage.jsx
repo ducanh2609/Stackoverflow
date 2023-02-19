@@ -9,8 +9,13 @@ import OkUserHeader from "../components/OkUserHeader";
 import ToolLeft from "../liteComponents/ToolLeft";
 import QuestionContent from "../components/QuestionContent";
 import DetailPage from "../components/Detail";
+import TagsContent from "../components/TagsContent";
+import UserContent from "../components/UserContent";
+import { useParams } from "react-router-dom";
 
 export default function QuestionPage() {
+  let param = useParams();
+  console.log(param);
   const [login, setLogin] = useState(0);
   useLayoutEffect(() => {
     let userIndex = document.cookie.indexOf(";");
@@ -27,7 +32,6 @@ export default function QuestionPage() {
       body: JSON.stringify(data),
     }).then(async (res) => {
       let message = await res.json();
-      console.log(message.message);
       if (message.message === "Not Session") {
         setLogin(0);
       } else {
@@ -173,98 +177,101 @@ export default function QuestionPage() {
     },
   ];
 
-  const url = window.location.href;
-  console.log(url.includes("/detail"));
   return (
     <>
       {login === 0 ? <QuestionHeader /> : <OkUserHeader />}
       <div className="content-box">
-        <ToolLeft />
-
-        <div className="tool-right">
-          {url.includes("/allquestions") ? (
-            <QuestionContent title="All Question"></QuestionContent>
-          ) : url.includes("/home") ? (
-            <QuestionContent title="Top Question"></QuestionContent>
-          ) : url.includes("/detail") ? (
-            <DetailPage></DetailPage>
-          ) : (
-            ""
-          )}
-          <div className="right-box">
-            <div className="overflow-blog">
-              <div className="overflow-div1">
-                <p>The Overflow Blog</p>
-              </div>
-              <div className="overflow-div2">
-                <i className="fa-solid fa-pen"></i>
-                <p>
-                  Engineering’s hidden bottleneck: pull requests <br />
-                  <span>
-                    <i>sponsored post</i>
-                  </span>
-                </p>
-              </div>
-              <div className="overflow-div2">
-                <i className="fa-solid fa-pen"></i>
-                <p>
-                  Three layers to secure a software development organization
-                </p>
-              </div>
-              <div className="overflow-div3">
-                <p>Featured on Meta</p>
-              </div>
-              {overflow4.map((item, index) => (
-                <OverflowDiv4
-                  key={index}
-                  title={item.title}
-                  element={item.element}
-                ></OverflowDiv4>
-              ))}
-            </div>
-            <div className="collectives-title">
-              <div className="collectives-header">
-                <p style={{ fontSize: "18px" }}>Collectives</p>
-                <p style={{ color: "blue" }}>see all</p>
-              </div>
-              {collectItem.map((item, index) => (
-                <CollectionItem
-                  key={index}
-                  src={item.src}
-                  name={item.name}
-                  member={item.member}
-                  content={item.content}
-                ></CollectionItem>
-              ))}
-            </div>
-            <div className="related-tags">
-              <div className="tags-header">Related Tags</div>
-              <div className="tag-item-box">
-                {tagsItem.map((item, index) => (
-                  <TagsItem
+        <ToolLeft></ToolLeft>
+        {param.element === "tags" ? (
+          <TagsContent />
+        ) : (
+          <div className="tool-right">
+            {param.element === "allquestions" ? (
+              <QuestionContent title="All Question"></QuestionContent>
+            ) : param.element === "home" ? (
+              <QuestionContent title="Top Question"></QuestionContent>
+            ) : param.element === "detail" ? (
+              <DetailPage></DetailPage>
+            ) : param.element === "users" ? (
+              <UserContent></UserContent>
+            ) : (
+              ""
+            )}
+            <div className="right-box">
+              <div className="overflow-blog">
+                <div className="overflow-div1">
+                  <p>The Overflow Blog</p>
+                </div>
+                <div className="overflow-div2">
+                  <i className="fa-solid fa-pen"></i>
+                  <p>
+                    Engineering’s hidden bottleneck: pull requests <br />
+                    <span>
+                      <i>sponsored post</i>
+                    </span>
+                  </p>
+                </div>
+                <div className="overflow-div2">
+                  <i className="fa-solid fa-pen"></i>
+                  <p>
+                    Three layers to secure a software development organization
+                  </p>
+                </div>
+                <div className="overflow-div3">
+                  <p>Featured on Meta</p>
+                </div>
+                {overflow4.map((item, index) => (
+                  <OverflowDiv4
                     key={index}
                     title={item.title}
-                    count={item.count}
-                  ></TagsItem>
+                    element={item.element}
+                  ></OverflowDiv4>
                 ))}
               </div>
-              <div className="more-btn">more related tags</div>
-            </div>
-            <div className="hot-network-ques">
-              <div className="tags-header">Hot Network Questions</div>
-              <div className="tag-item-box quetion-item-box">
-                {hotNetQues.map((item, index) => (
-                  <HotNetQues
+              <div className="collectives-title">
+                <div className="collectives-header">
+                  <p style={{ fontSize: "18px" }}>Collectives</p>
+                  <p style={{ color: "blue" }}>see all</p>
+                </div>
+                {collectItem.map((item, index) => (
+                  <CollectionItem
                     key={index}
-                    icon={item.icon}
-                    question={item.question}
-                  ></HotNetQues>
+                    src={item.src}
+                    name={item.name}
+                    member={item.member}
+                    content={item.content}
+                  ></CollectionItem>
                 ))}
               </div>
-              <div className="more-btn">more hot questions</div>
+              <div className="related-tags">
+                <div className="tags-header">Related Tags</div>
+                <div className="tag-item-box">
+                  {tagsItem.map((item, index) => (
+                    <TagsItem
+                      key={index}
+                      title={item.title}
+                      count={item.count}
+                    ></TagsItem>
+                  ))}
+                </div>
+                <div className="more-btn">more related tags</div>
+              </div>
+              <div className="hot-network-ques">
+                <div className="tags-header">Hot Network Questions</div>
+                <div className="tag-item-box quetion-item-box">
+                  {hotNetQues.map((item, index) => (
+                    <HotNetQues
+                      key={index}
+                      icon={item.icon}
+                      question={item.question}
+                    ></HotNetQues>
+                  ))}
+                </div>
+                <div className="more-btn">more hot questions</div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
       <Footer />
     </>

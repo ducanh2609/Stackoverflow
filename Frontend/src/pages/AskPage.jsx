@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import OkUserHeader from "../components/OkUserHeader";
 import "../css/askpage.scss";
 
 export default function AskPage() {
+  const [err, setErr] = useState("");
   useEffect(() => {
     let userIndex = document.cookie.indexOf(";");
     let sessIndex = document.cookie.indexOf("sessionID=");
@@ -34,18 +35,23 @@ export default function AskPage() {
       text: e.target.questionContent.value,
       tag: e.target.tags.value,
     };
-    fetch("http://localhost:8000/api/v1/question/ask", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then(async (res) => {
-      let message = await res.json();
-      if (message.message === "Post successfully") {
-        window.localStorage.href = "/question/home";
-      }
-    });
+    if (data.title === "" || data.content === "" || data.tag === "") {
+      setErr('(*) Các trường có dấu "*" không được để trống.');
+    } else {
+      setErr("");
+      fetch("http://localhost:8000/api/v1/question/ask", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then(async (res) => {
+        let message = await res.json();
+        if (message.message === "Post successfully") {
+          window.localStorage.href = "/question/home";
+        }
+      });
+    }
   }
   return (
     <div className="ask-page">
@@ -78,7 +84,7 @@ export default function AskPage() {
         </div>
         <form onSubmit={sendQuestion} className="question-text-form">
           <div className="ask-title">
-            <p>Title</p>
+            <p>Title (*)</p>
             <p>
               Be specific and imagine you’re asking a question to another
               person.
@@ -91,7 +97,7 @@ export default function AskPage() {
             <div className="button">Next</div>
           </div>
           <div className="ask-code">
-            <p>What are the details of your problem?</p>
+            <p>What are the details of your problem? (*)</p>
             <p>
               Introduce the problem and expand on what you put in the title.
               Minimum 20 characters.
@@ -105,7 +111,7 @@ export default function AskPage() {
             <div className="button">Next</div>
           </div>
           <div className="ask-code ask-text-content">
-            <p>What did you try and what were you expecting?</p>
+            <p>What did you try and what were you expecting? (*)</p>
             <p>
               Describe what you tried, what you expected to happen, and what
               actually resulted. Minimum 20 characters.
@@ -119,7 +125,7 @@ export default function AskPage() {
             <div className="button">Next</div>
           </div>
           <div className="ask-title ask-tags">
-            <p>Tags</p>
+            <p>Tags (*)</p>
             <p>
               Add up to 5 tags to describe what your question is about. Start
               typing to see suggestions.
@@ -131,6 +137,9 @@ export default function AskPage() {
             />
           </div>
           <button>Send question</button>
+          <p className="ask-err">
+            <i>{err}</i>
+          </p>
         </form>
       </div>
       <div className="ask-note">

@@ -16,21 +16,20 @@ export default function OkUserHeader() {
     }
   }
   function logOut() {
-    let sessionID = document.cookie.slice(10);
-
+    let sessIndex = document.cookie.indexOf("sessionID=");
+    let sessionID = document.cookie.slice(sessIndex + 10);
     fetch(`http://localhost:8000/logout/${sessionID}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
     }).then(() => {
-      window.location.reload();
+      window.location.href = "/";
     });
   }
   useEffect(() => {
     let userIndex = document.cookie.indexOf(";");
     let userID = document.cookie.slice(7, userIndex);
-    console.log(111);
     fetch(`http://localhost:8000/api/v1/user/${userID}`).then(async (res) => {
       let user = await res.json();
       dispatch(userSlice.actions.user(user));

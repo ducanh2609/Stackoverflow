@@ -92,8 +92,8 @@
   outline: none;
 }
 
-.search-box input:focus,
-.ok-search-box input:hover {
+input:focus,
+input:hover {
   border: 1px solid rgb(71, 71, 149);
   box-shadow: 1px 1px 2px rgb(129, 129, 232);
   background-color: rgb(255 255 255);

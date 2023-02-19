@@ -12,12 +12,17 @@
   width: 170px;
   padding: 20px 0;
 }
-.tool-left > div {
+.tool-left > div,
+.tool-left > a {
   min-height: 40px;
   padding: 8px 0;
   line-height: 25px;
 }
-.question-menu > div {
+.home-btn {
+  display: inline-block;
+  width: 100%;
+}
+.question-menu > a {
   display: flex;
   line-height: 30px;
 }
@@ -25,12 +30,12 @@
   cursor: pointer;
   background-color: rgb(241 242 243);
 }
-.question-menu > div > div {
+.question-menu > a > div {
   width: 30px;
   margin-right: 5px;
   text-align: center;
 }
-.question-menu > div > div i {
+.question-menu > a > div i {
   position: relative;
 }
 .active {
@@ -163,7 +168,6 @@
   margin-right: 3px;
 }
 .content-item {
-  height: 160px;
   display: flex;
   border-top: 1px solid rgb(207, 207, 218);
 }
@@ -211,9 +215,12 @@
   padding: 6px 10px;
   border-radius: 4px;
 }
-.question-tags span +span {
+.question-tags span:hover {
+  cursor: pointer;
+  background-color: rgba(127, 255, 212, 0.64);
+}
+.question-tags span + span {
   margin-left: 10px;
-
 }
 /* Right box */
 .right-box {

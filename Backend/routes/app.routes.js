@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllUser, postAllUser, postQuestion, getAllQuestion, getUser, getQuestion } = require('../controllers/app.controllers.js');
+const { getAllUser, postAllUser, postQuestion, getAllQuestion, getUser, getQuestion, updateView, postAnswer, getQuesAnswer, delAnswer, updateAnswer, getCata } = require('../controllers/app.controllers.js');
 const { checkExitsUser, checkExitsLogin, checkSession } = require('../middlewares/user.middlewares.js');
 const { delSessionSQL } = require('../models/app.models.js');
 
@@ -33,12 +33,17 @@ router.post('/api/v1/login', checkExitsLogin, async (req, res) => {
 router.get('/api/v1/question', getAllQuestion)
 router.get('/api/v1/question/:id', getQuestion)
 
+router.put('/api/v1/question/:id', updateView)
 
 
 router.post('/api/v1/question/ask', postQuestion)
 
-
-
-
+// Answer
+router.get('/api/v1/answer/:id', getQuesAnswer)
+router.post('/api/v1/answer', postAnswer)
+router.delete('/api/v1/answer/:id', delAnswer)
+router.put('/api/v1/answer/:id', updateAnswer)
+// Tags
+router.get('/api/v1/tags', getCata)
 
 module.exports = router

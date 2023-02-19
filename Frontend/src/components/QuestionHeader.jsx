@@ -13,7 +13,7 @@ export default function QuestionHeader() {
           <Link to="/about">About</Link>
         </div>
         <div className="product-link">
-          <Link to="/questions">Products</Link>
+          <Link to="/questions/allquestions">Products</Link>
         </div>
         <div className="for-team-link">For Teams</div>
         <div className="search-box" style={{ width: "56%" }}>

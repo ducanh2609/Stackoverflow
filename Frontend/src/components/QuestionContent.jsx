@@ -8,7 +8,6 @@ import { useEffect } from "react";
 export default function QuestionContent(props) {
   const dispatch = useDispatch();
   const allQuestion = useSelector(getQuestion).allQuestion;
-  console.log(allQuestion);
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/question").then(async (res) => {
       let data = await res.json();

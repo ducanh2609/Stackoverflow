@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 import Header from "../components/Header";
+import Loading from "../components/Loading";
 import HomePageContent from "../liteComponents/HompageContent";
 import Footer from "./../components/Footer";
 
 export default function HomePage() {
-  useEffect(() => {
+  const [flag, setFlag] = useState(0);
+  useLayoutEffect(() => {
     let userIndex = document.cookie.indexOf(";");
     let sessIndex = document.cookie.indexOf("sessionID=");
     let data = {
@@ -21,14 +23,22 @@ export default function HomePage() {
       let message = await res.json();
       if (message.message === "OK") {
         window.location.href = "/questions/home";
+      } else {
+        setFlag(1);
       }
     });
   }, []);
   return (
     <>
       <Header />
-      <HomePageContent />
-      <Footer />
+      {flag === 0 ? (
+        <Loading />
+      ) : (
+        <>
+          <HomePageContent />
+          <Footer />
+        </>
+      )}
     </>
   );
 }

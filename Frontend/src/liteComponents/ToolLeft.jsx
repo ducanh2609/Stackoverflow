@@ -1,16 +1,22 @@
+import { useParams } from "react-router-dom";
+
 export default function ToolLeft(props) {
-  let url = window.location.href;
+  let param = useParams();
   return (
     <div className="tool-left" style={props.style}>
-      <div className={url.includes("/home") ? "home-btn active" : "home-btn"}>
-        <a href="/">Home</a>
-      </div>
+      <a
+        href="/"
+        className={param.element === "home" ? "home-btn active" : "home-btn"}
+      >
+        Home
+      </a>
       <div className="public">
         <p>PUBLIC</p>
         <div className="question-menu">
-          <div
+          <a
+            href="/questions/allquestions"
             className={
-              url.includes("/allquestions")
+              param.element === "allquestions" || param.element === "detail"
                 ? "question-link active"
                 : "question-link"
             }
@@ -18,20 +24,37 @@ export default function ToolLeft(props) {
             <div>
               <i className="fa-solid fa-earth-americas fa-lg"></i>
             </div>
-            <a href="/questions/allquestions">Questions</a>
-          </div>
-          <div className="tag-link">
+            <p>Questions</p>
+          </a>
+          <a
+            href="/questions/tags"
+            className={
+              param.element === "tags" ? "tags-link active" : "tags-link"
+            }
+          >
             <div></div>
-            <a href="/questions/tags">Tags</a>
-          </div>
-          <div className="user-link">
+            <p>Tags</p>
+          </a>
+          <a
+            href="/questions/users"
+            className={
+              param.element === "users" ? "user-link active" : "user-link"
+            }
+          >
             <div></div>
-            <a href="/questions/users">Users</a>
-          </div>
-          <div className="company-link">
+            <p>Users</p>
+          </a>
+          <a
+            href="/questions/companies"
+            className={
+              param.element === "companies"
+                ? "company-link active"
+                : "company-link"
+            }
+          >
             <div></div>
-            <a href="/">Companies</a>
-          </div>
+            <p>Companies</p>
+          </a>
         </div>
       </div>
       <div className="collectives">

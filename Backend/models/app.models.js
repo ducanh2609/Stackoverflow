@@ -26,11 +26,11 @@ module.exports.delSessionSQL = (arr) => {
 }
 
 module.exports.getAllQuestionSQL = () => {
-    let sql = 'SELECT * FROM question';
+    let sql = 'SELECT t1.ques_id, t2.name, t2.image, t1.title, t1.code, t1.text, t1.view,t1.vote, t1.time FROM question as t1, profile as t2 WHERE t1.user_id = t2.user_id';
     return db.query(sql)
 }
 module.exports.postAllQuestionSQL = (arr) => {
-    let sql = 'INSERT INTO question VALUES (?,?,?,?,?,?,?)';
+    let sql = 'INSERT INTO question VALUES (?,?,?,?,?,?,?,default)';
     return db.query(sql, arr)
 }
 module.exports.getCatalogySQL = (arr) => {
@@ -43,10 +43,40 @@ module.exports.getCataQuesSQL = (arr) => {
 }
 
 module.exports.postCatalogySQL = (arr) => {
-    let sql = 'INSERT INTO catalogy VALUES (?,?)';
+    let sql = 'INSERT INTO catalogy VALUES (?,?,default)';
     return db.query(sql, arr)
 }
 module.exports.postCataQuesSQL = (arr) => {
     let sql = 'INSERT INTO ques_cata VALUES (?,?)';
+    return db.query(sql, arr)
+}
+module.exports.updateViewSQL = (arr) => {
+    let sql = 'UPDATE question SET view = ? WHERE ques_id = ?';
+    return db.query(sql, arr)
+}
+module.exports.getAllAnswerSQL = () => {
+    let sql = 'SELECT * FROM answer';
+    return db.query(sql)
+}
+module.exports.getQuesAnswerSQL = (arr) => {
+    let sql = 'SELECT t1.ans_id, t1.ques_id, t1.user_id, t2.name, t2.image, t1.content, t1.vote, t1.time FROM answer as t1, profile as t2 WHERE ques_id = ? AND t1.user_id = t2.user_id';
+    return db.query(sql, arr)
+}
+
+module.exports.postAnswerSQL = (arr) => {
+    let sql = 'INSERT INTO answer VALUES (?,?,?,?,?,default)';
+    return db.query(sql, arr)
+}
+
+module.exports.delAnswerSQL = (arr) => {
+    let sql = 'DELETE FROM answer WHERE ans_id = ?';
+    return db.query(sql, arr)
+}
+module.exports.updateAnswerSQL = (arr) => {
+    let sql = 'UPDATE answer SET content = ? WHERE ans_id = ?';
+    return db.query(sql, arr)
+}
+module.exports.getCataSQL = (arr) => {
+    let sql = 'SELECT * FROM catalogy as t1 JOIN (SELECT cata_id, count(ques_id) as question FROM ques_cata group by cata_id) as t2 WHERE t1.cata_id = t2.cata_id';
     return db.query(sql, arr)
 }

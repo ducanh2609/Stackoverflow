@@ -9,3 +9,12 @@ export const allQuestionSlice = createSlice({
         )
     }
 })
+export const questionSlice = createSlice({
+    name: 'question',
+    initialState: {},
+    reducers: {
+        question: (state, action) => (
+            action.payload
+        )
+    }
+})

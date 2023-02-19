@@ -1,0 +1,156 @@
+.tags-page {
+    width: calc(100% - 170px);
+    min-height: 100vh;
+    padding: 25px;
+
+    .tags-header-box {
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+
+        >p {
+            font-size: 26px;
+            width: 80%;
+            padding-bottom: 10px;
+        }
+
+        >span {
+            width: 60%;
+            font-size: 16px;
+            display: block;
+        }
+    }
+
+    .tags-search {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 10px;
+
+        .tags-input {
+            position: relative;
+
+            >input {
+                width: 200px;
+                height: 35px;
+                background-color: rgb(255 255 255);
+                color: rgb(121, 117, 117);
+                font-size: 13px;
+                padding: 0 10px 0 30px;
+                border-radius: 5px;
+                border: 1px solid rgba(171, 169, 169, 0.534);
+                outline: none;
+
+                &::placeholder {
+                    color: rgb(184, 183, 183);
+                }
+            }
+
+            i {
+                position: absolute;
+                color: rgb(107, 105, 105);
+                left: 10px;
+                top: 15px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+
+        }
+
+        >div {
+            span {
+                font-size: 13px;
+                display: inline-block;
+                padding: 8px 15px;
+                border: 1px solid rgb(121, 117, 117);
+                border-radius: 2px;
+                color: rgb(121, 117, 117);
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .tags-content-box {
+        height: 90vh;
+        overflow: auto;
+
+        .tags-content {
+            display: grid;
+            grid-template-columns: 24.25% 24.25% 24.25% 24.25%;
+            gap: 1%;
+            row-gap: 15px;
+
+            .tags-items {
+                border: 1px solid rgba(171, 169, 169, 0.534);
+                min-height: 80px;
+                height: max-content;
+                border-radius: 5px;
+                padding: 15px;
+
+                .tags-name {
+                    background-color: rgb(225 236 244);
+                    width: max-content;
+                    padding: 4px 10px;
+                    border-radius: 3px;
+                    color: rgb(57 115 179);
+                    margin-bottom: 10px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                .tags-question {
+                    color: rgb(140, 139, 139);
+                }
+            }
+        }
+
+    }
+
+    .div-page {
+        position: relative;
+        display: flex;
+        box-sizing: border-box;
+        justify-content: right;
+
+        .page-id {
+            display: flex;
+            overflow: hidden;
+
+            .order {
+                position: relative;
+                top: 11px;
+                border: 1px solid red;
+                display: block;
+                height: 30px;
+                width: 30px;
+                line-height: 27px;
+                text-align: center;
+                margin: 0 3px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .previos,
+        .next {
+            text-align: center;
+            background-color: rgba(173, 166, 166, 0.901);
+        }
+
+        .previos i:hover {
+            color: red;
+        }
+
+        .next i:hover {
+            color: blue;
+        }
+    }
+}
