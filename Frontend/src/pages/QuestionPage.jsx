@@ -12,10 +12,10 @@ import DetailPage from "../components/Detail";
 import TagsContent from "../components/TagsContent";
 import UserContent from "../components/UserContent";
 import { useParams } from "react-router-dom";
+import CompaniesContent from "../components/CompaniesContent";
 
 export default function QuestionPage() {
   let param = useParams();
-  console.log(param);
   const [login, setLogin] = useState(0);
   useLayoutEffect(() => {
     let userIndex = document.cookie.indexOf(";");
@@ -184,6 +184,8 @@ export default function QuestionPage() {
         <ToolLeft></ToolLeft>
         {param.element === "tags" ? (
           <TagsContent />
+        ) : param.element === "companies" ? (
+          <CompaniesContent />
         ) : (
           <div className="tool-right">
             {param.element === "allquestions" ? (

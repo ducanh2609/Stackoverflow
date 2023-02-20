@@ -30,11 +30,11 @@ export default function HomePage() {
   }, []);
   return (
     <>
-      <Header />
       {flag === 0 ? (
         <Loading />
       ) : (
         <>
+          <Header />
           <HomePageContent />
           <Footer />
         </>

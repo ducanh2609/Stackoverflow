@@ -1,4 +1,4 @@
-const { getAllUserSQL, postAllUserSQL, getAllQuestionSQL, postAllQuestionSQL, postCatalogySQL, getCatalogySQL, postCataQuesSQL, postProfile, getCataQuesSQL, updateViewSQL, postAnswerSQL, getAllAnswerSQL, getQuesAnswerSQL, delAnswerSQL, updateAnswerSQL, getCataSQL } = require('../models/app.models.js')
+const { getAllUserSQL, postAllUserSQL, getAllQuestionSQL, postAllQuestionSQL, postCatalogySQL, getCatalogySQL, postCataQuesSQL, postProfile, getCataQuesSQL, updateViewSQL, postAnswerSQL, getAllAnswerSQL, getQuesAnswerSQL, delAnswerSQL, updateAnswerSQL, getCataSQL, getCountAnswerSQL } = require('../models/app.models.js')
 
 
 module.exports.getAllUser = async (req, res) => {
@@ -22,6 +22,7 @@ module.exports.postAllUser = async (req, res) => {
 module.exports.getAllQuestion = async (req, res) => {
     let [record] = await getAllQuestionSQL()
     let [cataQues] = await getCataQuesSQL()
+    let [countAns] = await getCountAnswerSQL();
     let test = cataQues.reduce((arr, item) => {
         let flag = false;
         arr.forEach(e => {
@@ -44,6 +45,13 @@ module.exports.getAllQuestion = async (req, res) => {
         test.forEach((e) => {
             if (item.ques_id == e.ques_id) {
                 item.cata_name = e.cata_name
+            }
+        })
+        countAns.forEach((e) => {
+            if (item.ques_id == e.ques_id) {
+                item.answers = e.answers
+            } else {
+                item.answers = 0
             }
         })
     })
@@ -91,7 +99,6 @@ module.exports.postQuestion = async (req, res) => {
         let findCata = catalogy.find((item) => item.cata_name == e);
         if (findCata) findCataArr.push(findCata);
     })
-    console.log(findCataArr);
     if (findCataArr.length == 0) {
         cataID = catalogy.length
         for (let i = 0; i < tagArr.length; i++) {
@@ -111,7 +118,6 @@ module.exports.postQuestion = async (req, res) => {
         })
         let value = findCataArr.map((item) => item.cata_name)
         let newCata = tagArr.filter((item) => value.includes(item) == false);
-        console.log(newCata);
         cataID = catalogy.length + 1;
         cataID = catalogy.length
         for (let i = 0; i < newCata.length; i++) {

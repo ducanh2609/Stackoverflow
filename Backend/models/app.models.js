@@ -58,6 +58,10 @@ module.exports.getAllAnswerSQL = () => {
     let sql = 'SELECT * FROM answer';
     return db.query(sql)
 }
+module.exports.getCountAnswerSQL = () => {
+    let sql = 'SELECT ques_id, count(ans_id) as answers FROM answer GROUP BY ques_id';
+    return db.query(sql)
+}
 module.exports.getQuesAnswerSQL = (arr) => {
     let sql = 'SELECT t1.ans_id, t1.ques_id, t1.user_id, t2.name, t2.image, t1.content, t1.vote, t1.time FROM answer as t1, profile as t2 WHERE ques_id = ? AND t1.user_id = t2.user_id';
     return db.query(sql, arr)

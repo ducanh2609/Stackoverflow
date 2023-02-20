@@ -9,7 +9,7 @@ export default function ContentItem(props) {
           <span>{props.data.vote}</span> votes
         </p>
         <p>
-          <span>0</span> answers
+          <span>{props.data.answers}</span> answers
         </p>
         <p>
           <span>{props.data.view}</span> views

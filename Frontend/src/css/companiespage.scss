@@ -1,0 +1,138 @@
+.companies-page {
+    width: calc(100% - 170px);
+    min-height: 100vh;
+    padding: 25px;
+
+    .companies-header-box {
+        padding-bottom: 20px;
+
+        >p {
+            font-size: 26px;
+            width: 80%;
+            padding-bottom: 10px;
+        }
+
+        >span {
+            width: 60%;
+            font-size: 12px;
+            display: block;
+        }
+    }
+
+    .companies-seach-box {
+        display: flex;
+        position: relative;
+
+        >i {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            color: rgb(143, 140, 140);
+        }
+
+        >input {
+            width: 40%;
+            height: 42px;
+            margin-right: 5px;
+            font-size: 16px;
+            outline: none;
+            border-radius: 3px;
+            border: 1px solid rgba(167, 166, 166, 0.822);
+            padding: 0 10px 0 45px;
+
+            &::placeholder {
+                color: rgba(167, 166, 166, 0.822);
+            }
+        }
+
+        >input:nth-child(3) {
+            width: 38%;
+            padding: 0 10px;
+        }
+
+        >button {
+            height: 42px;
+            margin: 0 10px 0 0;
+            font-size: 15px;
+        }
+
+        >button:nth-child(6) {
+            background-color: white;
+            color: rgba(121, 121, 121, 0.774);
+            border: 1px solid rgba(121, 121, 121, 0.774);
+            display: flex;
+            line-height: 26px;
+            margin: 0;
+
+            &:hover {
+                outline-style: outset;
+                border: 1px solid rgb(211, 208, 208);
+            }
+
+            i {
+                padding: 4px 0 4px 5px;
+            }
+        }
+
+        >div {
+            border-left: 1px solid rgba(186, 184, 184, 0.853);
+            margin-right: 10px;
+
+            .companies-filter-box {
+                position: absolute;
+                border: 1px solid rgba(191, 191, 230, 0.758);
+                padding: 10px;
+                right: 0;
+                top: 50px;
+                border-radius: 5px;
+                box-shadow: 3px 3px 10px rgba(189, 188, 188, 0.553);
+                width: 30%;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: -9px;
+                    right: 50px;
+                    height: 0;
+                    width: 0;
+                    border-left: 20px solid transparent;
+                    border-right: 20px solid transparent;
+                    border-bottom: 8px solid rgba(191, 191, 230, 0.758);
+                }
+
+                p {
+                    font-weight: 600;
+                    font-size: 15px;
+                }
+
+                input {
+                    height: 35px;
+                    width: 100%;
+                    border: 1px solid rgba(191, 191, 230, 0.758);
+                    border-radius: 3px;
+                    padding: 0 10px;
+                    margin: 5px 0;
+                    outline: none;
+
+                    &::placeholder {
+                        color: rgba(167, 166, 166, 0.822);
+                    }
+                }
+
+                >div {
+                    display: flex;
+                    justify-content: space-between;
+
+                    div {
+                        background-color: rgb(248 249 249);
+                        color: rgb(241 242 243);
+
+                        &:hover {
+                            color: blue;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
