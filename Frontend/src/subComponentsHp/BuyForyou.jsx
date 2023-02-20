@@ -17,7 +17,7 @@ function BuyForyou(props) {
                         ))}
                     </div>
                     <div className='hp-likeBtn'>
-                        <div style={props.style} className='likeButton5 wt-hover'><a style={props.style1} href=''>{props.button}</a> </div>
+                        <div style={props.style} className='likeButton5 wt-hover'><a style={props.style1} href='/'>{props.button}</a> </div>
                     </div>
                     <p className='hp-flex-item5-p p2'>{props.quantity}</p>
                 </div>

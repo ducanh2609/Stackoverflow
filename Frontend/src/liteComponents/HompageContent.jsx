@@ -39,7 +39,6 @@ export default function HomePageContent() {
                 setBackTop(false)
             }
         })
-        console.log(test);
     }, []);
     const scrollTop = () => {
         window.scrollTo({
@@ -437,7 +436,7 @@ export default function HomePageContent() {
                                 ))
                                 }
                                 <div className='hp-flex-item6'>
-                                    <div className='bg-wh' style={{ fontSize: '18px' }}>You can save time and money with Stack Overflow for Teams.</div>
+                                    <div className='bg-wh' style={{ fontSize: '17px' }}>You can save time and money with Stack Overflow for Teams.</div>
                                     <div className='hp-flex-item-click'><a href='/'>Calculator your ROI</a></div>
                                 </div>
                             </div>
