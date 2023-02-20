@@ -39,6 +39,7 @@ export default function HomePageContent() {
                 setBackTop(false)
             }
         })
+        console.log(test);
     }, []);
     const scrollTop = () => {
         window.scrollTo({
@@ -315,23 +316,23 @@ export default function HomePageContent() {
                         <div className='flex-item1-2'>
                             <div>
                                 <div style={{ paddingBottom: '20px' }}>
-                                    <a href="">
+                                    <a href="/">
                                         <img className='logoSO' src='/image/img-homepage/logo-stackoverflow.png' alt="" />
                                     </a>
                                     <img className='imgSO' src='/image/img-homepage/illo-public.svg' alt="" />
                                     <h2 className='text-h2'>A public platform building the definitive collection of coding questions & answers</h2>
                                     <p className='text-p'>A community-based space to find and contribute answers to technical challenges, and one of the most popular websites in the world.</p>
                                     <div>
-                                        <a className='like-button-1' href="">Join the community</a>
+                                        <a className='like-button-1' href="/">Join the community</a>
                                     </div>
-                                    <div>or <a href="" style={{ color: 'hsl(210,8%,55%)' }}>search content</a></div>
+                                    <div>or <a href="/" style={{ color: 'hsl(210,8%,55%)' }}>search content</a></div>
                                 </div>
                             </div>
                         </div>
                         <div className='flex-item2-2'>
                             <div>
                                 <div style={{ paddingBottom: '20px' }}>
-                                    <a href="">
+                                    <a href="/">
                                         <img className='logoSO' src='/image/img-homepage/teams-logo-compact.png' alt="" />
                                     </a>
                                     <img className='imgSO' src='/image/img-homepage/illo-teams.svg' alt="" />
@@ -344,12 +345,12 @@ export default function HomePageContent() {
                                     </div>
                                     <div style={{ display: 'flex', justifyContent: 'center', gap: '6px' }}>
                                         <div>
-                                            <a className='like-button-2' href="">For large organizations
+                                            <a className='like-button-2' href="/">For large organizations
                                                 <span><FaIndustry style={{ marginLeft: '4px' }} /></span>
                                             </a>
                                         </div>
                                         <div>
-                                            <a className='like-button-2' href="">For small teams
+                                            <a className='like-button-2' href="/">For small teams
                                                 <span><BsPeopleFill style={{ marginLeft: '3px' }} /></span>
                                             </a>
                                         </div>
@@ -388,7 +389,7 @@ export default function HomePageContent() {
                                     <h3>Capture your company's knowledge and context in a discoverable format to <span>unblock your team</span></h3>
                                 </div>
                                 <div>
-                                    <a className='like-button-2' href="">Take a tour of Teams</a>
+                                    <a className='like-button-2' href="/">Take a tour of Teams</a>
                                 </div>
                                 <div className='flexbox-3 p40'>
                                     <div className='flex-item3'>
@@ -437,7 +438,7 @@ export default function HomePageContent() {
                                 }
                                 <div className='hp-flex-item6'>
                                     <div className='bg-wh' style={{ fontSize: '18px' }}>You can save time and money with Stack Overflow for Teams.</div>
-                                    <div className='hp-flex-item-click'><a href=''>Calculator your ROI</a></div>
+                                    <div className='hp-flex-item-click'><a href='/'>Calculator your ROI</a></div>
                                 </div>
                             </div>
                         </div>
@@ -452,13 +453,13 @@ export default function HomePageContent() {
                                 </div>
                                 <div className='hp-flex-item7-2'>
                                     <h2>Integrates with and improves other tools</h2>
-                                    <div>All plans come with integrations for ChatOps tools <a href=''>Slack</a> & <a href=''>Microsoft Teams</a> in order to cut down on pings, limit distractions and make the tools even more powerful. Business and Enterprise customers get access to Jira, GitHub & Okta integrations.</div>
+                                    <div>All plans come with integrations for ChatOps tools <a href='/'>Slack</a> & <a href='/'>Microsoft Teams</a> in order to cut down on pings, limit distractions and make the tools even more powerful. Business and Enterprise customers get access to Jira, GitHub & Okta integrations.</div>
                                     <div className='hp-flex-item7-img-allMd'>
-                                        <a href=''><img className='hp-flex-item7-img-md' src='/image/img-homepage/slack-icon.png' alt="" /></a>
-                                        <a href=''><img className='hp-flex-item7-img-md' src='/image/img-homepage/microsoft-teams.png' alt="" /></a>
-                                        <a href=''><img className='hp-flex-item7-img-md' src='/image/img-homepage/github-logo.png' alt="" /></a>
-                                        <a href=''><img className='hp-flex-item7-img-md' src='/image/img-homepage/jira-logo.png' alt="" /></a>
-                                        <a href=''><img className='hp-flex-item7-img-md' src='/image/img-homepage/okta-logo.png' alt="" /></a>
+                                        <a href='/'><img className='hp-flex-item7-img-md' src='/image/img-homepage/slack-icon.png' alt="" /></a>
+                                        <a href='/'><img className='hp-flex-item7-img-md' src='/image/img-homepage/microsoft-teams.png' alt="" /></a>
+                                        <a href='/'><img className='hp-flex-item7-img-md' src='/image/img-homepage/github-logo.png' alt="" /></a>
+                                        <a href='/'><img className='hp-flex-item7-img-md' src='/image/img-homepage/jira-logo.png' alt="" /></a>
+                                        <a href='/'><img className='hp-flex-item7-img-md' src='/image/img-homepage/okta-logo.png' alt="" /></a>
                                     </div>
                                 </div>
                                 <div className='hp-flex-item7-1'>
@@ -495,10 +496,10 @@ export default function HomePageContent() {
                         ))}
                     </div>
                     <div className='linkProperty bg-orange-500 hp-container7-a1'>
-                        <a href="">About the company</a>
+                        <a href="/">About the company</a>
                     </div>
                     <div className='hp-container7-a2'>
-                        <a href="">Want to work here? <span>Current job openings</span></a>
+                        <a href="/">Want to work here? <span>Current job openings</span></a>
                     </div>
                 </div>
 
@@ -513,13 +514,13 @@ export default function HomePageContent() {
                                 <h4 className='hp-flex-item10-h4'>Explore technical topics and other disciplines across 170+ Q&A communities</h4>
                                 <p className='hp-flex-item10-p'>
                                     From
-                                    <a href=""> Server Fault </a>
+                                    <a href="/"> Server Fault </a>
                                     to
-                                    <a href=""> Super User </a>
+                                    <a href="/"> Super User </a>
                                     , much of the Stack Exchange network continues our mission to empower the world to develop technology through collective knowledge. Other sites on the Stack Exchange network further encourage knowledge sharing across topics such as cooking and medicine.
                                 </p>
                                 <div className='linkProperty hp-container8-a'>
-                                    <a href="">Explore the network</a>
+                                    <a href="/">Explore the network</a>
                                 </div>
                             </div>
                             <div className='hp-flex-item10-1'></div>
@@ -532,7 +533,7 @@ export default function HomePageContent() {
                         <img src="/image/img-homepage/lock.png" alt="" />
                     </div>
                     <p className='hp-flex-item11-p1'>Build a <strong> private community </strong> to share technical or non-technical knowledge.</p>
-                    <p className='hp-flex-item11-p2'> <a href=""> Create a free Team</a></p>
+                    <p className='hp-flex-item11-p2'> <a href="/"> Create a free Team</a></p>
                 </div>
 
                 <div>
