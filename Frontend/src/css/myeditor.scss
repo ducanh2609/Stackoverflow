@@ -1,0 +1,78 @@
+.myEditor {
+    border: 1px solid rgba(182, 228, 227, 0.804);
+    border-radius: 3px;
+
+    .menu-bar {
+        height: 40px;
+        border-bottom: 1px solid rgba(182, 228, 227, 0.804);
+        padding: 7px;
+        display: flex;
+        justify-content: space-between;
+
+        .menu-item-box {
+            display: flex;
+
+            .menu-item {
+                justify-content: center;
+                display: flex;
+                padding: 3px;
+                margin-right: 10px;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                &:hover {
+                    background-color: aquamarine;
+                }
+            }
+
+        }
+
+        .menu-preview {
+            display: flex;
+
+            .preview-item {
+                border: 1px solid black;
+                border-radius: 2px;
+                justify-content: center;
+                display: flex;
+                padding: 3px;
+
+                &:hover {
+                    background-color: aquamarine;
+                }
+
+                img {
+                    width: 20px;
+                    height: 20px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+    iframe {
+        width: 100%;
+        min-height: 210px;
+    }
+
+    // >textarea {
+    //     font-size: 15px;
+    //     width: 100%;
+    //     min-height: 210px;
+    //     border: none;
+    //     outline: none;
+    //     user-select: text;
+    // }
+
+
+}

@@ -13,6 +13,7 @@ import TagsContent from "../components/TagsContent";
 import UserContent from "../components/UserContent";
 import { useParams } from "react-router-dom";
 import CompaniesContent from "../components/CompaniesContent";
+import ProfilePage from "./ProfilePage";
 
 export default function QuestionPage() {
   let param = useParams();
@@ -186,6 +187,10 @@ export default function QuestionPage() {
           <TagsContent />
         ) : param.element === "companies" ? (
           <CompaniesContent />
+        ) : param.element === "profile" ? (
+          <ProfilePage />
+        ) : param.element === "users" ? (
+          <UserContent />
         ) : (
           <div className="tool-right">
             {param.element === "allquestions" ? (
@@ -194,8 +199,6 @@ export default function QuestionPage() {
               <QuestionContent title="Top Question"></QuestionContent>
             ) : param.element === "detail" ? (
               <DetailPage></DetailPage>
-            ) : param.element === "users" ? (
-              <UserContent></UserContent>
             ) : (
               ""
             )}

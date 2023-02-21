@@ -35,6 +35,7 @@ export default function OkUserHeader() {
       dispatch(userSlice.actions.user(user));
     });
   }, [dispatch]);
+  let userLink = `/questions/profile/${user.user_id}`;
   return (
     <div className="header">
       <div className="header-box">
@@ -52,7 +53,9 @@ export default function OkUserHeader() {
         </div>
         <div className="profile-header">
           <div className="profile-header-image">
-            <img src={user.image} alt="" />
+            <Link to={userLink}>
+              <img src={user.image} alt="" />
+            </Link>
             <p>1</p>
             <div className="dot"></div>
             <p>1</p>
