@@ -7,6 +7,7 @@ const session = require('express-session');
 const { sessionStore } = require('./utils/db.js')
 const app = express();
 const upload = multer();
+const uploadImage = multer({ dest: './public/image' })
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(upload.array());
@@ -25,5 +26,7 @@ app.use(session({
 }));
 
 app.use('/', appRoutes);
+
+
 
 app.listen(8000);

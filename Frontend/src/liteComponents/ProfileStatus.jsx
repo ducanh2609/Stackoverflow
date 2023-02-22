@@ -1,4 +1,4 @@
-export default function ProfileStatus() {
+export default function ProfileStatus(props) {
   return (
     <div className="profile-status">
       <div className="profile-status-left">
@@ -30,7 +30,7 @@ export default function ProfileStatus() {
           <div className="about-box">
             <p>
               Your about me section is currently blank. Would you like to add
-              one?<span> Edit profile</span>
+              one?<span onClick={props.onClick}> Edit profile</span>
             </p>
           </div>
         </div>

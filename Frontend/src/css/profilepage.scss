@@ -177,6 +177,28 @@
                     width: 100%;
                     margin: 20px 0;
 
+                    .image-box {
+                        width: 100%;
+                        height: 200px;
+                        display: flex;
+
+                        img {
+                            height: 100%;
+                            border: 1px solid rgb(185, 183, 183);
+                            border-radius: 20px;
+                        }
+
+                        >input {
+                            display: none;
+                        }
+
+                        >div {
+                            margin-left: 20px;
+                            height: 36px;
+                            margin: auto 150px;
+                        }
+                    }
+
                     label {
                         padding: 10px 0;
                         display: inline-block;
