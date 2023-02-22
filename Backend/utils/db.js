@@ -6,7 +6,7 @@ const MySQLStore = require('express-mysql-session')(session);
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'ducanh93',
+    password: 'ThaonghekhongrO@',
     database: 'stackoverflow',
     multipleStatements: true
 })
@@ -15,7 +15,7 @@ const db = pool.promise();
 const options = {
     host: 'localhost',
     user: 'root',
-    password: 'ducanh93',
+    password: 'ThaonghekhongrO@',
     database: 'stackoverflow',
     createDatabaseTable: true
 };
