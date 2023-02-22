@@ -23,6 +23,7 @@ router.post('/api/v1/user', checkExitsUser, postAllUser)
 router.post('/api/v1/login', checkExitsLogin, async (req, res) => {
     req.session.userId = req.user_id;
     let session_id = req.sessionID;
+    // console.log(session_id);
     res.json({
         sessionID: session_id,
         userId: req.session.userId

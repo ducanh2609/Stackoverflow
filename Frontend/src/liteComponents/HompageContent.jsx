@@ -7,6 +7,8 @@ import Typetech from './../subComponentsHp/Typetech';
 import Text from './../subComponentsHp/Text';
 import Rate from './../subComponentsHp/Rate';
 import Apout from './../subComponentsHp/About';
+import Animation from '../subComponentsHp/Animation';
+import Animation2 from '../subComponentsHp/Animation2';
 
 // react-icon
 import { BiSearchAlt } from "react-icons/bi";
@@ -71,6 +73,23 @@ export default function HomePageContent() {
             h3: 'Engineering leader',
             p: 'Help your team get the information they need to do their job - reduce burnout and help engineers grow and learn together.',
         },
+    ]
+    let animatedRd = [
+        {
+            image1: <img className="imgAccept" src='/image/img-homepage/accept.png' alt="" />,
+            h3: 'Increase productivity',
+            p: 'If somebody somewhere has the right answer, suddenly you have it too. Collaborate better in a remote-first world.',
+        },
+        {
+            image1: <img className="imgAccept" src="/image/img-homepage/accept.png" alt="" />,
+            h3: 'Accelerate time to market',
+            p: 'Shorten the time between initial idea and complete product. Take delays and misinformation out of the equation.',
+        },
+        {
+            image1: <img className="imgAccept" src="/image/img-homepage/accept.png" alt="" />,
+            h3: 'Protect institutional knowledge',
+            p: 'People come and people go, but if you capture their contributions in one central place, that expertise sticks around.',
+        }
     ]
     let textRd = [
         {
@@ -222,6 +241,24 @@ export default function HomePageContent() {
             ]
         },
     ]
+    let overRateRd = [
+        {
+            img: <img src="/image/img-homepage/passkey.png" className='hp-flex-item12-img' alt="" />,
+            text: 'Robust read and write API',
+        },
+        {
+            img: <img src="/image/img-homepage/lock.png" className='hp-flex-item12-img' alt="" />,
+            text: 'Single sign-on with AD or SAML',
+        },
+        {
+            img: <GiConversation className='hp-flex-item12-img'/>,
+            text: 'Your own customer success representative',
+        },
+        {
+            img: <BiSupport className='hp-flex-item12-img'/>,
+            text: '99.5% uptime SLA and priority support',
+        },
+    ]
     let rateRd = [
         {
             image: <img src='/image/img-homepage/quotes.svg' alt="" />,
@@ -262,9 +299,11 @@ export default function HomePageContent() {
             about: 'Build your employer brand',
         }
     ]
+   
     return (
         <>
             <div style={{ boxSizing: 'border-box' }}>
+
                 <div className='p40'>
                     <div className='headerHome' >
                         <img className='img-code1' src='/image/img-homepage/illo-code.svg' alt="" />
@@ -364,6 +403,7 @@ export default function HomePageContent() {
                     <div>
                         <div>Thousands of organizations around the globe use Stack Overflow for Teams</div>
                     </div>
+                    <div></div>
                 </div>
 
                 <div className='body-4 p40'>
@@ -391,21 +431,9 @@ export default function HomePageContent() {
                                     <a className='like-button-2' href="/">Take a tour of Teams</a>
                                 </div>
                                 <div className='flexbox-3 p40'>
-                                    <div className='flex-item3'>
-                                        <img className="imgAccept" src='/image/img-homepage/accept.png' alt="" />
-                                        <h3 className='tt-title'>Increase productivity</h3>
-                                        <p>If somebody somewhere has the right answer, suddenly you have it too. Collaborate better in a remote-first world.</p>
-                                    </div>
-                                    <div className='flex-item3'>
-                                        <img className="imgAccept" src='/image/img-homepage/accept.png' alt="" />
-                                        <h3 className='tt-title'>Accelerate time to market</h3>
-                                        <p>Shorten the time between initial idea and complete product. Take delays and misinformation out of the equation.</p>
-                                    </div>
-                                    <div className='flex-item3'>
-                                        <img className="imgAccept" src='/image/img-homepage/accept.png' alt="" />
-                                        <h3 className='tt-title'>Protect institutional knowledge</h3>
-                                        <p>People come and people go, but if you capture their contributions in one central place, that expertise sticks around.</p>
-                                    </div>
+                                    {animatedRd.map((item, index) => (
+                                        <Animation key={index} image1={item.image1} h3={item.h3} p={item.p} />
+                                    ))}
                                 </div>
                                 <div className='sticky'></div>
                                 <div style={{ paddingTop: '20px', color: 'white' }}>
@@ -474,8 +502,10 @@ export default function HomePageContent() {
                     </div>
                 </div>
 
-                <div>
-                    render dung logic
+                <div className='hp-flexbox-12'>
+                    {overRateRd.map((item, index) => (
+                        <Animation2 key={index} img={item.img} text={item.text} />
+                    ))}
                 </div>
 
                 <div className='hp-flexbox-8 pd-120'>

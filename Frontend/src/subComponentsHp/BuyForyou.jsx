@@ -1,6 +1,5 @@
 import BuyFustatus from './BuyFustatus';
 function BuyForyou(props) {
-    console.log(props);
     return (
         <>
             <div className='hp-flex-item5'>
