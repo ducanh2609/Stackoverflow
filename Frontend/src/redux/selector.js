@@ -44,3 +44,11 @@ export const getMethod = createSelector([methodAnswer], (methodAnswer) => {
         methodAnswer: methodAnswer
     }
 })
+
+const hpActive = (state) => state.hpActive;
+
+export const getActive = createSelector([hpActive], (hpActive) => {
+    return {
+        hpActive: hpActive
+    }
+})

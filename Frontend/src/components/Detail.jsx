@@ -11,6 +11,8 @@ import {
   getValue,
 } from "../redux/selector";
 import AnswerContent from "./AnswerContent";
+import hljs from "highlight.js";
+import "highlight.js/styles/github.css";
 
 export default function DetailPage() {
   const dispatch = useDispatch();
@@ -126,9 +128,20 @@ export default function DetailPage() {
           <i className="fa-solid fa-caret-down fa-3x"></i>
         </div>
         <div className="detail-content-right">
-          <pre>
-            <code>{question.code}</code>
-          </pre>
+          {question.code ? (
+            <pre>
+              <code
+                className="language-html"
+                dangerouslySetInnerHTML={{
+                  __html: hljs.highlight(question.code, {
+                    language: "javascript",
+                  }).value,
+                }}
+              ></code>
+            </pre>
+          ) : (
+            ""
+          )}
           <p>{question.text}</p>
           <div>
             {question.cata_name

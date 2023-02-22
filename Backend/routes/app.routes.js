@@ -47,4 +47,9 @@ router.put('/api/v1/answer/:id', updateAnswer)
 // Tags
 router.get('/api/v1/tags', getCata)
 
+// Profile
+router.put('/api/v1/profile/:id', (req, res) => {
+    console.log(req.body);
+})
+
 module.exports = router

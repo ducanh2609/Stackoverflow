@@ -31,7 +31,7 @@ export default function CompaniesContent() {
           </div>
         </div>
         <button onClick={filterCompanies}>
-          Filter by tag <i class="fa-solid fa-caret-down"></i>
+          Filter by tag <i className="fa-solid fa-caret-down"></i>
         </button>
       </div>
     </div>

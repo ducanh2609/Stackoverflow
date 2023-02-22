@@ -27,7 +27,7 @@ module.exports.checkExitsLogin = async (req, res, next) => {
 }
 
 
-module.exports.checkSession = async (req, res, next) => {
+module.exports.checkSession = async (req, res) => {
     let [record] = await getSession();
     let checkSession = record.find((item) => item.session_id == req.body.sessionID)
     if (checkSession === undefined) res.send({ message: 'Not Session' })

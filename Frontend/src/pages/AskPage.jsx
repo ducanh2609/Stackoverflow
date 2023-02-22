@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import OkUserHeader from "../components/OkUserHeader";
 import "../css/askpage.scss";
+import SunEditor from "suneditor-react";
+import "suneditor/dist/css/suneditor.min.css";
 
 export default function AskPage() {
   const [err, setErr] = useState("");
+  const [code, setCode] = useState("");
+  const [content, setContent] = useState("");
+
   useEffect(() => {
     let userIndex = document.cookie.indexOf(";");
     let sessIndex = document.cookie.indexOf("sessionID=");
@@ -25,17 +30,18 @@ export default function AskPage() {
       }
     });
   }, []);
+  console.log(code);
   function sendQuestion(e) {
     e.preventDefault();
     let userIndex = document.cookie.indexOf(";");
     let data = {
       user_id: document.cookie.slice(7, userIndex),
       title: e.target.title.value,
-      code: e.target.questionCode.value,
-      text: e.target.questionContent.value,
+      code: code,
+      text: content,
       tag: e.target.tags.value,
     };
-    if (data.title === "" || data.content === "" || data.tag === "") {
+    if (data.title === "" || data.text.length < 20 || data.tag === "") {
       setErr('(*) Các trường có dấu "*" không được để trống.');
     } else {
       setErr("");
@@ -48,11 +54,18 @@ export default function AskPage() {
       }).then(async (res) => {
         let message = await res.json();
         if (message.message === "Post successfully") {
-          window.localStorage.href = "/question/home";
+          window.location.href = "/questions/home";
         }
       });
     }
   }
+  function sendCode(e) {
+    setCode(e.target.innerText);
+  }
+  function sendContent(e) {
+    setContent(e.target.innerText);
+  }
+
   return (
     <div className="ask-page">
       <OkUserHeader />
@@ -102,12 +115,7 @@ export default function AskPage() {
               Introduce the problem and expand on what you put in the title.
               Minimum 20 characters.
             </p>
-            <div className="question-text-box">
-              <div className="question-text-tool"></div>
-              <code>
-                <textarea name="questionCode" cols="30" rows="10"></textarea>
-              </code>
-            </div>
+            <SunEditor onKeyDown={sendCode} />
             <div className="button">Next</div>
           </div>
           <div className="ask-code ask-text-content">
@@ -116,12 +124,7 @@ export default function AskPage() {
               Describe what you tried, what you expected to happen, and what
               actually resulted. Minimum 20 characters.
             </p>
-            <div className="question-text-box">
-              <div className="question-text-tool"></div>
-              <code>
-                <textarea name="questionContent" cols="30" rows="10"></textarea>
-              </code>
-            </div>
+            <SunEditor onKeyDown={sendContent} />
             <div className="button">Next</div>
           </div>
           <div className="ask-title ask-tags">

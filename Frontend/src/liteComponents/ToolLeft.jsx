@@ -38,7 +38,9 @@ export default function ToolLeft(props) {
           <a
             href="/questions/users"
             className={
-              param.element === "users" ? "user-link active" : "user-link"
+              param.element === "users" || param.element === "profile"
+                ? "user-link active"
+                : "user-link"
             }
           >
             <div></div>
