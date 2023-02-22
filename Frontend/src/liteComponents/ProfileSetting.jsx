@@ -60,7 +60,7 @@ export default function ProfileSetting() {
       <div className="setting-right">
         <p>Edit your profile</p>
         <form
-          onSubmit={sendProfile}
+          // onSubmit={sendProfile}
           action="http://localhost:8000/api/v1/profile"
           encType="multipart/form-data"
           method="post"
@@ -71,7 +71,7 @@ export default function ProfileSetting() {
             <input
               type="file"
               name="image"
-              // onChange={getFile}
+              onChange={getFile}
               accept="image/*"
               ref={imageInput}
             />
