@@ -15,41 +15,31 @@ export default function ProfileSetting() {
     setSrc(link);
   }
   function sendProfile(e) {
-    // e.preventDefault();
-    // let dataImage = {
-    //   file: imageInput.current.files[0],
-    // };
-    // console.log(dataImage);
-    // fetch(`http://localhost:8000/api/v1/profile/${user.user_id}`, {
-    //   method: "post",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(dataImage),
-    // });
-    // let data = {
-    //   name: e.target.displayname.value,
-    //   address: e.target.address.value,
-    //   about: e.target.about.value,
-    //   image: src,
-    // };
-    // console.log(data);
-    // fetch(`http://localhost:8000/api/v1/profile/${user.user_id}`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(data),
-    // })
-    //   .then(async (res) => {
-    //     let message = await res.json();
-    //     if (message.message === "Update successfully") {
-    //       window.location.reload();
-    //     }
-    //   })
-    //   .catch(() => {
-    //     alert("Không update được dữ liệu");
-    //   });
+    e.preventDefault();
+
+    let data = {
+      name: e.target.displayname.value,
+      address: e.target.address.value,
+      about: e.target.about.value,
+      image: src,
+    };
+    console.log(data);
+    fetch(`http://localhost:8000/api/v1/profile/${user.user_id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then(async (res) => {
+        let message = await res.json();
+        if (message.message === "Update successfully") {
+          window.location.reload();
+        }
+      })
+      .catch(() => {
+        alert("Không update được dữ liệu");
+      });
   }
 
   return (
@@ -60,7 +50,7 @@ export default function ProfileSetting() {
       <div className="setting-right">
         <p>Edit your profile</p>
         <form
-          // onSubmit={sendProfile}
+          onSubmit={sendProfile}
           action="http://localhost:8000/api/v1/profile"
           encType="multipart/form-data"
           method="post"
