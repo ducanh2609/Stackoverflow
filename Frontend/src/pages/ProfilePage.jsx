@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import "../css/profilepage.scss";
 import ProfileSetting from "../liteComponents/ProfileSetting";
 import ProfileStatus from "../liteComponents/ProfileStatus";
+import { getUser } from "../redux/selector";
 
 export default function ProfilePage() {
   let menuStyle = {
@@ -11,6 +13,7 @@ export default function ProfilePage() {
   const [menu, setMenu] = useState("profile");
   const [menuStyleProfile, setMenuStyleProfile] = useState(menuStyle);
   const [menuStyleSettings, setMenuStyleSettings] = useState({});
+  const user = useSelector(getUser).user;
 
   function changeMenu() {
     setMenu("settings");
@@ -25,9 +28,9 @@ export default function ProfilePage() {
   return (
     <div className="profile-page">
       <div className="profile-header-box">
-        <img src="/image/profile_header.png" alt="" />
+        <img src={user.image} alt="" />
         <div className="profile-header-name">
-          <p>ducanh</p>
+          <p>{user.name}</p>
           <div></div>
         </div>
         <div onClick={changeMenu} className="profile-edit-btn button">

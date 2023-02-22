@@ -1,34 +1,49 @@
 import { Link } from "react-router-dom";
 import ContentItem from "../liteComponents/ContentItem";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { allQuestionSlice } from "../reducers/questionSlice";
 import { useEffect, useState } from "react";
 import "../css/filterbox.scss";
+import { getQuestion } from "../redux/selector";
 
 export default function QuestionContent(props) {
   const [style, setStyle] = useState({ display: "none" });
   const dispatch = useDispatch();
+  const allQuesStore = useSelector(getQuestion).allQuestion;
   let [allQuestion, setAllQuestion] = useState([]);
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/question").then(async (res) => {
       let data = await res.json();
       dispatch(allQuestionSlice.actions.allQuestion(data));
-      setAllQuestion(data);
     });
   }, [dispatch]);
-  function sortForm(value, str) {
+  useEffect(() => {
+    setAllQuestion(allQuesStore);
+  }, [allQuesStore]);
+  function sortForm(value, ques, str) {
     value.sort((a, b) => b - a);
     let sortQues = value.reduce((arr, item) => {
-      for (let i = 0; i < allQuestion.length; i++) {
-        if (allQuestion[i][str] === item) {
-          arr.push(allQuestion[i]);
-          allQuestion = allQuestion.filter((k, index) => index !== i);
+      for (let i = 0; i < ques.length; i++) {
+        if (ques[i][str] === item) {
+          arr.push(ques[i]);
+          ques = ques.filter((k, index) => index !== i);
         }
       }
       return arr;
     }, []);
-    console.log(sortQues);
     setAllQuestion(sortQues);
+  }
+  function liteForm(sort, arr) {
+    if (sort === "votes") {
+      let sortVote = arr.map((item) => item.vote);
+      sortForm(sortVote, arr, "vote");
+    } else if (sort === "answers") {
+      let sortAnswer = arr.map((item) => item.answers);
+      sortForm(sortAnswer, arr, "answers");
+    } else if (sort === "views") {
+      let sortView = arr.map((item) => item.view);
+      sortForm(sortView, arr, "view");
+    }
   }
   function filterQuestion(e) {
     e.preventDefault();
@@ -47,18 +62,9 @@ export default function QuestionContent(props) {
     if (data.noAnswer) {
       let sortQues = allQuestion.filter((item) => item.answers === 0);
       setAllQuestion(sortQues);
-    }
-    if (data.sort === "votes") {
-      let sortVote = allQuestion.map((item) => item.vote);
-      sortForm(sortVote, "vote");
-    }
-    if (data.sort === "answers") {
-      let sortAnswer = allQuestion.map((item) => item.answers);
-      sortForm(sortAnswer, "answers");
-    }
-    if (data.sort === "views") {
-      let sortView = allQuestion.map((item) => item.view);
-      sortForm(sortView, "view");
+      liteForm(data.sort, sortQues);
+    } else {
+      liteForm(data.sort, allQuesStore);
     }
   }
   return (

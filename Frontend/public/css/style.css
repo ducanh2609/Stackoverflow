@@ -173,6 +173,7 @@ button:hover {
 }
 .profile-header-image img {
   width: 26px;
+  height: 26px;
   border-radius: 3px;
   margin-right: 5px;
 }

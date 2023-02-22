@@ -30,7 +30,6 @@ export default function AskPage() {
       }
     });
   }, []);
-  console.log(code);
   function sendQuestion(e) {
     e.preventDefault();
     let userIndex = document.cookie.indexOf(";");
@@ -61,11 +60,8 @@ export default function AskPage() {
   }
   function sendCode(e) {
     setCode(e.target.innerText);
+    console.log(e.target);
   }
-  function sendContent(e) {
-    setContent(e.target.innerText);
-  }
-
   return (
     <div className="ask-page">
       <OkUserHeader />
@@ -107,16 +103,14 @@ export default function AskPage() {
               type="text"
               placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
             />
-            <div className="button">Next</div>
           </div>
           <div className="ask-code">
-            <p>What are the details of your problem? (*)</p>
+            <p>What are the details of your problem?</p>
             <p>
               Introduce the problem and expand on what you put in the title.
               Minimum 20 characters.
             </p>
             <SunEditor onKeyDown={sendCode} />
-            <div className="button">Next</div>
           </div>
           <div className="ask-code ask-text-content">
             <p>What did you try and what were you expecting? (*)</p>
@@ -124,8 +118,11 @@ export default function AskPage() {
               Describe what you tried, what you expected to happen, and what
               actually resulted. Minimum 20 characters.
             </p>
-            <SunEditor onKeyDown={sendContent} />
-            <div className="button">Next</div>
+            <SunEditor
+              onChange={(e) => {
+                setContent(e.slice(3, e.length - 4));
+              }}
+            />
           </div>
           <div className="ask-title ask-tags">
             <p>Tags (*)</p>

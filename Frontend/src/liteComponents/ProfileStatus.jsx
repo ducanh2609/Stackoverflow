@@ -1,4 +1,8 @@
+import { useSelector } from "react-redux";
+import { getUser } from "../redux/selector";
+
 export default function ProfileStatus(props) {
+  const user = useSelector(getUser).user;
   return (
     <div className="profile-status">
       <div className="profile-status-left">
@@ -28,18 +32,22 @@ export default function ProfileStatus(props) {
         <div className="profile-about">
           <p>About</p>
           <div className="about-box">
-            <p>
-              Your about me section is currently blank. Would you like to add
-              one?<span onClick={props.onClick}> Edit profile</span>
-            </p>
+            {user.about === "" ? (
+              <p>
+                Your about me section is currently blank. Would you like to add
+                one?<span onClick={props.onClick}> Edit profile</span>
+              </p>
+            ) : (
+              <p>{user.about}</p>
+            )}
           </div>
         </div>
         <div className="profile-about profile-infor">
           <p>User Information</p>
           <div className="infor-box about-box">
-            <span>Display Name:</span> <span>Duc Anh</span> <br />
-            <span>Email:</span> <span>Duc Anh</span> <br />
-            <span>Address:</span> <span>Duc Anh</span> <br />
+            <span>Display Name:</span> <span>{user.name}</span> <br />
+            <span>Email:</span> <span>{user.email}</span> <br />
+            <span>Address:</span> <span>{user.address}</span> <br />
           </div>
         </div>
       </div>

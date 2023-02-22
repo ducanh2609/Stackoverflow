@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 
 
 module.exports.getAllUserSQL = () => {
-    let sql = 'SELECT t1.user_id, t1.username, t1.email, t1.password, t1.checkBonus, t2.name, t2.address, t2.image FROM user as t1, profile as t2 WHERE t1.user_id = t2.user_id';
+    let sql = 'SELECT t1.user_id, t1.username, t1.email, t1.password, t1.checkBonus, t2.name, t2.address, t2.image, t2.about FROM user as t1, profile as t2 WHERE t1.user_id = t2.user_id';
     return db.query(sql)
 }
 
@@ -12,7 +12,7 @@ module.exports.postAllUserSQL = (arr) => {
     return db.query(sql, arr)
 }
 module.exports.postProfile = (arr) => {
-    let sql = 'INSERT INTO profile VALUES (?,?,?,?)';
+    let sql = 'INSERT INTO profile VALUES (?,?,?,?,null)';
     return db.query(sql, arr)
 }
 
@@ -82,5 +82,9 @@ module.exports.updateAnswerSQL = (arr) => {
 }
 module.exports.getCataSQL = (arr) => {
     let sql = 'SELECT * FROM catalogy as t1 JOIN (SELECT cata_id, count(ques_id) as question FROM ques_cata group by cata_id) as t2 WHERE t1.cata_id = t2.cata_id';
+    return db.query(sql, arr)
+}
+module.exports.uploadProfile = (arr) => {
+    let sql = 'UPDATE profile SET name = ?, address = ?, image = ?, about = ? WHERE user_id = ?';
     return db.query(sql, arr)
 }

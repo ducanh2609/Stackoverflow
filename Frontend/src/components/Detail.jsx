@@ -131,7 +131,7 @@ export default function DetailPage() {
           {question.code ? (
             <pre>
               <code
-                className="language-html"
+                className="language-javascript"
                 dangerouslySetInnerHTML={{
                   __html: hljs.highlight(question.code, {
                     language: "javascript",

@@ -5,6 +5,10 @@ import { getUser } from "../redux/selector";
 export default function ProfileSetting() {
   const user = useSelector(getUser).user;
   const [src, setSrc] = useState(user.image);
+  const [username, setUsername] = useState(user.name);
+  const [address, setAddress] = useState(user.address);
+  const [about, setAbout] = useState(user.about);
+
   let imageInput = useRef();
   let srcInput = useRef();
   const focusInput = () => {
@@ -14,34 +18,7 @@ export default function ProfileSetting() {
     let link = URL.createObjectURL(e.target.files[0]);
     setSrc(link);
   }
-  function sendProfile(e) {
-    e.preventDefault();
-
-    let data = {
-      name: e.target.displayname.value,
-      address: e.target.address.value,
-      about: e.target.about.value,
-      image: src,
-    };
-    console.log(data);
-    fetch(`http://localhost:8000/api/v1/profile/${user.user_id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then(async (res) => {
-        let message = await res.json();
-        if (message.message === "Update successfully") {
-          window.location.reload();
-        }
-      })
-      .catch(() => {
-        alert("Không update được dữ liệu");
-      });
-  }
-
+  let link = `http://localhost:8000/api/v1/profile/${user.user_id}`;
   return (
     <div className="profile-setting-box">
       <div className="setting-left">
@@ -50,15 +27,15 @@ export default function ProfileSetting() {
       <div className="setting-right">
         <p>Edit your profile</p>
         <form
-          onSubmit={sendProfile}
-          action="http://localhost:8000/api/v1/profile"
-          encType="multipart/form-data"
+          action={link}
+          enctype="multipart/form-data"
           method="post"
           className="edit-form"
         >
           <div className="image-box">
             <img name="src" src={src} ref={srcInput} alt="" />
             <input
+              onSubmit="return false"
               type="file"
               name="image"
               onChange={getFile}
@@ -71,12 +48,34 @@ export default function ProfileSetting() {
           </div>
           <label htmlFor="displayname">Display Name</label>
           <br />
-          <input name="displayname" type="text" /> <br />
+          <input
+            name="displayname"
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+            type="text"
+          />{" "}
+          <br />
           <label htmlFor="">Address</label>
-          <br /> <input name="address" type="text" />
+          <br />{" "}
+          <input
+            name="address"
+            value={address}
+            onChange={(e) => {
+              setAddress(e.target.value);
+            }}
+            type="text"
+          />
           <br />
           <label htmlFor="about">About me</label> <br />
-          <textarea name="about"></textarea>
+          <textarea
+            name="about"
+            value={about}
+            onChange={(e) => {
+              setAbout(e.target.value);
+            }}
+          ></textarea>
           <div className="save-btn">
             <button>Save profile</button>
             <div className="button">Cancel</div>
