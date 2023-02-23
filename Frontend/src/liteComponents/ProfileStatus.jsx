@@ -38,7 +38,11 @@ export default function ProfileStatus(props) {
                 one?<span onClick={props.onClick}> Edit profile</span>
               </p>
             ) : (
-              <p>{user.about}</p>
+              <p
+                style={{ textAlign: "left", width: "100%", margin: "0px auto" }}
+              >
+                {user.about}
+              </p>
             )}
           </div>
         </div>

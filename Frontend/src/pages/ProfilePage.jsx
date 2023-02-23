@@ -25,6 +25,7 @@ export default function ProfilePage() {
     setMenuStyleSettings({});
     setMenuStyleProfile(menuStyle);
   }
+
   return (
     <div className="profile-page">
       <div className="profile-header-box">
@@ -49,7 +50,7 @@ export default function ProfilePage() {
         {menu === "profile" ? (
           <ProfileStatus onClick={changeMenu} />
         ) : menu === "settings" ? (
-          <ProfileSetting />
+          <ProfileSetting onClick={changeMenuProfile} />
         ) : (
           ""
         )}

@@ -23,11 +23,37 @@ export default function DetailPage() {
   const valueUpdate = useSelector(getValue).value;
   const [value, setValue] = useState("");
   const [err, setErr] = useState("");
+  const [voteQues, setVoteQues] = useState(question.vote);
+  const [flag, setFlag] = useState(0);
+
   useEffect(() => {
     if (valueUpdate.content !== "") {
       setValue(valueUpdate.content);
     }
-  }, [valueUpdate]);
+    setVoteQues(question.vote);
+  }, [valueUpdate, question]);
+  useEffect(() => {
+    let userIndex = document.cookie.indexOf(";");
+    let sessIndex = document.cookie.indexOf("sessionID=");
+    let data = {
+      sessionID: document.cookie.slice(sessIndex + 10),
+      userID: document.cookie.slice(7, userIndex),
+    };
+    fetch("http://localhost:8000/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then(async (res) => {
+      let message = await res.json();
+      if (message.message === "Not Session") {
+        setFlag(0);
+      } else {
+        setFlag(1);
+      }
+    });
+  }, []);
   useLayoutEffect(() => {
     let ques_id = window.location.href.slice(47);
     fetch(`http://localhost:8000/api/v1/question/${ques_id}`).then(
@@ -107,6 +133,28 @@ export default function DetailPage() {
       }
     }
   }
+  function insVote() {
+    fetch(`http://localhost:8000/api/v1/question/vote/${question.ques_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ vote: voteQues + 1 }),
+    }).then(() => {
+      setVoteQues(voteQues + 1);
+    });
+  }
+  function desVote() {
+    fetch(`http://localhost:8000/api/v1/question/vote/${question.ques_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ vote: voteQues - 1 }),
+    }).then(() => {
+      setVoteQues(voteQues - 1);
+    });
+  }
   return (
     <div className="detail-page">
       <div className="detail-header">
@@ -123,9 +171,9 @@ export default function DetailPage() {
       </div>
       <div className="detail-content">
         <div className="detail-content-left">
-          <i className="fa-solid fa-caret-up fa-3x"></i>
-          <p>{question.vote}</p>
-          <i className="fa-solid fa-caret-down fa-3x"></i>
+          <i onClick={insVote} className="fa-solid fa-caret-up fa-3x"></i>
+          <p>{voteQues}</p>
+          <i onClick={desVote} className="fa-solid fa-caret-down fa-3x"></i>
         </div>
         <div className="detail-content-right">
           {question.code ? (
@@ -146,7 +194,14 @@ export default function DetailPage() {
           <div>
             {question.cata_name
               ? question.cata_name.map((item, index) => (
-                  <span key={index}>{item}</span>
+                  <span
+                    onClick={() => {
+                      window.location.href = `/questions/allquestions/${item}`;
+                    }}
+                    key={index}
+                  >
+                    {item}
+                  </span>
                 ))
               : ""}
           </div>
@@ -171,21 +226,25 @@ export default function DetailPage() {
             ))
           : ""}
       </div>
-      <form onSubmit={sendAnswer} className="answer-form">
-        <p>Your Answer</p>
-        <textarea
-          name="answer"
-          value={value}
-          type="text"
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-        ></textarea>
-        <button>Post Your Answer</button>
-        <div>
-          <i>{err}</i>
-        </div>
-      </form>
+      {flag === 0 ? (
+        ""
+      ) : (
+        <form onSubmit={sendAnswer} className="answer-form">
+          <p>Your Answer</p>
+          <textarea
+            name="answer"
+            value={value}
+            type="text"
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
+          ></textarea>
+          <button>Post Your Answer</button>
+          <div>
+            <i>{err}</i>
+          </div>
+        </form>
+      )}
     </div>
   );
 }

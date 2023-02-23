@@ -23,7 +23,14 @@ export default function ContentItem(props) {
         <div className="question-tags">
           <div>
             {props.data.cata_name.map((item, index) => (
-              <span key={index}>{item}</span>
+              <span
+                onClick={() => {
+                  window.location.href = `/questions/allquestions/${item}`;
+                }}
+                key={index}
+              >
+                {item}
+              </span>
             ))}
           </div>
         </div>

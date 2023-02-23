@@ -6,6 +6,9 @@ import LoginLink from "../liteComponents/Login-Link";
 export default function LoginPage() {
   const [errStyle, setErrStyle] = useState({ display: "none" });
   const [errMes, setErrMes] = useState("");
+  const [valueForgot, setValueForgot] = useState("");
+  const [forgotStyle, setForgotStyle] = useState({ display: "none" });
+
   useEffect(() => {
     let userIndex = document.cookie.indexOf(";");
     let sessIndex = document.cookie.indexOf("sessionID=");
@@ -93,9 +96,45 @@ export default function LoginPage() {
       });
     }
   }
+  function showFogotBox() {
+    setForgotStyle({ display: "block" });
+  }
+  function sendForgot(e) {
+    e.preventDefault();
+    let token = Math.random().toString(20);
+    let data = {
+      email: e.target.forgot.value,
+      token: token,
+    };
+    fetch("http://localhost:8000/api/v1/user/forgotpass", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then(async (res) => {
+      let message = await res.json();
+      alert(message.message);
+      setForgotStyle({ display: "none" });
+    });
+  }
+
   return (
     <>
+      <div style={forgotStyle} className="forgot-box">
+        <div className="forgot-modal"></div>
+        <form onSubmit={sendForgot} className="forgot-form">
+          <label htmlFor="forgot">Nhập email đăng kí của bạn:</label> <br />
+          <input
+            type="email"
+            name="forgot"
+            value={valueForgot}
+            onChange={(e) => setValueForgot(e.target.value)}
+          />
+        </form>
+      </div>
       <Header />
+
       <div className="login-page">
         <div className="logo-homepage">
           <Link to="/">
@@ -118,7 +157,7 @@ export default function LoginPage() {
           <label htmlFor="email">Email</label> <br />
           <input name="email" type="email" /> <br />
           <label htmlFor="password">Password</label>
-          <span>Forgot password?</span>
+          <span onClick={showFogotBox}>Forgot password?</span>
           <br />
           <input name="password" type="password" /> <br />
           <button>Log in</button>

@@ -33,11 +33,17 @@
         }
     }
 
+    i:hover {
+        cursor: pointer;
+        opacity: 0.6;
+    }
+
     .detail-content {
         padding: 20px 0;
         display: flex;
         margin-bottom: 20px;
         border-bottom: 1px solid rgba(194, 192, 192, 0.582);
+
 
 
         .detail-content-left {
@@ -58,6 +64,7 @@
         .detail-content-right {
             padding: 0 20px;
             width: 100%;
+
             pre {
                 code {
                     width: 100%;
@@ -165,11 +172,6 @@
 
                 i {
                     padding: 0 10px;
-
-                    &:hover {
-                        cursor: pointer;
-                        opacity: 0.6;
-                    }
                 }
             }
 

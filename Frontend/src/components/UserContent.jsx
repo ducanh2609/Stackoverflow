@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import "../css/userpage.scss";
 import UsersItemsPage from "../liteComponents/UsersItemsPage";
 import { allUserSlice } from "../reducers/userSlice";
@@ -9,6 +10,7 @@ export default function UserContent() {
   const dispatch = useDispatch();
   const allUser = useSelector(getUser).allUser;
   const [userMap, setUserMap] = useState([]);
+  let params = useParams();
   useEffect(() => {
     fetch(`http://localhost:8000/api/v1/user`).then(async (res) => {
       let users = await res.json();
@@ -16,8 +18,11 @@ export default function UserContent() {
     });
   }, [dispatch]);
   useEffect(() => {
-    setUserMap(allUser);
-  }, [allUser]);
+    let userSearchArr = allUser.filter(
+      (item) => item.name.indexOf(params.title) !== -1
+    );
+    params.title ? setUserMap(userSearchArr) : setUserMap(allUser);
+  }, [allUser, params.title]);
   function findUser(e) {
     let user = allUser.filter((item) => item.name.includes(e.target.value));
     setUserMap(user);
@@ -25,7 +30,7 @@ export default function UserContent() {
   return (
     <div className="users-page">
       <div className="users-header-box">
-        <p>Users</p>
+        {params.title ? <p>Users [{params.title}]</p> : <p>Users</p>}
       </div>
       <div className="users-search">
         <div className="users-input">

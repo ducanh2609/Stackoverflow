@@ -10,9 +10,9 @@ export const getUser = createSelector([allUser, user], (allUser, user) => {
     }
 })
 
+
 const allQuestion = (state) => state.allQuestion;
 const question = (state) => state.question;
-
 export const getQuestion = createSelector([allQuestion, question], (allQuestion, question) => {
     return {
         allQuestion: allQuestion,
@@ -20,8 +20,8 @@ export const getQuestion = createSelector([allQuestion, question], (allQuestion,
     }
 })
 
-const allAnswer = (state) => state.allAnswer;
 
+const allAnswer = (state) => state.allAnswer;
 export const getAnswer = createSelector([allAnswer], (allAnswer) => {
     return {
         allAnswer: allAnswer
@@ -30,25 +30,32 @@ export const getAnswer = createSelector([allAnswer], (allAnswer) => {
 
 
 const value = (state) => state.value;
-
 export const getValue = createSelector([value], (value) => {
     return {
         value: value
     }
 })
 
-const methodAnswer = (state) => state.methodAnswer;
 
+const methodAnswer = (state) => state.methodAnswer;
 export const getMethod = createSelector([methodAnswer], (methodAnswer) => {
     return {
         methodAnswer: methodAnswer
     }
 })
 
-const hpActive = (state) => state.hpActive;
 
+const hpActive = (state) => state.hpActive;
 export const getActive = createSelector([hpActive], (hpActive) => {
     return {
         hpActive: hpActive
+    }
+})
+
+
+const tagQues = (state) => state.tagQues;
+export const getTag = createSelector([tagQues], (tagQues) => {
+    return {
+        tagQues: tagQues
     }
 })

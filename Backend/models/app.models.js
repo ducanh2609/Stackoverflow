@@ -6,7 +6,10 @@ module.exports.getAllUserSQL = () => {
     let sql = 'SELECT t1.user_id, t1.username, t1.email, t1.password, t1.checkBonus, t2.name, t2.address, t2.image, t2.about FROM user as t1, profile as t2 WHERE t1.user_id = t2.user_id';
     return db.query(sql)
 }
-
+module.exports.updatePassSQL = (arr) => {
+    let sql = 'UPDATE user SET password = ? WHERE user_id = ?';
+    return db.query(sql, arr)
+}
 module.exports.postAllUserSQL = (arr) => {
     let sql = 'INSERT INTO user VALUES (?,?,?,?,?)';
     return db.query(sql, arr)
@@ -54,6 +57,15 @@ module.exports.updateViewSQL = (arr) => {
     let sql = 'UPDATE question SET view = ? WHERE ques_id = ?';
     return db.query(sql, arr)
 }
+module.exports.updateVoteQuesSQL = (arr) => {
+    let sql = 'UPDATE question SET vote = ? WHERE ques_id = ?';
+    return db.query(sql, arr)
+}
+module.exports.updateVoteAnsSQL = (arr) => {
+    let sql = 'UPDATE answer SET vote = ? WHERE ans_id = ?';
+    return db.query(sql, arr)
+}
+
 module.exports.getAllAnswerSQL = () => {
     let sql = 'SELECT * FROM answer';
     return db.query(sql)
@@ -81,7 +93,7 @@ module.exports.updateAnswerSQL = (arr) => {
     return db.query(sql, arr)
 }
 module.exports.getCataSQL = (arr) => {
-    let sql = 'SELECT * FROM catalogy as t1 JOIN (SELECT cata_id, count(ques_id) as question FROM ques_cata group by cata_id) as t2 WHERE t1.cata_id = t2.cata_id';
+    let sql = 'SELECT t3.cata_id, t3.cata_name, t3.time, t3.question FROM (SELECT * FROM catalogy as t1 LEFT JOIN (SELECT cata_id as cata_ques, count(ques_id) as question FROM ques_cata group by cata_id) as t2 ON t1.cata_id = t2.cata_ques) as t3';
     return db.query(sql, arr)
 }
 module.exports.uploadProfile = (arr) => {

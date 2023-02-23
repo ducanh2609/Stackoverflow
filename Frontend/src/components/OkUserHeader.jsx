@@ -8,6 +8,8 @@ export default function OkUserHeader() {
   const dispatch = useDispatch();
   const user = useSelector(getUser).user;
   const [menuStyle, setMenuStyle] = useState({ display: "none" });
+  const [demoStyle, setDemoStyle] = useState({ display: "none" });
+
   function menuBoxOpen() {
     if (menuStyle.display === "none") {
       setMenuStyle({ display: "block" });
@@ -35,6 +37,16 @@ export default function OkUserHeader() {
       dispatch(userSlice.actions.user(user));
     });
   }, [dispatch]);
+  function sendSearch(e) {
+    e.preventDefault();
+    let value = e.target.searchValue.value;
+    if (value.includes("user:"))
+      window.location.href = `/questions/users/${value.slice(6)}`;
+    else if (value.includes("tag:"))
+      window.location.href = `/questions/allquestions/${value.slice(5)}`;
+    else if (value.includes("question:"))
+      window.location.href = `/questions/allquestions/${value.slice(10)}`;
+  }
   let userLink = `/questions/profile/${user.user_id}`;
   return (
     <div className="header">
@@ -47,10 +59,32 @@ export default function OkUserHeader() {
         <div className="product-link">
           <Link to="/questions/home">Products</Link>
         </div>
-        <div className="ok-search-box">
-          <input placeholder="Search..." />
+        <form onSubmit={sendSearch} className="ok-search-box">
+          <input
+            name="searchValue"
+            onFocus={() => {
+              setDemoStyle({ display: "block" });
+            }}
+            onBlur={() => {
+              setDemoStyle({ display: "none" });
+            }}
+            placeholder="Search..."
+          />
           <i className="fa-sharp fa-solid fa-magnifying-glass fa-lg"></i>
-        </div>
+          <div className="search-detail-box" style={demoStyle}>
+            <div className="search-detail-demo">
+              <p>
+                <span>user:</span> 123
+              </p>
+              <p>
+                <span>tag:</span> java
+              </p>
+              <p>
+                <span>question:</span> How are you?
+              </p>
+            </div>
+          </div>
+        </form>
         <div className="profile-header">
           <div className="profile-header-image">
             <Link to={userLink}>

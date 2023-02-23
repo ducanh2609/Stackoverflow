@@ -154,6 +154,8 @@
                 >div {
                     padding: 5px 15px;
                     border-radius: 20px;
+                    margin-bottom: 10px;
+                    border: 1px solid rgb(205, 204, 204);
 
                     &:hover {
                         cursor: pointer;
@@ -163,6 +165,10 @@
 
             .setting-right {
                 width: 78%;
+
+                .error {
+                    color: red;
+                }
 
                 >p {
                     font-size: 25px;

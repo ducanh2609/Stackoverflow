@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   allAnswerSlice,
@@ -6,11 +7,12 @@ import {
 } from "../reducers/answerSlice";
 
 export default function AnswerContent(props) {
-  console.log(props.userID, "111", props.userAnswer);
+  const [voteAns, setVoteAns] = useState(props.data.vote);
+  useEffect(() => {
+    setVoteAns(props.data.vote);
+  }, [props.data]);
   const dispatch = useDispatch();
   function editAns(e) {
-    console.log(props.data.content);
-    console.log(props.data.ans_id);
     let update = {
       content: props.data.content,
       ans_id: props.data.ans_id,
@@ -27,14 +29,36 @@ export default function AnswerContent(props) {
       },
     });
   }
+  function insVote() {
+    fetch(`http://localhost:8000/api/v1/answer/vote/${props.data.ans_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ vote: voteAns + 1 }),
+    }).then(() => {
+      setVoteAns(voteAns + 1);
+    });
+  }
+  function desVote() {
+    fetch(`http://localhost:8000/api/v1/answer/vote/${props.data.ans_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ vote: voteAns - 1 }),
+    }).then(() => {
+      setVoteAns(voteAns - 1);
+    });
+  }
   return (
     <div>
       <div className="answer-content-box">
         <div className="answer-content">
           <div className="answer-content-left">
-            <i className="fa-solid fa-caret-up fa-3x"></i>
-            <p>{props.data.vote}</p>
-            <i className="fa-solid fa-caret-down fa-3x"></i>
+            <i onClick={insVote} className="fa-solid fa-caret-up fa-3x"></i>
+            <p>{voteAns}</p>
+            <i onClick={desVote} className="fa-solid fa-caret-down fa-3x"></i>
           </div>
           <div className="answer-content-right">{props.data.content}</div>
         </div>
