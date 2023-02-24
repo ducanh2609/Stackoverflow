@@ -5,12 +5,13 @@ import "../css/askpage.scss";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 import Loading from "../components/Loading";
+import Toast from "../subComponentsHp/Toast";
 
 export default function AskPage() {
-  const [err, setErr] = useState("");
   const [code, setCode] = useState("");
   const [content, setContent] = useState("");
   const [flag, setFlag] = useState(0);
+  const [toastList, setToastList] = useState({});
 
   useEffect(() => {
     let userIndex = document.cookie.indexOf(";");
@@ -28,7 +29,10 @@ export default function AskPage() {
     }).then(async (res) => {
       let message = await res.json();
       if (message.message === "Not Session") {
-        window.location.href = "/login";
+        setToastList({ status: "Error", message: "Bạn chưa đăng nhập" });
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000);
       } else {
         setFlag(1);
       }
@@ -45,9 +49,11 @@ export default function AskPage() {
       tag: e.target.tags.value,
     };
     if (data.title === "" || data.text.length < 20 || data.tag === "") {
-      setErr('(*) Các trường có dấu "*" không được để trống.');
+      setToastList({
+        status: "Error",
+        message: '(*) Các trường có dấu " * " không được để trống.',
+      });
     } else {
-      setErr("");
       fetch("http://localhost:8000/api/v1/question/ask", {
         method: "POST",
         headers: {
@@ -57,7 +63,13 @@ export default function AskPage() {
       }).then(async (res) => {
         let message = await res.json();
         if (message.message === "Post successfully") {
-          window.location.href = "/questions/home";
+          setToastList({
+            status: "Success",
+            message: "Gửi câu hỏi thành công",
+          });
+          setTimeout(() => {
+            window.location.href = "/questions/home";
+          }, 2000);
         }
       });
     }
@@ -67,6 +79,7 @@ export default function AskPage() {
   }
   return (
     <>
+      <Toast toastArray={toastList}></Toast>
       {flag === 0 ? (
         <Loading />
       ) : (
@@ -146,9 +159,6 @@ export default function AskPage() {
                 />
               </div>
               <button>Send question</button>
-              <p className="ask-err">
-                <i>{err}</i>
-              </p>
             </form>
           </div>
           <div className="ask-note">

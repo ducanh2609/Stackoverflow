@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { getUser } from "../redux/selector";
+import Toast from "../subComponentsHp/Toast";
 
 export default function ProfileSetting(props) {
   const user = useSelector(getUser).user;
@@ -19,6 +20,7 @@ export default function ProfileSetting(props) {
   const [password, setPassword] = useState("");
   const [newPass, setNewPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+  const [toastList, setToastList] = useState({});
 
   let imageInput = useRef();
   let srcInput = useRef();
@@ -42,7 +44,7 @@ export default function ProfileSetting(props) {
   function changePass(e) {
     e.preventDefault();
     console.log(user);
-    if (password !== user.password) setErr("Mật khẩu không khớp");
+    if (password !== user.password) setErr("Mật khẩu không đúng");
     else if (newPass.length < 6)
       setErr("Mật khẩu phải lơn hơn hoặc bằng 6 kí tự");
     else if (newPass !== confirmPass) setErr("Mật khẩu nhập lại không đúng");
@@ -59,133 +61,141 @@ export default function ProfileSetting(props) {
         body: JSON.stringify(data),
       }).then(async (res) => {
         let message = await res.json();
-        alert(message.message);
-        window.location.reload();
+        setToastList({
+          status: "Success",
+          message: message.message,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       });
     }
   }
   let link = `http://localhost:8000/api/v1/profile/${user.user_id}`;
   return (
-    <div className="profile-setting-box">
-      <div className="setting-left">
-        <div onClick={changeMenuPro} style={menuStyleProfile}>
-          Edit Profile
+    <>
+      <Toast toastArray={toastList}></Toast>
+      <div className="profile-setting-box">
+        <div className="setting-left">
+          <div onClick={changeMenuPro} style={menuStyleProfile}>
+            Edit Profile
+          </div>
+          <div onClick={changeMenuChangeP} style={menuStyleChangeP}>
+            Change Password
+          </div>
         </div>
-        <div onClick={changeMenuChangeP} style={menuStyleChangeP}>
-          Change Password
-        </div>
-      </div>
-      <div className="setting-right">
-        {currentTool === "profile" ? (
-          <>
-            <p>Edit your profile</p>
-            <form
-              action={link}
-              encType="multipart/form-data"
-              method="post"
-              className="edit-form"
-            >
-              <div className="image-box">
-                <img name="src" src={src} ref={srcInput} alt="" />
+        <div className="setting-right">
+          {currentTool === "profile" ? (
+            <>
+              <p>Edit your profile</p>
+              <form
+                action={link}
+                encType="multipart/form-data"
+                method="post"
+                className="edit-form"
+              >
+                <div className="image-box">
+                  <img name="src" src={src} ref={srcInput} alt="" />
+                  <input
+                    type="file"
+                    name="image"
+                    onChange={getFile}
+                    accept="image/*"
+                    ref={imageInput}
+                  />
+                  <div className="button" onClick={focusInput}>
+                    Choose Image
+                  </div>
+                </div>
+                <label htmlFor="displayname">Display Name</label>
+                <br />
                 <input
-                  type="file"
-                  name="image"
-                  onChange={getFile}
-                  accept="image/*"
-                  ref={imageInput}
+                  name="displayname"
+                  value={username}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                  }}
+                  type="text"
+                />{" "}
+                <br />
+                <label htmlFor="">Address</label>
+                <br />{" "}
+                <input
+                  name="address"
+                  value={address}
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                  }}
+                  type="text"
                 />
-                <div className="button" onClick={focusInput}>
-                  Choose Image
+                <br />
+                <label htmlFor="about">About me</label> <br />
+                <textarea
+                  name="about"
+                  value={about}
+                  onChange={(e) => {
+                    setAbout(e.target.value);
+                  }}
+                ></textarea>
+                <div className="save-btn">
+                  <button>Save profile</button>
+                  <div onClick={props.onClick} className="button">
+                    Cancel
+                  </div>
                 </div>
-              </div>
-              <label htmlFor="displayname">Display Name</label>
-              <br />
-              <input
-                name="displayname"
-                value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-                type="text"
-              />{" "}
-              <br />
-              <label htmlFor="">Address</label>
-              <br />{" "}
-              <input
-                name="address"
-                value={address}
-                onChange={(e) => {
-                  setAddress(e.target.value);
-                }}
-                type="text"
-              />
-              <br />
-              <label htmlFor="about">About me</label> <br />
-              <textarea
-                name="about"
-                value={about}
-                onChange={(e) => {
-                  setAbout(e.target.value);
-                }}
-              ></textarea>
-              <div className="save-btn">
-                <button>Save profile</button>
-                <div onClick={props.onClick} className="button">
-                  Cancel
+              </form>
+            </>
+          ) : (
+            <>
+              <p>Change Password</p>
+              <form onSubmit={changePass} className="edit-form">
+                <div className="error">
+                  <i>{err}</i>
                 </div>
-              </div>
-            </form>
-          </>
-        ) : (
-          <>
-            <p>Change Password</p>
-            <form onSubmit={changePass} className="edit-form">
-              <div className="error">
-                <i>{err}</i>
-              </div>
-              <label htmlFor="password">Password</label>
-              <br />
-              <input
-                name="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                type="password"
-              />{" "}
-              <br />
-              <label htmlFor="newPass">New Password</label>
-              <br />{" "}
-              <input
-                name="newPass"
-                value={newPass}
-                onChange={(e) => {
-                  setNewPass(e.target.value);
-                }}
-                type="password"
-              />
-              <br />
-              <label htmlFor="confirmPass">Confirm Password</label>
-              <br />{" "}
-              <input
-                name="confirmPass"
-                value={confirmPass}
-                onChange={(e) => {
-                  setConfirmPass(e.target.value);
-                }}
-                type="password"
-              />{" "}
-              <br />
-              <div className="save-btn">
-                <button>Send</button>
-                <div onClick={props.onClick} className="button">
-                  Cancel
+                <label htmlFor="password">Password</label>
+                <br />
+                <input
+                  name="password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                  type="password"
+                />{" "}
+                <br />
+                <label htmlFor="newPass">New Password</label>
+                <br />{" "}
+                <input
+                  name="newPass"
+                  value={newPass}
+                  onChange={(e) => {
+                    setNewPass(e.target.value);
+                  }}
+                  type="password"
+                />
+                <br />
+                <label htmlFor="confirmPass">Confirm Password</label>
+                <br />{" "}
+                <input
+                  name="confirmPass"
+                  value={confirmPass}
+                  onChange={(e) => {
+                    setConfirmPass(e.target.value);
+                  }}
+                  type="password"
+                />{" "}
+                <br />
+                <div className="save-btn">
+                  <button>Send</button>
+                  <div onClick={props.onClick} className="button">
+                    Cancel
+                  </div>
                 </div>
-              </div>
-            </form>
-          </>
-        )}
+              </form>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

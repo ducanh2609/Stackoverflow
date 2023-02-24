@@ -8,26 +8,7 @@ export default function LoginPage() {
   const [valueForgot, setValueForgot] = useState("");
   const [forgotStyle, setForgotStyle] = useState({ display: "none" });
 
-  const [style, setStyle] = useState({ display: "none" });
   const [toastList, setToastList] = useState({});
-  let succsess = {
-    id: 1,
-    title: "Success",
-    description: "",
-    icon: <i className="fa-solid fa-circle-check"></i>,
-    style: {
-      backgroundColor: "rgb(25, 164, 41)",
-    },
-  };
-  let unsuccess = {
-    id: 2,
-    title: "Error",
-    description: "",
-    icon: <i className="fa-solid fa-circle-exclamation"></i>,
-    style: {
-      backgroundColor: "rgb(207, 39, 39)",
-    },
-  };
   useEffect(() => {
     let userIndex = document.cookie.indexOf(";");
     let sessIndex = document.cookie.indexOf("sessionID=");
@@ -84,8 +65,10 @@ export default function LoginPage() {
       password: e.target.password.value,
     };
     if (data.email === "" || data.password === "") {
-      unsuccess.description = "Các trường nhập không được để trống";
-      showToast(unsuccess);
+      showToast({
+        status: "Error",
+        message: "Các trường nhập không được để trống",
+      });
     } else {
       fetch(`http://localhost:8000/api/v1/login`, {
         method: "POST",
@@ -99,11 +82,9 @@ export default function LoginPage() {
           message.message === "Tài khoản không tồn tại" ||
           message.message === "Sai mật khẩu"
         ) {
-          unsuccess.description = message.message;
-          showToast(unsuccess);
+          showToast({ status: "Error", message: message.message });
         } else {
-          succsess.description = message.message;
-          showToast(succsess);
+          showToast({ status: "Success", message: message.message });
           let token = message.sessionID;
           let userId = message.userId;
           const d = new Date();
@@ -137,12 +118,10 @@ export default function LoginPage() {
     }).then(async (res) => {
       let message = await res.json();
       if (message.message !== "Email không tồn tại") {
-        succsess.description = message.message;
-        showToast(succsess);
+        showToast({ status: "Success", message: message.message });
         setForgotStyle({ display: "none" });
       } else {
-        unsuccess.description = message.message;
-        showToast(unsuccess);
+        showToast({ status: "Error", message: message.message });
       }
     });
   }
@@ -151,17 +130,10 @@ export default function LoginPage() {
   }
   function showToast(toast) {
     setToastList(toast);
-    setStyle({ display: "block" });
-    setTimeout(() => {
-      setStyle(style);
-    }, 4000);
-  }
-  function closeToast() {
-    setStyle({ display: "none" });
   }
   return (
     <>
-      <Toast close={closeToast} toastArray={toastList} style={style} />
+      <Toast toastArray={toastList} />
       <div style={forgotStyle} className="forgot-box">
         <div className="forgot-modal"></div>
         <form onSubmit={sendForgot} className="forgot-form">

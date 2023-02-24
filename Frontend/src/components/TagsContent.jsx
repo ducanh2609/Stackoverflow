@@ -9,7 +9,6 @@ export default function TagsContent() {
   useLayoutEffect(() => {
     fetch("http://localhost:8000/api/v1/tags").then(async (res) => {
       let data = await res.json();
-      console.log(data);
       setTags(data);
     });
   }, []);

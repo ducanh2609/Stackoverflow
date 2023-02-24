@@ -18,6 +18,15 @@ import ProfilePage from "./ProfilePage";
 export default function QuestionPage() {
   let param = useParams();
   const [login, setLogin] = useState(0);
+  const [tags, setTags] = useState([]);
+
+  useLayoutEffect(() => {
+    fetch("http://localhost:8000/api/v1/tags").then(async (res) => {
+      let data = await res.json();
+      console.log(data);
+      setTags(data);
+    });
+  }, []);
   useLayoutEffect(() => {
     let userIndex = document.cookie.indexOf(";");
     let sessIndex = document.cookie.indexOf("sessionID=");
@@ -79,48 +88,6 @@ export default function QuestionPage() {
       member: "2k Members",
       content:
         "On-premises, hybrid, multicloud, or at the edge—build on your terms with best-in-class...",
-    },
-  ];
-  let tagsItem = [
-    {
-      title: "javascript",
-      count: 739625,
-    },
-    {
-      title: "python",
-      count: 623615,
-    },
-    {
-      title: "java",
-      count: 551041,
-    },
-    {
-      title: "android",
-      count: 525282,
-    },
-    {
-      title: "php",
-      count: 441234,
-    },
-    {
-      title: "C#",
-      count: 419447,
-    },
-    {
-      title: "html",
-      count: 339583,
-    },
-    {
-      title: "jquery",
-      count: 278735,
-    },
-    {
-      title: "ios",
-      count: 222700,
-    },
-    {
-      title: "css",
-      count: 215620,
     },
   ];
   let hotNetQues = [
@@ -251,11 +218,11 @@ export default function QuestionPage() {
               <div className="related-tags">
                 <div className="tags-header">Related Tags</div>
                 <div className="tag-item-box">
-                  {tagsItem.map((item, index) => (
+                  {tags.map((item, index) => (
                     <TagsItem
                       key={index}
-                      title={item.title}
-                      count={item.count}
+                      title={item.cata_name}
+                      count={item.question}
                     ></TagsItem>
                   ))}
                 </div>
