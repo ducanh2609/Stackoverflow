@@ -59,3 +59,10 @@ export const getTag = createSelector([tagQues], (tagQues) => {
         tagQues: tagQues
     }
 })
+
+const toast = (state) => state.toast;
+export const getToast = createSelector([toast], (toast) => {
+    return {
+        toast: toast
+    }
+})

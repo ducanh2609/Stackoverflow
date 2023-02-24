@@ -2,13 +2,32 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import LoginLink from "../liteComponents/Login-Link";
+import Toast from "../subComponentsHp/Toast";
 
 export default function LoginPage() {
-  const [errStyle, setErrStyle] = useState({ display: "none" });
-  const [errMes, setErrMes] = useState("");
   const [valueForgot, setValueForgot] = useState("");
   const [forgotStyle, setForgotStyle] = useState({ display: "none" });
 
+  const [style, setStyle] = useState({ display: "none" });
+  const [toastList, setToastList] = useState({});
+  let succsess = {
+    id: 1,
+    title: "Success",
+    description: "",
+    icon: <i className="fa-solid fa-circle-check"></i>,
+    style: {
+      backgroundColor: "rgb(25, 164, 41)",
+    },
+  };
+  let unsuccess = {
+    id: 2,
+    title: "Error",
+    description: "",
+    icon: <i className="fa-solid fa-circle-exclamation"></i>,
+    style: {
+      backgroundColor: "rgb(207, 39, 39)",
+    },
+  };
   useEffect(() => {
     let userIndex = document.cookie.indexOf(";");
     let sessIndex = document.cookie.indexOf("sessionID=");
@@ -65,8 +84,8 @@ export default function LoginPage() {
       password: e.target.password.value,
     };
     if (data.email === "" || data.password === "") {
-      setErrMes("Các trường nhập không được để trống");
-      setErrStyle({ display: "block" });
+      unsuccess.description = "Các trường nhập không được để trống";
+      showToast(unsuccess);
     } else {
       fetch(`http://localhost:8000/api/v1/login`, {
         method: "POST",
@@ -80,9 +99,11 @@ export default function LoginPage() {
           message.message === "Tài khoản không tồn tại" ||
           message.message === "Sai mật khẩu"
         ) {
-          setErrMes(message.message);
-          setErrStyle({ display: "block" });
+          unsuccess.description = message.message;
+          showToast(unsuccess);
         } else {
+          succsess.description = message.message;
+          showToast(succsess);
           let token = message.sessionID;
           let userId = message.userId;
           const d = new Date();
@@ -90,8 +111,9 @@ export default function LoginPage() {
           let expires = "expires=" + d.toUTCString();
           document.cookie = "sessionID = " + token + ";" + expires + ";path=/";
           document.cookie = "userID = " + userId + ";" + expires + ";path=/";
-
-          window.location.href = "/questions/home";
+          setTimeout(() => {
+            window.location.href = "/questions/home";
+          }, 2000);
         }
       });
     }
@@ -114,13 +136,32 @@ export default function LoginPage() {
       body: JSON.stringify(data),
     }).then(async (res) => {
       let message = await res.json();
-      alert(message.message);
-      setForgotStyle({ display: "none" });
+      if (message.message !== "Email không tồn tại") {
+        succsess.description = message.message;
+        showToast(succsess);
+        setForgotStyle({ display: "none" });
+      } else {
+        unsuccess.description = message.message;
+        showToast(unsuccess);
+      }
     });
   }
-
+  function cancel() {
+    setForgotStyle({ display: "none" });
+  }
+  function showToast(toast) {
+    setToastList(toast);
+    setStyle({ display: "block" });
+    setTimeout(() => {
+      setStyle(style);
+    }, 4000);
+  }
+  function closeToast() {
+    setStyle({ display: "none" });
+  }
   return (
     <>
+      <Toast close={closeToast} toastArray={toastList} style={style} />
       <div style={forgotStyle} className="forgot-box">
         <div className="forgot-modal"></div>
         <form onSubmit={sendForgot} className="forgot-form">
@@ -131,6 +172,12 @@ export default function LoginPage() {
             value={valueForgot}
             onChange={(e) => setValueForgot(e.target.value)}
           />
+          <div className="send-btn">
+            <button>Send</button>
+            <div onClick={cancel} className="button">
+              Cancel
+            </div>
+          </div>
         </form>
       </div>
       <Header />
@@ -151,9 +198,6 @@ export default function LoginPage() {
           ></LoginLink>
         ))}
         <form onSubmit={sendLogin} className="login-form">
-          <p className="errorNotify" style={errStyle}>
-            <i>{errMes}</i>
-          </p>
           <label htmlFor="email">Email</label> <br />
           <input name="email" type="email" /> <br />
           <label htmlFor="password">Password</label>

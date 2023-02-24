@@ -10,7 +10,6 @@ import Rate from "./../subComponentsHp/Rate";
 import Apout from "./../subComponentsHp/About";
 import Animation2 from "../subComponentsHp/Animation2";
 import Animation from "../subComponentsHp/Animation";
-import ToastUI from "../subComponentsHp/ToastUI";
 
 // react-icon
 import { BiSearchAlt } from "react-icons/bi";
@@ -811,9 +810,6 @@ export default function HomePageContent() {
               <i className="fa-solid fa-chevron-up"></i>
             </button>
           )}
-        </div>
-        <div>
-          <ToastUI />
         </div>
       </div>
     </>

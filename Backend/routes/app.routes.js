@@ -27,7 +27,8 @@ router.post('/api/v1/login', checkExitsLogin, async (req, res) => {
     // console.log(session_id);
     res.json({
         sessionID: session_id,
-        userId: req.session.userId
+        userId: req.session.userId,
+        message: 'Đăng nhập thành công'
     })
 })
 router.put('/api/v1/user/forgotpass', forgotPass)

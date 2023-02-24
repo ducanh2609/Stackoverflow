@@ -134,3 +134,13 @@
   outline: none;
   width: 100%;
 }
+.send-btn {
+  display: flex;
+  justify-content: space-between;
+}
+.send-btn div {
+  background-color: red;
+}
+.send-btn div:hover {
+  background-color: rgba(235, 93, 93, 0.888);
+}

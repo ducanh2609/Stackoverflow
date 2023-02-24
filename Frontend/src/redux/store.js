@@ -4,6 +4,7 @@ import { allQuestionSlice, questionSlice } from '../reducers/questionSlice';
 import { allAnswerSlice, methodAnswerSlice, valueSlice } from '../reducers/answerSlice';
 import { hpActiveSlice } from '../reducers/activeSlice';
 import { tagQuesSlice } from '../reducers/tagQuesSlice';
+import { toastSlice } from '../reducers/toastSlice';
 
 export const store = configureStore({
     reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
         value: valueSlice.reducer,
         methodAnswer: methodAnswerSlice.reducer,
         hpActive: hpActiveSlice.reducer,
-        tagQues: tagQuesSlice.reducer
+        tagQues: tagQuesSlice.reducer,
+        toast: toastSlice.reducer
     }
 })
