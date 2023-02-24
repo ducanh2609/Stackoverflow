@@ -3,7 +3,6 @@ export default function Animation2 (props)  {
     let showItem = {
         opacity: 1,
         transform: 'translateX(0)',
-         
     }
     const [style,setStyle] = useState();
     useEffect(() => {
