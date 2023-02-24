@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 export default function ToolLeft(props) {
   let param = useParams();
   return (
-    <div className="tool-left" style={props.style}>
+    <div className="tool-left da-5" style={props.style}>
       <a
         href="/"
         className={param.element === "home" ? "home-btn active" : "home-btn"}

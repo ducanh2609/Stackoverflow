@@ -181,7 +181,7 @@ export default function QuestionPage() {
   return (
     <>
       {login === 0 ? <QuestionHeader /> : <OkUserHeader />}
-      <div className="content-box">
+      <div className="content-box da-10">
         <ToolLeft></ToolLeft>
         {param.element === "tags" ? (
           <TagsContent />
@@ -192,7 +192,7 @@ export default function QuestionPage() {
         ) : param.element === "users" ? (
           <UserContent />
         ) : (
-          <div className="tool-right">
+          <div className="tool-right da-10">
             {param.element === "allquestions" ? (
               <QuestionContent title="All Question"></QuestionContent>
             ) : param.element === "home" ? (
@@ -202,7 +202,7 @@ export default function QuestionPage() {
             ) : (
               ""
             )}
-            <div className="right-box">
+            <div className="right-box da-0">
               <div className="overflow-blog">
                 <div className="overflow-div1">
                   <p>The Overflow Blog</p>

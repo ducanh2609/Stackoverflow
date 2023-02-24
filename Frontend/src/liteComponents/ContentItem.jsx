@@ -15,7 +15,7 @@ export default function ContentItem(props) {
           <span>{props.data.view}</span> views
         </p>
       </div>
-      <div className="content-item-right">
+      <div className="content-item-right da-10">
         <div onClick={toDetail} className="question-title">
           {props.data.title}
         </div>

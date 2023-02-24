@@ -48,10 +48,10 @@ export default function Footer() {
   ];
   return (
     <div className="footer">
-      <div className="footer-box">
-        <div className="footer-logo">
+      <div className="footer-box da-10">
+        <div className="footer-logo da-0">
           <a href="/">
-            <img src="/image/StackOF.png" alt="" />
+            <img className="da-0" src="/image/StackOF.png" alt="" />
           </a>
         </div>
         {item.map((item, index) => (

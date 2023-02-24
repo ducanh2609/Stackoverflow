@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUser } from "../redux/selector";
 import { userSlice } from "../reducers/userSlice";
+import ToolLeft from "../liteComponents/ToolLeft";
 
 export default function OkUserHeader() {
   const dispatch = useDispatch();
@@ -37,6 +38,20 @@ export default function OkUserHeader() {
       dispatch(userSlice.actions.user(user));
     });
   }, [dispatch]);
+  const [toolI, setToolI] = useState(
+    <i className="fa-solid fa-bars fa-lg"></i>
+  );
+  const [toolStyle, setToolStyle] = useState({ display: "none" });
+
+  function menuToggle() {
+    if (toolStyle.display === "none") {
+      setToolStyle({ display: "block" });
+      setToolI(<i className="fa-solid fa-xmark fa-lg"></i>);
+    } else {
+      setToolStyle({ display: "none" });
+      setToolI(<i className="fa-solid fa-bars fa-lg"></i>);
+    }
+  }
   function sendSearch(e) {
     e.preventDefault();
     let value = e.target.searchValue.value;
@@ -50,16 +65,25 @@ export default function OkUserHeader() {
   let userLink = `/questions/profile/${user.user_id}`;
   return (
     <div className="header">
-      <div className="header-box">
-        <div className="logo">
-          <Link to="/">
+      <div className="header-box da-10">
+        <div
+          onClick={menuToggle}
+          className="menu-btn da-1 da-sm-0 da-md-0 da-lg-0 da-xl-0"
+        >
+          {toolI}
+        </div>
+        <div className="logo da-15">
+          <Link className="da-10 da-sm-0 da-md-0 da-lg-0 da-xl-0" to="/">
+            <img src="/image/StackOF.png" alt="" />
+          </Link>
+          <Link className="da-0" to="/">
             <img src="/image/Overflow_logo.png" alt="" />
           </Link>
         </div>
-        <div className="product-link">
+        <div className="product-link da-15">
           <Link to="/questions/home">Products</Link>
         </div>
-        <form onSubmit={sendSearch} className="ok-search-box">
+        <form onSubmit={sendSearch} className="ok-search-box da-0">
           <input
             name="searchValue"
             onFocus={() => {
@@ -85,26 +109,26 @@ export default function OkUserHeader() {
             </div>
           </div>
         </form>
-        <div className="profile-header">
-          <div className="profile-header-image">
+        <div className="profile-header da-7">
+          <div className="profile-header-image da-2">
             <Link to={userLink}>
               <img src={user.image} alt="" />
             </Link>
-            <p>1</p>
-            <div className="dot"></div>
-            <p>1</p>
+            <p className="da-0">1</p>
+            <div className="dot da-0"></div>
+            <p className="da-0">1</p>
           </div>
 
-          <div className="profile-header-item">
+          <div className="profile-header-item da-2">
             <i className="fa-solid fa-inbox fa-lg"></i>
           </div>
-          <div className="profile-header-item">
+          <div className="profile-header-item da-2">
             <i className="fa-solid fa-trophy fa-lg"></i>
           </div>
-          <div className="profile-header-item">
+          <div className="profile-header-item da-2">
             <i className="fa-solid fa-circle-question fa-lg"></i>
           </div>
-          <div onClick={menuBoxOpen} className="profile-header-item">
+          <div onClick={menuBoxOpen} className="profile-header-item da-2">
             <i className="fa-brands fa-stack-exchange fa-lg"></i>
           </div>
         </div>
@@ -143,6 +167,7 @@ export default function OkUserHeader() {
           </div>
         </div>
       </div>
+      <ToolLeft style={toolStyle} />
     </div>
   );
 }

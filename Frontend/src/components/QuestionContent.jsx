@@ -102,8 +102,8 @@ export default function QuestionContent(props) {
     }
   }
   return (
-    <div className="question-content">
-      <div className="content-header">
+    <div className="question-content da-10">
+      <div className="content-header da-10">
         <div className="content-header-top">
           {params.title ? (
             <p>
@@ -112,18 +112,18 @@ export default function QuestionContent(props) {
           ) : (
             <p>{props.title}</p>
           )}
-          <button>
+          <button className="da-4">
             <Link to="/questions/ask" style={{ color: "white" }}>
               Ask Question
             </Link>
           </button>
         </div>
         <div className="content-header-bottom">
-          <p>{allQuestion.length} questions</p>
-          <div className="content-navbar">
+          <p className="da-0">{allQuestion.length} questions</p>
+          <div className="content-navbar da-8">
             <div className="nav-item">Newest</div>
             <div className="nav-item">Active</div>
-            <div className="nav-item">
+            <div className="nav-item da-0">
               Bountied <span>0</span>
             </div>
             <div
@@ -144,7 +144,7 @@ export default function QuestionContent(props) {
                   : { display: "none" }
               );
             }}
-            className="filte-btn"
+            className="filte-btn da-2"
           >
             <i className="fa-solid fa-arrow-up-wide-short fa-lg"></i>
             Filter
@@ -170,8 +170,13 @@ export default function QuestionContent(props) {
           </div>
           <div className="filter-item">
             <p>Tagged with</p>
-            <input type="radio" name="search" checked onChange={() => {}} />
-            <span>The following tags:</span> <br />
+            <input
+              type="radio"
+              name="search"
+              checked
+              onChange={() => {}}
+            />{" "}
+            <span> The following tags:</span> <br />
             <input type="text" name="tagname" />
           </div>
         </div>

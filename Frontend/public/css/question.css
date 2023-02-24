@@ -192,6 +192,9 @@
   max-height: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 .question-title:hover {
   cursor: pointer;
@@ -201,6 +204,9 @@
   max-height: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 .question-tags {
   margin-top: 5px;
