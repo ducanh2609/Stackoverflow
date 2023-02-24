@@ -7,6 +7,7 @@ const { delSessionSQL } = require('../models/app.models.js');
 // Render Pages
 router.post('/', checkSession)
 
+
 // Log out
 router.delete('/logout/:id', async (req, res) => {
     let id = req.params.id
@@ -30,15 +31,15 @@ router.post('/api/v1/login', checkExitsLogin, async (req, res) => {
     })
 })
 router.put('/api/v1/user/forgotpass', forgotPass)
+
+
 // Question / Ask
 router.get('/api/v1/question', getAllQuestion)
 router.get('/api/v1/question/:id', getQuestion)
-
 router.put('/api/v1/question/:id', updateView)
 router.put('/api/v1/question/vote/:id', updateVoteQues)
-
-
 router.post('/api/v1/question/ask', postQuestion)
+
 
 // Answer
 router.get('/api/v1/answer/:id', getQuesAnswer)
@@ -46,6 +47,7 @@ router.post('/api/v1/answer', postAnswer)
 router.delete('/api/v1/answer/:id', delAnswer)
 router.put('/api/v1/answer/:id', updateAnswer)
 router.put('/api/v1/answer/vote/:id', updateVoteAns)
+
 
 // Tags
 router.get('/api/v1/tags', getCata)

@@ -20,7 +20,6 @@ transporter.verify(function (error, success) {
 });
 
 
-
 module.exports.forgotPass = async (req, res) => {
     let { email, token } = req.body;
     let [data] = await getAllUserSQL();
@@ -54,9 +53,6 @@ module.exports.forgotPass = async (req, res) => {
         })
     }
 }
-
-
-
 module.exports.getAllUser = async (req, res) => {
     let [record] = await getAllUserSQL()
     res.send(record)
@@ -70,7 +66,6 @@ module.exports.updatePass = async (req, res) => {
     await updatePassSQL([req.body.password, req.params.id])
     res.send({ message: 'Change password successfully' })
 }
-
 module.exports.postAllUser = async (req, res) => {
     let [record] = await getAllUserSQL();
     let user_id = record.length + 1;
@@ -219,12 +214,10 @@ module.exports.delAnswer = async (req, res) => {
     await delAnswerSQL([req.params.id]);
     res.send({ message: 'Delete successfully' })
 }
-
 module.exports.updateAnswer = async (req, res) => {
     await updateAnswerSQL([req.body.content, req.params.id]);
     res.send({ message: 'Update successfully' })
 }
-
 module.exports.getCata = async (req, res) => {
     let [record] = await getCataSQL()
     record.forEach((item) => {

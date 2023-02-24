@@ -44,16 +44,21 @@ export default function QuestionContent(props) {
     params.title ? setAllQuestion(tagQuesArr) : setAllQuestion(allQuesStore);
   }, [allQuesStore, tagQues, params.title]);
   function sortForm(value, ques, str, tagname) {
-    value.sort((a, b) => b - a);
-    let sortQues = value.reduce((arr, item) => {
-      for (let i = 0; i < ques.length; i++) {
-        if (ques[i][str] === item) {
-          arr.push(ques[i]);
-          ques = ques.filter((k, index) => index !== i);
+    let sortQues;
+    if (value === "") {
+      sortQues = ques;
+    } else {
+      value.sort((a, b) => b - a);
+      sortQues = value.reduce((arr, item) => {
+        for (let i = 0; i < ques.length; i++) {
+          if (ques[i][str] === item) {
+            arr.push(ques[i]);
+            ques = ques.filter((k, index) => index !== i);
+          }
         }
-      }
-      return arr;
-    }, []);
+        return arr;
+      }, []);
+    }
     if (tagname !== "") {
       let sortTagQues = sortQues.filter((item) =>
         item.cata_name.includes(tagname)
@@ -71,6 +76,8 @@ export default function QuestionContent(props) {
     } else if (sort === "views") {
       let sortView = arr.map((item) => item.view);
       sortForm(sortView, arr, "view", tagname);
+    } else {
+      sortForm("", arr, "view", tagname);
     }
   }
   function filterQuestion(e) {
