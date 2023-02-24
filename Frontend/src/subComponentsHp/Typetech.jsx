@@ -5,7 +5,7 @@ import { getActive } from "../redux/selector";
 function Typetech(props) {
   let dispatch = useDispatch();
   const hpActive = useSelector(getActive).hpActive;
-  console.log(hpActive);
+  // console.log(hpActive);
   function pick() {
     if (props.index === hpActive)
       dispatch(hpActiveSlice.actions.hpActive(null));
@@ -17,7 +17,7 @@ function Typetech(props) {
         onClick={pick}
         className={
           props.index === hpActive
-            ? "hp-flex-item-4a hp-active"
+            ? "hp-flex-item-4a hp-active "
             : "hp-flex-item-4a"
         }
       >

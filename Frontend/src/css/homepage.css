@@ -28,6 +28,7 @@
   display: flex;
   height: 42%;
   justify-content: center;
+  max-width: 100%;
 }
 
 .flex-item1,
@@ -37,7 +38,11 @@
   max-width: 420px;
   margin-top: 15px;
 }
-
+.flex-item-p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 22px;
+}
 .property-item {
   padding: 20px;
   height: 68%;
@@ -100,8 +105,8 @@ h6 {
   font-size: 14px;
 }
 p > a {
-  color: black;
-  font-size: small;
+  color: rgb(77, 75, 75);
+  margin-top: 8px;
 }
 
 p > a:hover {
@@ -151,6 +156,7 @@ h1 {
   transition: all 2s;
 }
 
+
 .stick {
   height: 10px;
   width: 100px;
@@ -170,7 +176,7 @@ h1 {
 
 .flex-item {
   max-width: 200px;
-  padding: 10px 30px;
+  padding: 10px 20px;
   /* border: 1px solid white; */
   text-align: center;
 }
@@ -183,7 +189,7 @@ h1 {
 }
 
 .tt-body {
-  font-size: 12px;
+  font-size: 13px;
   word-wrap: break-word;
   color: hsl(210, 8%, 65%);
 }
@@ -199,13 +205,13 @@ h1 {
   margin: 0 30px;
   position: absolute;
   margin-top: -180px;
-  background-color: white;
+  background-color: #f8f8f8;
 }
 
 .body-1 {
   box-sizing: border-box;
   max-width: 1950px;
-  height: 800px;
+  height: 700px;
 }
 
 .flexbox-2 {
@@ -383,6 +389,7 @@ h1 {
   padding-left: 120px;
   padding-right: 120px;
   padding-top: 40px;
+  justify-content: center;
 }
 
 .imgAccept {
@@ -400,7 +407,17 @@ h1 {
 
 .flex-item3 {
   flex-basis: 30%;
-  margin: 0 1%;
+}
+.hidden-item0 {
+  transform: translateX(-150%);
+  opacity: 0;
+  transition: all 1s;
+}
+.hidden-item0:nth-child(2) {
+  transition-delay: 100ms;
+}
+.hidden-item0:nth-child(3) {
+  transition-delay: 300ms;
 }
 .flex-item3 p{
     color: rgb(158, 158, 158);
@@ -450,19 +467,30 @@ h1 {
   padding: 20px;
   margin-right: 1%;
   text-align: center;
-  background-color: hsl(210, 3%, 24%);
-  box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.06), 0 2px 6px hsla(0, 0%, 0%, 0.06),
-    0 3px 8px hsla(0, 0%, 0%, 0.09);
+  background-color: transparent;
   border-radius: 5px;
+  overflow: hidden;
 }
 .hp-flex-item-4a p {
   text-align: left;
   padding: 0 5px;
-
+}
+.hp-flex-item-4a:hover {
+  background-color: hsl(210, 3%, 13%);
 }
 .hp-active {
     scale: 1.2;
+    background-color: hsl(210, 3%, 24%);
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.06), 0 2px 6px hsla(0, 0%, 0%, 0.06),
+    0 3px 8px hsla(0, 0%, 0%, 0.09);
 }
+.hp-active:hover {
+  background-color:hsl(210, 3%, 24%);
+}
+.hp-active > .hp-flex-item4-img {
+  color: #0a95ff;
+}
+
 /* container4 */
 .hp-discount {
   padding-top: 20px;
@@ -526,9 +554,11 @@ h1 {
   padding: 6px 10px;
   border-radius: 5px;
   color: white;
-  margin: 0 auto;
   height: 100%;
-  width: 100%;
+  /* width: 100%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .likeButton5:hover {
   opacity: 0.9;
@@ -538,7 +568,6 @@ h1 {
   bottom: 80px;
   width: 86%;
   height: 40px;
-  text-align: center;
 }
 
 .hp-likeBtn a {
@@ -693,6 +722,8 @@ a {
 .hp-flex-item8-p {
   color: #525960;
   margin-bottom: 30px;
+  font-size: 15px;
+  line-height: 20px;
 }
 .hp-flex-item8-2p {
   padding-top: 15px;
@@ -706,7 +737,7 @@ a {
   background-image: url("../../../Frontend/public/image/img-homepage/illo-about-left.png"),
     url("../../../Frontend/public/image/img-homepage/illo-about-left.png");
   background-repeat: no-repeat, no-repeat;
-  background-position: 0 0, 100% 0;
+  background-position: 0 0, 115% 0;
   background-size: 27% auto;
   padding-top: 20px;
 }
