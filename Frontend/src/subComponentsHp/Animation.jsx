@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function Animation(props) {
     let show = {
-        flexBasis: '33%',
+        flexBasis: '30%',
         opacity: 1,
         transform: 'translateX(0)',
         filter: 'blur(0)',
@@ -24,8 +24,8 @@ export default function Animation(props) {
     return (
         <>
 
-            <div className='flex-item3' style={style}>
-                <div>{props.image1}</div>
+            <div className='flex-item3 hidden-item0' style={style}>
+                <div>{props.image}</div>
                 <h3 className='tt-title'>{props.h3}</h3>
                 <p>{props.p}</p>
             </div>
