@@ -6,8 +6,8 @@ export default function ProfileStatus(props) {
   const loginUser = useSelector(getUser).user;
 
   return (
-    <div className="profile-status">
-      <div className="profile-status-left">
+    <div className="profile-status da-10">
+      <div className="profile-status-left da-10">
         <div className="status-box">
           <p>Stats</p>
           <div>
@@ -30,20 +30,18 @@ export default function ProfileStatus(props) {
           </div>
         </div>
       </div>
-      <div className="profile-status-right">
+      <div className="profile-status-right da-10">
         <div className="profile-about">
           <p>About</p>
           <div className="about-box">
             {user.about === null || user.about === "" ? (
               loginUser.user_id === user.user_id ? (
-                <p>
+                <p className="da-10">
                   Your about me section is currently blank. Would you like to
                   add one?<span onClick={props.onClick}> Edit profile</span>
                 </p>
               ) : (
-                <p>
-                  This one about section is currently blank.
-                </p>
+                <p>This one about section is currently blank.</p>
               )
             ) : (
               <p

@@ -21,22 +21,22 @@ export default function AboutFooter() {
 
   let item = [
     {
-      class: "about-footer-item",
+      class: "about-footer-item da-10",
       content: "STACK OVERFLOW",
       fn: stack,
     },
     {
-      class: "about-footer-item",
+      class: "about-footer-item da-10",
       content: "PRODUCTS",
       fn: product,
     },
     {
-      class: "about-footer-item",
+      class: "about-footer-item da-10",
       content: "POLICIES",
       fn: policies,
     },
     {
-      class: "about-footer-item",
+      class: "about-footer-item da-10",
       content: "CHANNELS",
       fn: channel,
     },

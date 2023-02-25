@@ -51,13 +51,14 @@ export default function UserContent() {
     next = `/questions/users/${+currentPage + 1}`;
   }
   return (
-    <div className="users-page">
+    <div className="users-page da-10">
       <div className="users-header-box">
         {params.id ? <p>Users [{params.id}]</p> : <p>Users</p>}
       </div>
-      <div className="users-search">
-        <div className="users-input">
+      <div className="users-search da-10">
+        <div className="users-input da-10">
           <input
+            className="da-10"
             type="text"
             name="users-search"
             onInput={findUser}
@@ -66,7 +67,7 @@ export default function UserContent() {
           <i className="fa-sharp fa-solid fa-magnifying-glass fa-lg"></i>
         </div>
 
-        <div>
+        <div className="da-0">
           <span>Repulation</span>
           <span>New users</span>
           <span>Voters</span>

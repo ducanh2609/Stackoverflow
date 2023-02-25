@@ -83,14 +83,14 @@ export default function AskPage() {
       {flag === 0 ? (
         <Loading />
       ) : (
-        <div className="ask-page">
+        <div className="ask-page da-10">
           <OkUserHeader />
-          <div className="ask-content">
+          <div className="ask-content da-10">
             <div className="ask-header">
-              <p>Ask a public question</p>
-              <div className="ask-header-image"></div>
+              <p className="da-10">Ask a public question</p>
+              <div className="ask-header-image da-0"></div>
             </div>
-            <div className="ask-title-box">
+            <div className="ask-title-box da-10">
               <p>Writing a good question</p>
               <p>
                 You’re ready to <a href="/question/ask"> ask</a> a
@@ -113,8 +113,8 @@ export default function AskPage() {
                 <li>Review your question and post it to the site.</li>
               </ul>
             </div>
-            <form onSubmit={sendQuestion} className="question-text-form">
-              <div className="ask-title">
+            <form onSubmit={sendQuestion} className="question-text-form da-10">
+              <div className="ask-title da-10">
                 <p>Title (*)</p>
                 <p>
                   Be specific and imagine you’re asking a question to another
@@ -126,7 +126,7 @@ export default function AskPage() {
                   placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
                 />
               </div>
-              <div className="ask-code">
+              <div className="ask-code da-10">
                 <p>What are the details of your problem?</p>
                 <p>
                   Introduce the problem and expand on what you put in the title.
@@ -134,7 +134,7 @@ export default function AskPage() {
                 </p>
                 <SunEditor onKeyDown={sendCode} />
               </div>
-              <div className="ask-code ask-text-content">
+              <div className="ask-code ask-text-content da-10">
                 <p>What did you try and what were you expecting? (*)</p>
                 <p>
                   Describe what you tried, what you expected to happen, and what
@@ -146,7 +146,7 @@ export default function AskPage() {
                   }}
                 />
               </div>
-              <div className="ask-title ask-tags">
+              <div className="ask-title ask-tags da-10">
                 <p>Tags (*)</p>
                 <p>
                   Add up to 5 tags to describe what your question is about.
@@ -161,7 +161,7 @@ export default function AskPage() {
               <button>Send question</button>
             </form>
           </div>
-          <div className="ask-note">
+          <div className="ask-note da-0">
             <div>Writing a good title</div>
             <div>
               <img src="/image/pencil.webp" alt="" />

@@ -145,7 +145,7 @@ export default function OkUserHeader() {
               <i className="fa-brands fa-stack-exchange fa-lg"></i>
             </div>
           </div>
-          <div className="profile-menu-box" style={menuStyle}>
+          <div className="profile-menu-box da-8" style={menuStyle}>
             <div
               className="box1"
               style={{ backgroundColor: "rgb(241 242 243)" }}

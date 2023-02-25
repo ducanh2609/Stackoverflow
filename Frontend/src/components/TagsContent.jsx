@@ -111,18 +111,19 @@ export default function TagsContent() {
     next = `/questions/tags/${+currentPage + 1}`;
   }
   return (
-    <div className="tags-page">
-      <div className="tags-header-box">
+    <div className="tags-page da-10">
+      <div className="tags-header-box da-10">
         <p>Tags</p>
-        <span>
+        <span className="da-10">
           A tag is a keyword or label that categorizes your question with other,
           similar questions. Using the right tags makes it easier for others to
           find and answer your question.
         </span>
       </div>
       <div className="tags-search">
-        <div className="tags-input">
+        <div className="tags-input da-10">
           <input
+            className="da-10"
             type="text"
             name="tags-search"
             placeholder="Filter by tag name"
@@ -131,7 +132,7 @@ export default function TagsContent() {
           <i className="fa-sharp fa-solid fa-magnifying-glass fa-lg"></i>
         </div>
 
-        <div>
+        <div className="da-0">
           <span onClick={sortByPoplar}>Popular</span>
           <span onClick={sortByName}>Name</span>
           <span onClick={sortByTime}>New</span>

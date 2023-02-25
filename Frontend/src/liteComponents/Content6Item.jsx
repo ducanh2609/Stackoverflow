@@ -5,9 +5,9 @@ export default function Content6Item(props) {
         <img src="/image/StackOF.png" alt="" />
         <h3>{props.h3}</h3>
       </div>
-      <p>{props.p}</p>
+      <p className="da-10">{props.p}</p>
       <button>Learn more</button>
-      <img src={props.src} alt="" />
+      <img className="da-0" src={props.src} alt="" />
     </div>
   );
 }

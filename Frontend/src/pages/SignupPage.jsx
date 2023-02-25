@@ -124,7 +124,7 @@ export default function SignupPage() {
     <>
       <Toast toastArray={toastList}></Toast>
       <Header />
-      <div className="signup-page">
+      <div className="signup-page da-9">
         {loginLink.map((item, index) => (
           <LoginLink
             key={index}
@@ -181,7 +181,7 @@ export default function SignupPage() {
             </a>
           </p>
         </div>
-        <div className="introduct">
+        <div className="introduct da-0">
           <div className="intro-title">Join the Stack Overflow community</div>
           {introItem.map((item, index) => (
             <IntroItem

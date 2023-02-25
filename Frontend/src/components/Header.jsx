@@ -31,23 +31,26 @@ export default function Header() {
   }
   return (
     <div className="header">
-      <div className="header-box">
-        <div onClick={menuToggle} className="menu-btn">
+      <div className="header-box da-10">
+        <div onClick={menuToggle} className="menu-btn da-1">
           {toolI}
         </div>
-        <div className="logo">
-          <Link to="/">
-            <img src="../image/Overflow_logo.png" alt="" />
+        <div className="logo da-15">
+          <Link className="da-10 da-sm-0 da-md-0 da-lg-0 da-xl-0" to="/">
+            <img src="/image/StackOF.png" alt="" />
+          </Link>
+          <Link className="da-0" to="/">
+            <img src="/image/Overflow_logo.png" alt="" />
           </Link>
         </div>
-        <div className="about-link">
+        <div className="about-link da-15">
           <Link to="/about">About</Link>
         </div>
-        <div className="product-link">
+        <div className="product-link da-0">
           <Link to="/questions/allquestions">Products</Link>
         </div>
-        <div className="for-team-link">For Teams</div>
-        <form onSubmit={sendSearch} className="search-box">
+        <div className="for-team-link da-15">For Teams</div>
+        <form onSubmit={sendSearch} className="search-box da-0">
           <input
             onFocus={() => {
               setDemoStyle({ display: "block" });

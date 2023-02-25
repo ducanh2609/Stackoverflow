@@ -96,6 +96,100 @@
   .tool-left {
     left: 0 !important;
   }
+  .tags-content,
+  .users-content {
+    grid-template-columns: 48% 48% !important;
+    font-size: 12px !important;
+  }
+  .profile-status,
+  .profile-setting-box {
+    display: block !important;
+  }
+  .about-box p {
+    padding: 0 !important;
+  }
+  .profile-page .profile-header-box .button {
+    margin: 10px 10px !important;
+  }
+  .setting-left {
+    display: flex !important;
+  }
+  .setting-left > div {
+    margin-right: 20px !important;
+  }
+  .image-box {
+    display: block !important;
+    height: max-content !important;
+  }
+  .image-box > div {
+    margin: 10px 0 !important;
+  }
+  .companies-seach-box {
+    display: block !important;
+  }
+  .companies-seach-box > div,
+  .companies-seach-box > input {
+    margin: 10px 10px 10px 0 !important;
+  }
+  .companies-seach-box > i {
+    top: 17px !important;
+  }
+  .companies-filter-box {
+    top: 165px !important;
+  }
+  .companies-filter-box::before {
+    left: 50px !important;
+  }
+  .forgot-form {
+    margin: 50% 0 !important;
+  }
+  .login-form span {
+    margin-left: 33% !important;
+  }
+  .signup-page {
+    margin: 0 auto !important;
+  }
+  .about-content1,
+  .about-content2,
+  .about-content3,
+  .about-content6,
+  .about-content7,
+  .about-content8,
+  .about-content9,
+  .about-footer-box {
+    display: block !important ;
+    margin: 0 auto !important;
+    padding: 30px 10px !important;
+  }
+  .content2-item {
+    height: max-content !important;
+  }
+  .about-content4 {
+    overflow: auto !important;
+  }
+  .content4-item {
+    width: 35% !important;
+    padding: 15px !important;
+  }
+  .content4-item div:nth-child(4) {
+    position: relative !important;
+    top: 0 !important;
+  }
+
+  .about-content6 > div {
+    margin-bottom: 30px !important;
+  }
+  .content8-right {
+    padding: 20px 0 !important;
+  }
+  .about-logo {
+    width: 15% !important;
+  }
+  .footer-about-item {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    gap: 5%;
+  }
 }
 
 @media screen and (max-width: 768px) and (min-width: 576px) {

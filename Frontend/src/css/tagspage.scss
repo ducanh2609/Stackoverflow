@@ -75,9 +75,8 @@
     }
 
     .tags-content-box {
-        height: 90vh;
         overflow: hidden;
-
+        min-height: 80vh;
         .tags-content {
             display: grid;
             grid-template-columns: 24.25% 24.25% 24.25% 24.25%;

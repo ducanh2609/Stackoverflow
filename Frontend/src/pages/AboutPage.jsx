@@ -134,13 +134,13 @@ export default function AboutPage() {
     },
   ];
   return (
-    <div className="about-page">
+    <div className="about-page da-10">
       <AboutHeader />
       <div className="about-content">
         <div className="about-content1">
-          <img src="/image/bg-header-mobile.png" alt="" />
-          <div className="contect1-text">
-            <p className="contect1-text1">Who we are</p>
+          <img className="da-10" src="/image/bg-header-mobile.png" alt="" />
+          <div className="contect1-text da-10">
+            <p className="contect1-text1 da-10">Who we are</p>
             <p className="contect1-text2">
               Empowering the world to develop technology through collective
               knowledge.
@@ -160,14 +160,14 @@ export default function AboutPage() {
             <Content2Item key={index} p1={item.p1} p2={item.p2}></Content2Item>
           ))}
         </div>
-        <div className="about-content3">
-          <p>
+        <div className="about-content3 da-10">
+          <p className="da-10">
             Stack Overflow helps people find the answers they need, when they
             need them. We're best known for our public Q&A platform that over
             100 million people visit every month to ask questions, learn, and
             share technical knowledge.
           </p>
-          <p>
+          <p className="da-10">
             Our products and tools empower people to find what they need to
             develop technology at work or at home. These products include,
             <a href="/about"> Stack Overflow for Teams</a>,
@@ -176,7 +176,7 @@ export default function AboutPage() {
             <a href="/about">Stack Overflow Talent</a>.
           </p>
         </div>
-        <div className="about-content4">
+        <div className="about-content4 da-10" style={{display:'flex !important'}}>
           {content4.map((item, index) => (
             <Content4Item
               key={index}
@@ -189,10 +189,10 @@ export default function AboutPage() {
         </div>
         <div className="our-products-title">
           <span></span>
-          <span>Our products</span>
+          <span className="da-8">Our products</span>
           <span></span>
         </div>
-        <div className="about-content5">
+        <div className="about-content5 da-10">
           <img src="/image/StackOF.png" alt="" />
           <p style={{ fontWeight: "700" }}>Our Public Platform</p>
           <p style={{ color: "rgb(103, 103, 101)" }}>
@@ -203,7 +203,7 @@ export default function AboutPage() {
             <i className="fa-solid fa-arrow-up-right-from-square"></i>
           </button>
         </div>
-        <div className="about-content6">
+        <div className="about-content6 da-8">
           {content6.map((item, index) => (
             <Content6Item
               key={index}
@@ -217,12 +217,12 @@ export default function AboutPage() {
           Used by thousands of organizations around the globe
         </p>
         <Marrque />
-        <div className="our-products-title">
+        <div className="our-products-title da-10">
           <span></span>
-          <span>Our core values</span>
+          <span className="da-10">Our core values</span>
           <span></span>
         </div>
-        <div className="about-content7">
+        <div className="about-content7 da-10">
           {content7.map((item, index) => (
             <Content7Item
               key={index}
@@ -233,8 +233,8 @@ export default function AboutPage() {
             ></Content7Item>
           ))}
         </div>
-        <div className="about-content8">
-          <div className="content8-item content8-left">
+        <div className="about-content8 da-10">
+          <div className="content8-item content8-left da-10">
             <p style={{ fontSize: "27px", fontWeight: "600" }}>Where we work</p>
             <p>
               We’re proud to be a remote first company working across many
@@ -252,7 +252,7 @@ export default function AboutPage() {
               </button>
             </div>
           </div>
-          <div className="content8-item content8-right">
+          <div className="content8-item content8-right da-10">
             <div>
               <div>
                 <img src="/image/content8-right.png" alt="" />
@@ -272,7 +272,7 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-        <div className="about-content9">
+        <div className="about-content9 da-10">
           {content9.map((item, index) => (
             <Content9Item
               key={index}

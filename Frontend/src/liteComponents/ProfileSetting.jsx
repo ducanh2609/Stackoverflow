@@ -74,8 +74,8 @@ export default function ProfileSetting(props) {
   return (
     <>
       <Toast toastArray={toastList}></Toast>
-      <div className="profile-setting-box">
-        <div className="setting-left">
+      <div className="profile-setting-box da-10">
+        <div className="setting-left da-10">
           <div onClick={changeMenuPro} style={menuStyleProfile}>
             Edit Profile
           </div>
@@ -83,7 +83,7 @@ export default function ProfileSetting(props) {
             Change Password
           </div>
         </div>
-        <div className="setting-right">
+        <div className="setting-right da-10">
           {currentTool === "profile" ? (
             <>
               <p>Edit your profile</p>
@@ -111,6 +111,7 @@ export default function ProfileSetting(props) {
                 <input
                   name="displayname"
                   value={username}
+                  className="da-10"
                   onChange={(e) => {
                     setUsername(e.target.value);
                   }}
@@ -121,6 +122,7 @@ export default function ProfileSetting(props) {
                 <br />{" "}
                 <input
                   name="address"
+                  className="da-10"
                   value={address}
                   onChange={(e) => {
                     setAddress(e.target.value);

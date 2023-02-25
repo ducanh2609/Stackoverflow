@@ -156,7 +156,7 @@ export default function DetailPage() {
     });
   }
   return (
-    <div className="detail-page">
+    <div className="detail-page da-10">
       <div className="detail-header">
         <div className="detail-header-title">
           <p>{question.title}</p>

@@ -4,7 +4,7 @@ export default function AboutHeader() {
   return (
     <div className="about-header">
       <div className="about-header-box">
-        <div className="menu-btn">
+        <div className="menu-btn da-0">
           <i className="fa-solid fa-bars fa-2x"></i>
         </div>
         <div className="logo">
@@ -12,7 +12,7 @@ export default function AboutHeader() {
             <img src="../image/Overflow_logo.png" alt="" />
           </Link>
         </div>
-        <div className="about-header-tool">
+        <div className="about-header-tool da-0">
           <div className="our-products-box">
             <span>Our products</span>
             <i className="fa-solid fa-angle-down"></i>

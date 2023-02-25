@@ -136,7 +136,7 @@ export default function LoginPage() {
       <Toast toastArray={toastList} />
       <div style={forgotStyle} className="forgot-box">
         <div className="forgot-modal"></div>
-        <form onSubmit={sendForgot} className="forgot-form">
+        <form onSubmit={sendForgot} className="forgot-form da-10">
           <label htmlFor="forgot">Nhập email đăng kí của bạn:</label> <br />
           <input
             type="email"
@@ -154,7 +154,7 @@ export default function LoginPage() {
       </div>
       <Header />
 
-      <div className="login-page">
+      <div className="login-page da-8">
         <div className="logo-homepage">
           <Link to="/">
             <img src="/image/StackOF.png" alt="" />

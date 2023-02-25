@@ -33,7 +33,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="profile-page">
+    <div className="profile-page da-10">
       <div className="profile-header-box">
         <img src={user.image} alt="" />
         <div className="profile-header-name">
