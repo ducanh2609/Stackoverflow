@@ -1,36 +1,59 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../css/userpage.scss";
 import UsersItemsPage from "../liteComponents/UsersItemsPage";
 import { allUserSlice } from "../reducers/userSlice";
 import { getUser } from "../redux/selector";
 
 export default function UserContent() {
+  let params = useParams();
   const dispatch = useDispatch();
   const allUser = useSelector(getUser).allUser;
   const [userMap, setUserMap] = useState([]);
-  let params = useParams();
+  const [divPage, setDivPage] = useState([]);
+  const [currentPage, setCurrentPage] = useState(params.title);
   useEffect(() => {
     fetch(`http://localhost:8000/api/v1/user`).then(async (res) => {
       let users = await res.json();
       dispatch(allUserSlice.actions.allUser(users));
+      let number = [];
+      let divLength = Math.ceil(users.length / 24);
+      for (let i = 0; i < divLength; i++) {
+        number.push({ number: i + 1 });
+      }
+      setDivPage(number);
     });
   }, [dispatch]);
+
   useEffect(() => {
+    setCurrentPage(params.title);
     let userSearchArr = allUser.filter(
-      (item) => item.name.indexOf(params.title) !== -1
+      (item) => item.name.indexOf(params.id) !== -1
     );
-    params.title ? setUserMap(userSearchArr) : setUserMap(allUser);
-  }, [allUser, params.title]);
+    params.id ? setUserMap(userSearchArr) : setUserMap(allUser);
+  }, [allUser, params]);
   function findUser(e) {
     let user = allUser.filter((item) => item.name.includes(e.target.value));
     setUserMap(user);
   }
+  let previos = "";
+  if (+currentPage === 1) {
+    previos = `/questions/users/${currentPage}`;
+  } else {
+    previos = `/questions/users/${currentPage - 1}`;
+  }
+
+  let next = "";
+  if (+currentPage === divPage.length) {
+    next = `/questions/users/${currentPage}`;
+  } else {
+    next = `/questions/users/${+currentPage + 1}`;
+  }
   return (
     <div className="users-page">
       <div className="users-header-box">
-        {params.title ? <p>Users [{params.title}]</p> : <p>Users</p>}
+        {params.id ? <p>Users [{params.id}]</p> : <p>Users</p>}
       </div>
       <div className="users-search">
         <div className="users-input">
@@ -66,17 +89,23 @@ export default function UserContent() {
         </div>
       </div>
       <div className="div-page">
-        <button className="previos" id="previos">
+        <Link to={previos} className="previos" id="previos" disabled>
           <i className="fa-sharp fa-solid fa-backward"></i>
-        </button>
+        </Link>
         <div className="page-id" id="pageId">
-          <a href="/" className="order">
-            <span>1</span>
-          </a>
+          {divPage.map((item, index) => (
+            <div
+              key={index}
+              href="/"
+              className={+params.title === index + 1 ? "order active" : "order"}
+            >
+              <span>{item.number}</span>
+            </div>
+          ))}
         </div>
-        <button className="next" id="next">
+        <Link to={next} className="next">
           <i className="fa-sharp fa-solid fa-forward"></i>
-        </button>
+        </Link>
       </div>
     </div>
   );

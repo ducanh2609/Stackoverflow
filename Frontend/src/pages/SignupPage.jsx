@@ -4,10 +4,11 @@ import IntroItem from "../liteComponents/IntroductItem";
 import LoginLink from "../liteComponents/Login-Link";
 
 import { useLayoutEffect, useState } from "react";
+import Toast from "../subComponentsHp/Toast";
 
 export default function SignupPage() {
-  const [errStyle, setErrStyle] = useState({ display: "none" });
-  const [errMes, setErrMes] = useState("");
+  const [toastList, setToastList] = useState({});
+
   useLayoutEffect(() => {
     let userIndex = document.cookie.indexOf(";");
     let sessIndex = document.cookie.indexOf("sessionID=");
@@ -90,14 +91,16 @@ export default function SignupPage() {
       address: "",
     };
     if (data.username === "" || data.username === "" || data.password === "") {
-      setErrMes("Các trường nhập không được để trống");
-      setErrStyle({ display: "block" });
+      setToastList({
+        status: "Error",
+        message: "Các trường nhập không được để trống",
+      });
     } else if (data.captcha === false) {
-      setErrMes("Bạn có phải là robot?");
-      setErrStyle({ display: "block" });
+      setToastList({
+        status: "Error",
+        message: "Bạn có phải là robot?",
+      });
     } else {
-      setErrMes("");
-      setErrStyle({ display: "none" });
       fetch("http://localhost:8000/api/v1/user", {
         method: "POST",
         headers: {
@@ -107,16 +110,19 @@ export default function SignupPage() {
       }).then(async (res) => {
         let message = await res.json();
         if (message.message === "Post successfully") {
-          window.location.href = "/login";
+          setToastList({ status: "Success", message: "Đăng kí thành công" });
+          setTimeout(() => {
+            window.location.href = "/login";
+          }, 2000);
         } else {
-          setErrMes(message.message);
-          setErrStyle({ display: "block" });
+          setToastList({ status: "Error", message: message.message });
         }
       });
     }
   }
   return (
     <>
+      <Toast toastArray={toastList}></Toast>
       <Header />
       <div className="signup-page">
         {loginLink.map((item, index) => (
@@ -129,9 +135,6 @@ export default function SignupPage() {
           ></LoginLink>
         ))}
         <form onSubmit={sendSignin} className="signup-form">
-          <p className="errorNotify" style={errStyle}>
-            <i>{errMes}</i>
-          </p>
           <label htmlFor="email">Display name</label> <br />
           <input name="displayName" type="text" /> <br />
           <label htmlFor="email">Email</label> <br />

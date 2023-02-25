@@ -140,7 +140,7 @@
             .order {
                 position: relative;
                 top: 11px;
-                border: 1px solid red;
+                border: 1px solid rgb(193, 191, 191);
                 display: block;
                 height: 30px;
                 width: 30px;
@@ -156,6 +156,13 @@
 
         .previos,
         .next {
+            width: 50px;
+            height: 35px;
+            margin: 8px 0;
+            padding: 10px 10px;
+            border-radius: 4px;
+            border: none;
+            color: white;
             text-align: center;
             background-color: rgba(173, 166, 166, 0.901);
         }

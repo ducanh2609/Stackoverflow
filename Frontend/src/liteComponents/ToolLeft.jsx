@@ -27,7 +27,7 @@ export default function ToolLeft(props) {
             <p>Questions</p>
           </a>
           <a
-            href="/questions/tags"
+            href="/questions/tags/1"
             className={
               param.element === "tags" ? "tags-link active" : "tags-link"
             }
@@ -36,7 +36,7 @@ export default function ToolLeft(props) {
             <p>Tags</p>
           </a>
           <a
-            href="/questions/users"
+            href="/questions/users/1"
             className={
               param.element === "users" || param.element === "profile"
                 ? "user-link active"

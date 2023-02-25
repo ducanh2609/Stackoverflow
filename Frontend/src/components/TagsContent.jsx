@@ -1,20 +1,40 @@
 import { useEffect, useLayoutEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import "../css/tagspage.scss";
 import TagsItemsPage from "../liteComponents/TagsItemsPage";
 
 export default function TagsContent() {
+  let params = useParams();
   const [tags, setTags] = useState([]);
   const [searchTags, setsearchTags] = useState([]);
-
+  const [divPage, setDivPage] = useState([]);
+  const [currentPage, setCurrentPage] = useState(params.title);
   useLayoutEffect(() => {
     fetch("http://localhost:8000/api/v1/tags").then(async (res) => {
       let data = await res.json();
       setTags(data);
+      let number = [];
+      let divLength = Math.ceil(data.length / 24);
+      for (let i = 0; i < divLength; i++) {
+        number.push({ number: i + 1 });
+      }
+      setDivPage(number);
     });
   }, []);
   useEffect(() => {
-    setsearchTags(tags);
-  }, [tags]);
+    setCurrentPage(params.title);
+  }, [params]);
+  useEffect(() => {
+    if (tags.length !== 0) {
+      let search = [];
+      for (let i = (currentPage - 1) * 24; i < currentPage * 24; i++) {
+        if (i === tags.length) break;
+        else search.push(tags[i]);
+      }
+      setsearchTags(search);
+      console.log(search);
+    }
+  }, [tags, currentPage]);
   function searchTagsFn(e) {
     let value = [];
     if (e.target.value === "") setsearchTags(tags);
@@ -33,7 +53,7 @@ export default function TagsContent() {
       arr.push(tags.find((e) => e.cata_name === item));
       return arr;
     }, []);
-    setsearchTags(sortNameArr);
+    setTags(sortNameArr);
   }
   function sortByPoplar() {
     let tagsQuestion = tags.map((item) => item.question);
@@ -54,7 +74,7 @@ export default function TagsContent() {
       }
       return arr;
     }, []);
-    setsearchTags(sortPopularArr);
+    setTags(sortPopularArr);
   }
   function sortByTime() {
     let tagsTime = tags.map((item) => item.time);
@@ -75,7 +95,20 @@ export default function TagsContent() {
       }
       return arr;
     }, []);
-    setsearchTags(sortTimeArr);
+    setTags(sortTimeArr);
+  }
+  let previos = "";
+  if (+currentPage === 1) {
+    previos = `/questions/tags/${currentPage}`;
+  } else {
+    previos = `/questions/tags/${currentPage - 1}`;
+  }
+
+  let next = "";
+  if (+currentPage === divPage.length) {
+    next = `/questions/tags/${currentPage}`;
+  } else {
+    next = `/questions/tags/${+currentPage + 1}`;
   }
   return (
     <div className="tags-page">
@@ -112,17 +145,23 @@ export default function TagsContent() {
         </div>
       </div>
       <div className="div-page">
-        <button className="previos" id="previos">
+        <Link to={previos} className="previos" id="previos" disabled>
           <i className="fa-sharp fa-solid fa-backward"></i>
-        </button>
+        </Link>
         <div className="page-id" id="pageId">
-          <a href="/" className="order">
-            <span>1</span>
-          </a>
+          {divPage.map((item, index) => (
+            <div
+              key={index}
+              href="/"
+              className={+params.title === index + 1 ? "order active" : "order"}
+            >
+              <span>{item.number}</span>
+            </div>
+          ))}
         </div>
-        <button className="next" id="next">
+        <Link to={next} className="next">
           <i className="fa-sharp fa-solid fa-forward"></i>
-        </button>
+        </Link>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUser } from "../redux/selector";
-import { userSlice } from "../reducers/userSlice";
+import { allUserSlice, userSlice } from "../reducers/userSlice";
 import ToolLeft from "../liteComponents/ToolLeft";
 import Toast from "../subComponentsHp/Toast";
 
@@ -42,8 +42,10 @@ export default function OkUserHeader() {
   useEffect(() => {
     let userIndex = document.cookie.indexOf(";");
     let userID = document.cookie.slice(7, userIndex);
-    fetch(`http://localhost:8000/api/v1/user/${userID}`).then(async (res) => {
-      let user = await res.json();
+    fetch(`http://localhost:8000/api/v1/user`).then(async (res) => {
+      let allUser = await res.json();
+      dispatch(allUserSlice.actions.allUser(allUser));
+      let user = allUser.find((item) => item.user_id === +userID);
       dispatch(userSlice.actions.user(user));
     });
   }, [dispatch]);

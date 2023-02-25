@@ -2,7 +2,9 @@ import { useSelector } from "react-redux";
 import { getUser } from "../redux/selector";
 
 export default function ProfileStatus(props) {
-  const user = useSelector(getUser).user;
+  const user = props.user;
+  const loginUser = useSelector(getUser).user;
+
   return (
     <div className="profile-status">
       <div className="profile-status-left">
@@ -32,11 +34,17 @@ export default function ProfileStatus(props) {
         <div className="profile-about">
           <p>About</p>
           <div className="about-box">
-            {user.about === "" ? (
-              <p>
-                Your about me section is currently blank. Would you like to add
-                one?<span onClick={props.onClick}> Edit profile</span>
-              </p>
+            {user.about === null || user.about === "" ? (
+              loginUser.user_id === user.user_id ? (
+                <p>
+                  Your about me section is currently blank. Would you like to
+                  add one?<span onClick={props.onClick}> Edit profile</span>
+                </p>
+              ) : (
+                <p>
+                  This one about section is currently blank.
+                </p>
+              )
             ) : (
               <p
                 style={{ textAlign: "left", width: "100%", margin: "0px auto" }}

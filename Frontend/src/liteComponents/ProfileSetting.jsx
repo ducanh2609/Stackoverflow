@@ -1,10 +1,9 @@
 import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { getUser } from "../redux/selector";
 import Toast from "../subComponentsHp/Toast";
 
 export default function ProfileSetting(props) {
-  const user = useSelector(getUser).user;
+  const user = props.user;
+
   const [src, setSrc] = useState(user.image);
   const [username, setUsername] = useState(user.name);
   const [address, setAddress] = useState(user.address);

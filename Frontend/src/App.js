@@ -15,7 +15,9 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/questions/">
           <Route path=":element" element={<QuestionPage />}>
-            <Route path=":title" element={<QuestionPage />} />
+            <Route path=":title" element={<QuestionPage />}>
+              <Route path=":id" element={<QuestionPage />} />
+            </Route>
           </Route>
           <Route path="ask" element={<AskPage />} />
         </Route>
