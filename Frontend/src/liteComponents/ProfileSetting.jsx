@@ -95,7 +95,7 @@ export default function ProfileSetting(props) {
                 className="edit-form"
               >
                 <div className="image-box">
-                  <img name="src" src={src} ref={srcInput} alt="" />
+                  <img className="da-10" name="src" src={src} ref={srcInput} alt="" />
                   <input
                     type="file"
                     name="image"
@@ -157,6 +157,7 @@ export default function ProfileSetting(props) {
                 <label htmlFor="password">Password</label>
                 <br />
                 <input
+                  className="da-10"
                   name="password"
                   value={password}
                   onChange={(e) => {
@@ -168,6 +169,7 @@ export default function ProfileSetting(props) {
                 <label htmlFor="newPass">New Password</label>
                 <br />{" "}
                 <input
+                  className="da-10"
                   name="newPass"
                   value={newPass}
                   onChange={(e) => {
@@ -179,6 +181,7 @@ export default function ProfileSetting(props) {
                 <label htmlFor="confirmPass">Confirm Password</label>
                 <br />{" "}
                 <input
+                  className="da-10"
                   name="confirmPass"
                   value={confirmPass}
                   onChange={(e) => {
