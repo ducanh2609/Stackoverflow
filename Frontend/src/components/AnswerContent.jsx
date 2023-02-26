@@ -7,6 +7,7 @@ import {
 } from "../reducers/answerSlice";
 
 export default function AnswerContent(props) {
+  let sessIndex = document.cookie.indexOf("sessionID=");
   const [voteAns, setVoteAns] = useState(props.data.vote);
   useEffect(() => {
     setVoteAns(props.data.vote);
@@ -16,6 +17,7 @@ export default function AnswerContent(props) {
     let update = {
       content: props.data.content,
       ans_id: props.data.ans_id,
+      sessionID: document.cookie.slice(sessIndex + 10),
     };
     dispatch(valueSlice.actions.value(update));
     dispatch(methodAnswerSlice.actions.method("update"));
@@ -27,6 +29,9 @@ export default function AnswerContent(props) {
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        sessionID: document.cookie.slice(sessIndex + 10),
+      }),
     });
   }
   function insVote() {
@@ -35,7 +40,10 @@ export default function AnswerContent(props) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ vote: voteAns + 1 }),
+      body: JSON.stringify({
+        vote: voteAns + 1,
+        sessionID: document.cookie.slice(sessIndex + 10),
+      }),
     }).then(() => {
       setVoteAns(voteAns + 1);
     });
@@ -46,7 +54,10 @@ export default function AnswerContent(props) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ vote: voteAns - 1 }),
+      body: JSON.stringify({
+        vote: voteAns - 1,
+        sessionID: document.cookie.slice(sessIndex + 10),
+      }),
     }).then(() => {
       setVoteAns(voteAns - 1);
     });

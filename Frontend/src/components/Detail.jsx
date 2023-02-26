@@ -56,6 +56,8 @@ export default function DetailPage() {
   }, []);
   useLayoutEffect(() => {
     let ques_id = window.location.href.slice(47);
+    let sessIndex = document.cookie.indexOf("sessionID=");
+
     fetch(`http://localhost:8000/api/v1/question/${ques_id}`).then(
       async (res) => {
         let question = await res.json();
@@ -65,7 +67,10 @@ export default function DetailPage() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ view: question.view + 1 }),
+          body: JSON.stringify({
+            view: question.view + 1,
+            sessionID: document.cookie.slice(sessIndex + 10),
+          }),
         });
       }
     );
@@ -76,6 +81,8 @@ export default function DetailPage() {
       }
     );
   }, [dispatch]);
+  let sessIndex = document.cookie.indexOf("sessionID=");
+
   function sendAnswer(e) {
     e.preventDefault();
     let ques_id = window.location.href.slice(47);
@@ -92,6 +99,7 @@ export default function DetailPage() {
           ques_id: ques_id,
           content: e.target.answer.value,
           vote: 0,
+          sessionID: document.cookie.slice(sessIndex + 10),
         };
         fetch(`http://localhost:8000/api/v1/answer/${valueUpdate.ans_id}`, {
           method: "PUT",
@@ -115,6 +123,7 @@ export default function DetailPage() {
           ques_id: ques_id,
           content: e.target.answer.value,
           vote: 0,
+          sessionID: document.cookie.slice(sessIndex + 10),
         };
         fetch("http://localhost:8000/api/v1/answer", {
           method: "POST",
@@ -133,13 +142,17 @@ export default function DetailPage() {
       }
     }
   }
+
   function insVote() {
     fetch(`http://localhost:8000/api/v1/question/vote/${question.ques_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ vote: voteQues + 1 }),
+      body: JSON.stringify({
+        vote: voteQues + 1,
+        sessionID: document.cookie.slice(sessIndex + 10),
+      }),
     }).then(() => {
       setVoteQues(voteQues + 1);
     });
@@ -150,7 +163,10 @@ export default function DetailPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ vote: voteQues - 1 }),
+      body: JSON.stringify({
+        vote: voteQues - 1,
+        sessionID: document.cookie.slice(sessIndex + 10),
+      }),
     }).then(() => {
       setVoteQues(voteQues - 1);
     });

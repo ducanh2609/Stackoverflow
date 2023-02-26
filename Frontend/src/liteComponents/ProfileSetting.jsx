@@ -42,15 +42,16 @@ export default function ProfileSetting(props) {
   }
   function changePass(e) {
     e.preventDefault();
-    console.log(user);
     if (password !== user.password) setErr("Mật khẩu không đúng");
     else if (newPass.length < 6)
       setErr("Mật khẩu phải lơn hơn hoặc bằng 6 kí tự");
     else if (newPass !== confirmPass) setErr("Mật khẩu nhập lại không đúng");
     else {
       setErr("");
+      let sessIndex = document.cookie.indexOf("sessionID=");
       let data = {
         password: newPass,
+        sessionID: document.cookie.slice(sessIndex + 10),
       };
       fetch(`http://localhost:8000/api/v1/user/changepass/${user.user_id}`, {
         method: "PUT",
