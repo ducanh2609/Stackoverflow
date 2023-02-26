@@ -133,6 +133,11 @@
         box-sizing: border-box;
         justify-content: right;
 
+        .active {
+            background-color: red;
+            color: white;
+        }
+
         .page-id {
             display: flex;
             overflow: hidden;

@@ -1,7 +1,8 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "../css/tagspage.scss";
 import TagsItemsPage from "../liteComponents/TagsItemsPage";
+import DivPage from "./DivPage";
 
 export default function TagsContent() {
   let params = useParams();
@@ -97,19 +98,6 @@ export default function TagsContent() {
     }, []);
     setTags(sortTimeArr);
   }
-  let previos = "";
-  if (+currentPage === 1) {
-    previos = `/questions/tags/${currentPage}`;
-  } else {
-    previos = `/questions/tags/${currentPage - 1}`;
-  }
-
-  let next = "";
-  if (+currentPage === divPage.length) {
-    next = `/questions/tags/${currentPage}`;
-  } else {
-    next = `/questions/tags/${+currentPage + 1}`;
-  }
   return (
     <div className="tags-page da-10">
       <div className="tags-header-box da-10">
@@ -145,25 +133,11 @@ export default function TagsContent() {
           ))}
         </div>
       </div>
-      <div className="div-page">
-        <Link to={previos} className="previos" id="previos" disabled>
-          <i className="fa-sharp fa-solid fa-backward"></i>
-        </Link>
-        <div className="page-id" id="pageId">
-          {divPage.map((item, index) => (
-            <div
-              key={index}
-              href="/"
-              className={+params.title === index + 1 ? "order active" : "order"}
-            >
-              <span>{item.number}</span>
-            </div>
-          ))}
-        </div>
-        <Link to={next} className="next">
-          <i className="fa-sharp fa-solid fa-forward"></i>
-        </Link>
-      </div>
+      <DivPage
+        divPage={divPage}
+        currentPage={currentPage}
+        status="tags"
+      ></DivPage>
     </div>
   );
 }

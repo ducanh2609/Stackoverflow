@@ -73,7 +73,7 @@
 .search-box,
 .ok-search-box {
   position: relative;
-  width: 51%;
+  width: 51% !important;
   margin: 8px 0;
 }
 .ok-search-box {
