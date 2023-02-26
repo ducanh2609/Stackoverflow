@@ -190,6 +190,79 @@
     grid-template-columns: 30% 30% 30%;
     gap: 5%;
   }
+  .p40 {
+    padding: 12px !important;
+  }
+  .flexbox,
+  .flexbox-2,
+  .text2,
+  .hp-flexbox-11 {
+    display: block !important;
+    height: max-content;
+    margin: 0 !important;
+  }
+  .text {
+    margin: 180px 0 !important;
+    font-size: 35px !important;
+  }
+
+  .introduction-1 {
+    display: block !important;
+  }
+  .headerHome {
+    height: max-content !important;
+  }
+  .flex-item {
+    max-width: 100% !important;
+  }
+  .flexbox-3 {
+    display: block !important;
+  }
+  .hidden-item0 {
+    transform: translateX(0%) !important;
+  }
+  .hp-flexbox-4 {
+    overflow: auto !important;
+    padding: 10px !important;
+    display: block !important;
+  }
+  .hp-flexbox-5 {
+    display: block !important;
+    height: max-content !important;
+  }
+  .hp-flex-item5 {
+    min-height: 500px !important;
+    margin-bottom: 30px !important;
+  }
+  .flexbox-2 {
+    position: relative !important;
+  }
+  .hp-text1 {
+    padding: 0 !important;
+  }
+  .hp-flexbox-6,
+  .hp-flexbox-12 {
+    display: block !important;
+    padding: 0 30px !important;
+    overflow: hidden !important;
+  }
+  .hp-flex-item6 {
+    margin-bottom: 30px !important;
+    width: 100% !important;
+  }
+  .hp-flex-item12 {
+    margin-bottom: 20px !important;
+  }
+  .hp-flexbox-8 {
+    padding: 0 !important;
+    display: block !important;
+  }
+  .hp-flex-item8 {
+    text-align: center !important;
+  }
+  .body-1 {
+    height: max-content !important;
+  }
 }
 
 @media screen and (max-width: 768px) and (min-width: 576px) {

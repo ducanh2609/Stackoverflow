@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../css/homepage.css";
 
-
 // import function nho
 import BuyForyou from "./../subComponentsHp/BuyForyou";
 import Typetech from "./../subComponentsHp/Typetech";
@@ -59,21 +58,39 @@ export default function HomePageContent() {
   // array
   let dcmReact = [
     {
-      image: <img src="/image/img-homepage/accept.png" className="imgAccept" alt="" />,
-      h3: 'Increase productivity',
-      p: 'If somebody somewhere has the right answer, suddenly you have it too. Collaborate better in a remote-first world.',
+      image: (
+        <img
+          src="/image/img-homepage/accept.png"
+          className="imgAccept"
+          alt=""
+        />
+      ),
+      h3: "Increase productivity",
+      p: "If somebody somewhere has the right answer, suddenly you have it too. Collaborate better in a remote-first world.",
     },
     {
-      image: <img src="/image/img-homepage/accept.png" className="imgAccept" alt="" />,
-      h3: 'Accelerate time to market',
-      p: 'Shorten the time between initial idea and complete product. Take delays and misinformation out of the equation.',
+      image: (
+        <img
+          src="/image/img-homepage/accept.png"
+          className="imgAccept"
+          alt=""
+        />
+      ),
+      h3: "Accelerate time to market",
+      p: "Shorten the time between initial idea and complete product. Take delays and misinformation out of the equation.",
     },
     {
-      image: <img src="/image/img-homepage/accept.png" className="imgAccept" alt="" />,
-      h3: 'Protect institutional knowledge',
-      p: 'People come and people go, but if you capture their contributions in one central place, that expertise sticks around.',
+      image: (
+        <img
+          src="/image/img-homepage/accept.png"
+          className="imgAccept"
+          alt=""
+        />
+      ),
+      h3: "Protect institutional knowledge",
+      p: "People come and people go, but if you capture their contributions in one central place, that expertise sticks around.",
     },
-  ]
+  ];
   let tytech = [
     {
       element: <RxRocket size="5rem" className="hp-flex-item4-img" />,
@@ -254,22 +271,34 @@ export default function HomePageContent() {
   ];
   let overRateRd = [
     {
-      img: <img src="/image/img-homepage/passkey.png" className="hp-flex-item12-img" alt="" />,
-      text: 'Robust read and write API',
+      img: (
+        <img
+          src="/image/img-homepage/passkey.png"
+          className="hp-flex-item12-img"
+          alt=""
+        />
+      ),
+      text: "Robust read and write API",
     },
     {
-      img: <img src="/image/img-homepage/lock.png" className="hp-flex-item12-img" alt="" />,
-      text: 'Single sign-on with AD or SAML',
+      img: (
+        <img
+          src="/image/img-homepage/lock.png"
+          className="hp-flex-item12-img"
+          alt=""
+        />
+      ),
+      text: "Single sign-on with AD or SAML",
     },
     {
       img: <BiSupport className="hp-flex-item12-img" />,
-      text: 'Your own customer success representative',
+      text: "Your own customer success representative",
     },
     {
       img: <GiConversation className="hp-flex-item12-img" />,
-      text: '99.5% uptime SLA and priority support',
+      text: "99.5% uptime SLA and priority support",
     },
-  ]
+  ];
   let rateRd = [
     {
       image: <img src="/image/img-homepage/quotes.svg" alt="" />,
@@ -362,32 +391,32 @@ export default function HomePageContent() {
                 </div>
               </div>
             </div>
-            <h1>
+            <h1 className="text">
               Every{" "}
               <span className="word">{listWord[index % listWord.length]}</span>{" "}
               has a <br /> tab open to Stack Overflow
             </h1>
             <div className="stick"></div>
             <div className="introduction-1">
-              <div className="flex-item">
+              <div className="flex-item da-10">
                 <div className="tt-title">100+ million</div>
                 <div className="tt-body">
                   monthly visitors to Stack Overflow & Stack Exchange
                 </div>
               </div>
-              <div className="flex-item">
+              <div className="flex-item da-10">
                 <div className="tt-title">45.1+ billion</div>
                 <div className="tt-body">
                   Times a developer got help since 2008
                 </div>
               </div>
-              <div className="flex-item">
+              <div className="flex-item da-10">
                 <div className="tt-title">191% ROI</div>
                 <div className="tt-body">
                   from companies using Stack Overflow for Teams
                 </div>
               </div>
-              <div className="flex-item">
+              <div className="flex-item da-10">
                 <div className="tt-title">5,000+</div>
                 <div className="tt-body">
                   Stack Overflow for Teams instances active every day
@@ -397,10 +426,10 @@ export default function HomePageContent() {
           </div>
         </div>
 
-        <div className="circle"></div>
-        <div className="body-1">
+        <div className="circle da-0"></div>
+        <div className="body-1 da-10">
           <div className="flexbox-2">
-            <div className="flex-item1-2">
+            <div className="flex-item1-2 da-10">
               <div>
                 <div style={{ paddingBottom: "20px" }}>
                   <a href="/">
@@ -438,7 +467,7 @@ export default function HomePageContent() {
                 </div>
               </div>
             </div>
-            <div className="flex-item2-2">
+            <div className="flex-item2-2 da-10">
               <div>
                 <div style={{ paddingBottom: "20px" }}>
                   <a href="/">
@@ -468,6 +497,7 @@ export default function HomePageContent() {
                     <span className="stick-getStarted"></span>
                   </div>
                   <div
+                    className="text2"
                     style={{
                       display: "flex",
                       justifyContent: "center",
@@ -497,8 +527,8 @@ export default function HomePageContent() {
           </div>
         </div>
 
-        <div className="body-4 p40">
-          <div className="body4-1">
+        <div className="body-4 p40 da-10">
+          <div className="body4-1 da-0">
             <div className="flex-item4-1">
               <img
                 className="imgQuestion"
@@ -544,7 +574,12 @@ export default function HomePageContent() {
                 </div>
                 <div className="flexbox-3 p40">
                   {dcmReact.map((item, index) => (
-                    <Animation key={index} image={item.image} h3={item.h3} p={item.p} />
+                    <Animation
+                      key={index}
+                      image={item.image}
+                      h3={item.h3}
+                      p={item.p}
+                    />
                   ))}
                 </div>
                 <div className="sticky"></div>
@@ -761,7 +796,7 @@ export default function HomePageContent() {
         <div className="p40">
           <div className="hp-container-8-bg">
             <div className="hp-flexbox-10">
-              <div className="hp-flex-item10-1"></div>
+              <div className="hp-flex-item10-1 da-0"></div>
               <div className="hp-flex-item10-2">
                 <div className="hp-flex-item10-img">
                   <img src="/image/img-homepage/so-logo5.svg" alt="" />
@@ -784,12 +819,12 @@ export default function HomePageContent() {
                   <a href="/">Explore the network</a>
                 </div>
               </div>
-              <div className="hp-flex-item10-1"></div>
+              <div className="hp-flex-item10-1 da-0"></div>
             </div>
           </div>
         </div>
 
-        <div className="hp-flexbox-11">
+        <div className="hp-flexbox-11 da-xl-6" style={{ margin: "0 auto" }}>
           <div className="hp-flex-item11-img">
             <img src="/image/img-homepage/lock.png" alt="" />
           </div>
@@ -797,7 +832,7 @@ export default function HomePageContent() {
             Build a <strong> private community </strong> to share technical or
             non-technical knowledge.
           </p>
-          <p className="hp-flex-item11-p2">
+          <p className="hp-flex-item11-p2 da-5 " style={{ margin: "0 auto" }}>
             {" "}
             <a href="/"> Create a free Team</a>
           </p>

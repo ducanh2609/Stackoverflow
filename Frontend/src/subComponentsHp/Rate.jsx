@@ -6,7 +6,7 @@ export default function Rate(props) {
                     {props.image} 
                 </div>
                 <p className="hp-flex-item8-p">{props.rate}</p>
-                <div className="hp-flex-item8-2p">
+                <div className="hp-flex-item8-2p da-10">
                     <strong>
                         {props.position}
                     </strong>   <br />

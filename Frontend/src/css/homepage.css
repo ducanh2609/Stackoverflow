@@ -301,10 +301,12 @@ h1 {
   margin-right: auto;
   box-sizing: border-box;
   overflow: hidden;
+  border-radius: 10px;
 }
 
 .p40 {
   padding: 40px;
+  border-radius: 10px;
 }
 
 .body4-1 {
