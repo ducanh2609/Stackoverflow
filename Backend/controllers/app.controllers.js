@@ -199,11 +199,12 @@ module.exports.updateVoteAns = async (req, res) => {
 }
 module.exports.postAnswer = async (req, res) => {
     let [record] = await getAllAnswerSQL();
-    let { user_id, ques_id, content, vote } = req.body
-    await postAnswerSQL([record.length + 1, ques_id, user_id, content, vote])
+    let { user_id, ques_id, content, vote } = req.body;
+    let id = +record[record.length - 1].ans_id + 1;
+    await postAnswerSQL([id, ques_id, user_id, content, vote])
     res.send({
         message: 'Post successfully',
-        ans_id: record.length + 1
+        ans_id: id + 1
     })
 }
 module.exports.getQuesAnswer = async (req, res) => {
